@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import { useRef } from "react";
+import formLogo from "../../assets/form_logo.png";
 
 function LoginForm({ onLoginSubmit }) {
   const emailRef = useRef();
@@ -18,18 +19,18 @@ function LoginForm({ onLoginSubmit }) {
   };
 
   return (
-    <Container>
-      <Row className="mb-4" sm={3}>
-        {/* <img alt="login-logo" className="object-fit-contain mx-auto" /> */}
+    <Container className="h-100 mx-auto d-flex flex-column justify-content-center align-items-center">
+      <Row className="mb-1 col-sm-4 col-6 mx-auto">
+        <img src={formLogo} alt="" />
       </Row>
-      <Row className="justify-content-md-center mb-4" md="auto">
-        <h1>Sign In</h1>
+      <Row className="mb-1">
+        <h2 className="">Sign In</h2>
       </Row>
 
-      <Form className="d-md-flex flex-column w-75 mx-auto p-1">
-        <Form.Group className="mb-4" id="email">
-          <Form.Label className="fw-bold">Email Address:</Form.Label>
-          <InputGroup>
+      <Form className="d-flex flex-column col-sm-10 col-12 mx-auto">
+        <Form.Group className="mb-2" id="email">
+          <Form.Label className="fw-bold ms-1 my-0">Email Address:</Form.Label>
+          <InputGroup className="input-group-sm">
             <InputGroup.Text id="email">
               <i className="bi bi-person-circle"></i>
             </InputGroup.Text>
@@ -44,9 +45,9 @@ function LoginForm({ onLoginSubmit }) {
           </InputGroup>
         </Form.Group>
 
-        <Form.Group className="mb-5" id="password">
-          <Form.Label className="fw-bold">Password: </Form.Label>
-          <InputGroup>
+        <Form.Group className="mb-4" id="password">
+          <Form.Label className="fw-bold ms-1 my-0">Password: </Form.Label>
+          <InputGroup className="input-group-sm">
             <InputGroup.Text id="password">
               <i className="bi bi-key-fill"></i>
             </InputGroup.Text>
@@ -63,7 +64,7 @@ function LoginForm({ onLoginSubmit }) {
         <Button
           variant="primary"
           type="submit"
-          className="btn btn-lg"
+          className="btn btn-md"
           onClick={(evt) => handleSubmit(evt)}
         >
           Login

@@ -8,31 +8,31 @@ import { Link, Outlet } from "react-router-dom";
 function Login() {
   return (
     <>
-      <div className="d-flex flex-row vh-100">
+      <div className="d-flex flex-row vh-100 align-items-center">
         <Container
-          fluid="sm"
-          className="mx-auto p-5 rounded-3 bg-light w-50 d-md-flex flex-column align-self-center"
+          fluid
+          className="p-5 rounded-2 bg-light col-sm-12 col-md-6 col-xxl-3 d-flex flex-column mx-auto"
         >
-          <Row className="h-75">
+          <Row className="col-12 mx-auto">
             <Outlet />
           </Row>
-          <Row className="w-25 h-25 mx-auto pt-3">
-            <ButtonGroup className="p-0 d-flex">
-              <Link to="register" className="w-100">
+          <Row className="mx-auto pt-3 col-4">
+            <ButtonGroup className="p-0 d-flex flex-column flex-sm-row justify-content-center">
+              <Link to="register" className="col-sm-8 col-12">
                 <Button
                   variant="dark"
                   type="button"
-                  className="btn btn-sm w-100 rounded-end-0"
+                  className="btn btn-sm rounded-end-0 col-12"
                 >
                   Register
                 </Button>
               </Link>
 
-              <Link to="" className="w-100">
+              <Link to="" className="col-sm-8 col-12">
                 <Button
                   variant="secondary"
                   type="button"
-                  className="btn btn-sm w-100 rounded-start-0"
+                  className="btn btn-sm w-100 rounded-start-0 col-12"
                 >
                   Sign In
                 </Button>
