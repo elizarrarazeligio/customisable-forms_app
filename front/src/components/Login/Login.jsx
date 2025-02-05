@@ -8,10 +8,10 @@ import { Link, Outlet } from "react-router-dom";
 function Login() {
   return (
     <>
-      <div className="d-flex flex-row vh-100 align-items-center">
+      <div className="d-flex flex-row align-items-center align-content-center vh-100">
         <Container
           fluid
-          className="p-5 rounded-2 bg-light col-sm-12 col-md-6 col-xxl-3 d-flex flex-column mx-auto"
+          className="p-5 rounded-2 bg-light col-sm-12 col-md-6 col-xxl-3 d-flex flex-column mx-auto my-auto"
         >
           <Row className="col-12 mx-auto">
             <Outlet />
