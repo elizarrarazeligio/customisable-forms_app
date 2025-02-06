@@ -2,7 +2,7 @@ import Login from "./Login/Login";
 import LoginForm from "./Login/LoginForm";
 import RegisterForm from "./Login/RegisterForm";
 import Main from "./Main/Main.jsx";
-import HomePage from "./Main/HomePage.jsx";
+import HomePage from "./Main/HomePage/HomePage.jsx";
 import { Routes, Route } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { UsersContext } from "../contexts/UsersContext.js";

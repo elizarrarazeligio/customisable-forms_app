@@ -3,11 +3,18 @@ import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Form from "react-bootstrap/esm/Form";
 import formLogo from "../../assets/form_logo.png";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+  const navigate = useNavigate();
+
+  const handleUserLoginClick = (evt) => {
+    navigate("/");
+  };
+
   return (
     <>
-      <Navbar className="d-block bg-light p-2 navbar-light navbar-expand">
+      <Navbar className="d-block bg-light p-2 mb-1 navbar-light navbar-expand">
         <Row className="d-flex m-0 align-items-center">
           <Col className="col-3">
             <Row className="d-flex align-items-center">
@@ -48,6 +55,7 @@ function Header() {
             <i
               className="bi bi-person-circle fs-4 float-end"
               style={{ color: "#673AB7", cursor: "pointer" }}
+              onClick={() => handleUserLoginClick()}
             ></i>
           </Col>
         </Row>
