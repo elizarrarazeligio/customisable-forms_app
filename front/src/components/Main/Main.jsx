@@ -4,7 +4,7 @@ import Footer from "./Footer";
 
 function Main() {
   return (
-    <div style={{ minWidth: 450, maxWidth: 1800 }} className="mx-auto">
+    <div style={{ minWidth: 375, maxWidth: 1500 }} className="mx-auto">
       <Header />
       <Outlet />
       <Footer />
