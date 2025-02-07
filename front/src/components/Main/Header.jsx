@@ -3,10 +3,16 @@ import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Form from "react-bootstrap/esm/Form";
 import formLogo from "../../assets/form_logo.png";
+import Menu from "./Menu";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Header() {
   const navigate = useNavigate();
+  const [show, setShow] = useState(false);
+
+  const handleShow = () => setShow(true);
+  const handleHide = () => setShow(false);
 
   const handleUserLoginClick = (evt) => {
     navigate("/");
@@ -22,19 +28,15 @@ function Header() {
                 <span
                   className="navbar-toggler-icon p-2"
                   style={{ cursor: "pointer" }}
+                  onClick={handleShow}
                 ></span>
               </Col>
+              <Menu show={show} handleHide={handleHide} />
               <Navbar.Brand
                 href="home"
                 className="d-flex align-items-center p-0 m-0 col-4"
               >
-                <img
-                  src={formLogo}
-                  alt="formLogo"
-                  width={35}
-                  height={35}
-                  className=""
-                />
+                <img src={formLogo} alt="formLogo" width={35} height={35} />
                 <h2 className="fs-4 fw-normal m-0 ps-2 d-sm-inline d-none">
                   Forms
                 </h2>
