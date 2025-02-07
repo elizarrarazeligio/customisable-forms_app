@@ -3,28 +3,30 @@ import Alert from "react-bootstrap/esm/Alert";
 import Table from "react-bootstrap/esm/Table";
 import TemplateRegister from "./TemplateRegister";
 
-function UserTemplates() {
+function TemplatesTable() {
   const user = "1";
 
   return (
     <>
       <Row className="col-lg-9 col-11 mx-auto pt-4 px-0">
         {user ? (
-          <Table hover className="">
-            <thead>
-              <tr>
-                <th>Form Name</th>
-                <th>Created by</th>
-                <th>Date</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody className="align-middle">
-              {Array.from({ length: 3 }).map((i, ind) => (
-                <TemplateRegister key={ind}/>
-              ))}
-            </tbody>
-          </Table>
+          <>
+            <p className="fw-bold fs-5 m-0 px-2 text-muted">My templates</p>
+            <Table hover className="">
+              <thead>
+                <tr>
+                  <th className="col-sm-8 col-6">Name</th>
+                  <th className="col-sm-3 col-5">Last updated</th>
+                  <th className="col-1"></th>
+                </tr>
+              </thead>
+              <tbody className="align-middle">
+                {Array.from({ length: 1 }).map((i, ind) => (
+                  <TemplateRegister key={ind} />
+                ))}
+              </tbody>
+            </Table>
+          </>
         ) : (
           <Alert
             variant="dark"
@@ -42,4 +44,4 @@ function UserTemplates() {
   );
 }
 
-export default UserTemplates;
+export default TemplatesTable;

@@ -5,7 +5,6 @@ function TemplateRegister() {
     <>
       <tr>
         <td>Formulario de consultas</td>
-        <td>Eligio Elizarraraz Molina</td>
         <td>01/2024</td>
         <td>
           <CloseButton></CloseButton>

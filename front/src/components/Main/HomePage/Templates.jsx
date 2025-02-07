@@ -16,7 +16,7 @@ function Templates() {
         style={{ backgroundColor: "#eaeaea" }}
       >
         <Row className="justify-content-center align-items-center col-md-10 col-12 mx-auto py-2">
-          <Col className="col-10 fs-5 fw-medium">Initiate a new form</Col>
+          <Col className="col-10 fs-5 fw-medium">Latest templates</Col>
           <Col className="col-2">
             <ToggleButton
               className="btn btn-sm m-0 px-1 py-0 float-end"
@@ -39,7 +39,7 @@ function Templates() {
               style={{ height: 150 }}
             />
             <p className="badge text-dark fw-semibold fs-6 text-bg-light w-100 m-0 pt-2 text-truncate rounded-0 rounded-bottom">
-              Formulario en blanco
+              New Template
             </p>
           </Col>
           {Array.from({ length: 3 }).map((i, ind) => {
@@ -52,7 +52,7 @@ function Templates() {
                 Popular
               </Col>
               <div className="d-flex col-12 flex-wrap m-0 p-0">
-                {Array.from({ length: 3 }).map((i, ind) => {
+                {Array.from({ length: 5 }).map((i, ind) => {
                   return <FormTemplate key={ind} />;
                 })}
               </div>
