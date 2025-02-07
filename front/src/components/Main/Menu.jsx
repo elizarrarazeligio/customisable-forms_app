@@ -15,10 +15,18 @@ function Menu(props) {
         <Offcanvas.Body className="pt-0">
           <hr className="mt-0 col-11" />
           <ListGroup className="col-11 list-group-flush">
-            <ListGroup.Item action href="">Home Page</ListGroup.Item>
-            <ListGroup.Item action href="">My Profile</ListGroup.Item>
-            <ListGroup.Item action href="">User Management</ListGroup.Item>
-            <ListGroup.Item action href="">Logout</ListGroup.Item>
+            <ListGroup.Item action href="home">
+              Home Page
+            </ListGroup.Item>
+            <ListGroup.Item action href="">
+              My Profile
+            </ListGroup.Item>
+            <ListGroup.Item action href="management">
+              User Management
+            </ListGroup.Item>
+            <ListGroup.Item action href="">
+              Logout
+            </ListGroup.Item>
           </ListGroup>
         </Offcanvas.Body>
       </Offcanvas>

@@ -10,6 +10,7 @@ function HomePage() {
         <Row className="m-0">
           <Templates />
         </Row>
+        
         <Row className="m-0">
           <TemplatesTable />
         </Row>

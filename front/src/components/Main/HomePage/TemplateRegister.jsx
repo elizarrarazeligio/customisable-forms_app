@@ -5,7 +5,7 @@ function TemplateRegister() {
     <>
       <tr>
         <td>Formulario de consultas</td>
-        <td>01/2024</td>
+        <td>30/01/2024</td>
         <td>
           <CloseButton></CloseButton>
         </td>
