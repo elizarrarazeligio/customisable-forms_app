@@ -1,6 +1,7 @@
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Templates from "./Templates";
+import UserTemplates from "./UserTemplates";
 
 function HomePage() {
   return (
@@ -9,7 +10,9 @@ function HomePage() {
         <Row className="m-0">
           <Templates />
         </Row>
-        <Row className="m-0"></Row>
+        <Row className="m-0">
+          <UserTemplates />
+        </Row>
       </Container>
     </>
   );

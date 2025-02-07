@@ -43,7 +43,7 @@ function Templates() {
             </p>
           </Col>
           {Array.from({ length: 3 }).map((i, ind) => {
-            return <FormTemplate value={ind} />;
+            return <FormTemplate key={ind} />;
           })}
 
           <Collapse in={check}>
@@ -53,7 +53,7 @@ function Templates() {
               </Col>
               <div className="d-flex col-12 flex-wrap m-0 p-0">
                 {Array.from({ length: 3 }).map((i, ind) => {
-                  return <FormTemplate value={ind} />;
+                  return <FormTemplate key={ind} />;
                 })}
               </div>
             </div>

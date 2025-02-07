@@ -1,16 +1,13 @@
 import Col from "react-bootstrap/esm/Col";
 import defaultForm from "../../../assets/form.jpg";
 
-function FormTemplate({ value }) {
+function FormTemplate() {
   const foto = "";
   const titulo = "";
 
   return (
     <>
-      <Col
-        className="col-6 col-md-4 col-xl-3 justify-content-center px-2 py-1 rounded"
-        key={value}
-      >
+      <Col className="col-6 col-md-4 col-xl-3 justify-content-center px-2 py-1 rounded">
         <img
           src={foto ? foto : defaultForm}
           alt="template"
