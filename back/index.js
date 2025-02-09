@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import bodyParser from "body-parser";
 import users from "./routes/users.js";
 import templates from "./routes/templates.js";
 import forms from "./routes/forms.js";
@@ -9,6 +10,7 @@ const app = express();
 
 const allowedOrigins = ["http://localhost:3005"];
 app.use(cors({ origin: allowedOrigins }));
+app.use(bodyParser.json({ origin: "http://localhost:3000" }));
 
 app.use("/users", users);
 app.use("/templates", templates);
