@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
-import users from "./routes/users";
-import templates from "./routes/templates";
-import forms from "./routes/forms";
+import users from "./routes/users.js";
+import templates from "./routes/templates.js";
+import forms from "./routes/forms.js";
 import "dotenv/config";
 
 const app = express();
