@@ -9,8 +9,8 @@ import "dotenv/config";
 
 const app = express();
 
-const allowedOrigins = ["http://localhost:3005"];
-app.use(cors({ origin: allowedOrigins }));
+const allowedOrigins = ["http://localhost:3000"];
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(bodyParser.json({ origin: "http://localhost:3000" }));
 app.use(cookieParser());
 

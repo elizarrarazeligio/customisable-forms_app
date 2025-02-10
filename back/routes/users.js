@@ -13,9 +13,6 @@ users.get("/", (req, res) => {
     .catch((err) => res.status(404).send(err));
 });
 
-// ============= GET User By Token ==============
-users.get("/:token", (req, res) => {});
-
 // ============== POST User Login ===============
 users.post("/login", (req, res) => {
   const { email, password } = req.body;
@@ -44,13 +41,37 @@ users.post("/login", (req, res) => {
         { expiresIn: "1h" }
       );
 
-      res.cookie("token", token, { httpOnly: true, secure: true }).send({
-        status: "success",
-        message: "User logged in succesfully!",
-        response: user,
-      });
+      res
+        .cookie("token", token, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "strict",
+        })
+        .send({
+          status: "success",
+          message: "User logged in succesfully!",
+          response: user,
+        });
     })
     .catch((err) => res.status(400).send({ status: "error", message: err }));
+});
+
+// ============= GET User By Token ==============
+users.get("/token", (req, res) => {
+  const token = req.cookies.token;
+  if (!token) {
+    return res.status(401).send({
+      status: "error",
+      message: "Forbidden access, token not provided.",
+    });
+  }
+
+  try {
+    const data = jwt.verify(token, process.env.JWT_SECRET);
+    res.send({ status: "success", response: data });
+  } catch (err) {
+    res.status(401).send({ status: "error", message: "Invalid token." });
+  }
 });
 
 // =========== POST Register New User ===========

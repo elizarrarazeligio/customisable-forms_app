@@ -3,10 +3,12 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import formLogo from "../../assets/form_logo.png";
+import { UsersContext } from "../../contexts/UsersContext";
 
-function LoginForm({ onLoginSubmit }) {
+function LoginForm() {
+  const { onLoginSubmit } = useContext(UsersContext);
   const emailRef = useRef();
   const passwordRef = useRef();
 

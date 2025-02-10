@@ -4,15 +4,49 @@ import RegisterForm from "./Login/RegisterForm";
 import Main from "./Main/Main.jsx";
 import HomePage from "./Main/HomePage/HomePage.jsx";
 import UsersManagement from "./Main/UsersManagement/UsersManagement.jsx";
-import { Routes, Route } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { UsersContext } from "../contexts/UsersContext.js";
 import "react-toastify/dist/ReactToastify.css";
+import api from "../utils/api.js";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation;
+
+  const onLoginSubmit = (userData) => {
+    api
+      .loginUser(userData)
+      .then((res) => toast.success(res.message))
+      .then(() => {
+        getUserToken();
+        navigate("/home");
+      })
+      .catch((err) => err.then((res) => toast.error(res.message)));
+  };
+
+  const getUserToken = () => {
+    api
+      .getToken()
+      .then((res) => setUser(res.response))
+      .catch((err) => {
+        setUser(null);
+        err.then((res) => {
+          toast.error(res.message);
+          navigate("/");
+        });
+      });
+  };
+
+  useEffect(() => {
+    getUserToken();
+  }, [location]);
+
   return (
     <>
-      <UsersContext.Provider value={{}}>
+      <UsersContext.Provider value={{ onLoginSubmit }}>
         <Routes>
           <Route path="/" element={<Login />}>
             <Route path="/" element={<LoginForm />} />
