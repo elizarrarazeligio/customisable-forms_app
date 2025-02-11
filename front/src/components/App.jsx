@@ -8,22 +8,12 @@ import { toast, ToastContainer } from "react-toastify";
 import { UsersContext } from "../contexts/UsersContext.js";
 import "react-toastify/dist/ReactToastify.css";
 import api from "../utils/Api.js";
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function App() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
-  const location = useLocation;
-
-  const onLoginSubmit = (userData) => {
-    api
-      .loginUser(userData)
-      .then((res) => toast.success(res.message))
-      .then(() => getUserToken())
-      .then(() => navigate("/home"))
-      .catch((err) => err.then((res) => toast.error(res.message)));
-  };
 
   const getUserToken = () => {
     api
@@ -38,13 +28,9 @@ function App() {
       });
   };
 
-  useEffect(() => {
-    getUserToken();
-  }, [location]);
-
   return (
     <>
-      <UsersContext.Provider value={{ onLoginSubmit }}>
+      <UsersContext.Provider value={{ user, getUserToken }}>
         <Routes>
           <Route path="/" element={<Login />}>
             <Route path="/" element={<LoginForm />} />

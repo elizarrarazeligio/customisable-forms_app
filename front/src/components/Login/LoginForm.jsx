@@ -3,14 +3,28 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
-import { useContext, useRef } from "react";
+import { useRef, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import formLogo from "../../assets/form_logo.png";
+import { toast } from "react-toastify";
+import api from "../../utils/Api.js";
 import { UsersContext } from "../../contexts/UsersContext";
 
 function LoginForm() {
-  const { onLoginSubmit } = useContext(UsersContext);
+  const { getUserToken } = useContext(UsersContext);
+  const navigate = useNavigate();
+
   const emailRef = useRef();
   const passwordRef = useRef();
+
+  const onLoginSubmit = (userData) => {
+    api
+      .loginUser(userData)
+      .then((res) => toast.success(res.message))
+      .then(() => getUserToken())
+      .then(() => navigate("/home"))
+      .catch((err) => err.then((res) => toast.error(res.message)));
+  };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();

@@ -4,12 +4,12 @@ class Api {
     this._headers = headers;
   }
 
-  // getUsers() {
-  //   return fetch(`${this._baseUrl}/users`).then((res) => {
-  //     if (res.ok) return res.json();
-  //     return Promise.reject(`Error: ${res.status}`);
-  //   });
-  // }
+  getAllUsers() {
+    return fetch(`${this._baseUrl}/users`).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
 
   loginUser({ email, password }) {
     return fetch(`${this._baseUrl}/users/login`, {
