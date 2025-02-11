@@ -2,7 +2,7 @@ import UserRegister from "./UserRegister";
 import Table from "react-bootstrap/Table";
 import ToggleButton from "react-bootstrap/ToggleButton";
 
-function UsersTable() {
+function UsersTable({ users }) {
   return (
     <>
       <Table striped className="table-sm">
@@ -28,8 +28,8 @@ function UsersTable() {
           </tr>
         </thead>
         <tbody className="align-middle">
-          {Array.from({ length: 20 }).map((i, ind) => {
-            return <UserRegister key={ind} />;
+          {users.map((user, ind) => {
+            return <UserRegister key={ind} user={user} />;
           })}
         </tbody>
       </Table>

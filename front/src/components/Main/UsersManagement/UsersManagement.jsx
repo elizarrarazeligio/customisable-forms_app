@@ -2,8 +2,23 @@ import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import UsersTable from "./UsersTable";
 import Toolbar from "./Toolbar";
+import { useEffect, useState } from "react";
+import api from "../../../utils/Api";
 
 function UsersManagement() {
+  const [allUsers, setAllUsers] = useState([]);
+
+  const setUsers = () => {
+    api
+      .getAllUsers()
+      .then((res) => setAllUsers(res))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    setUsers();
+  }, []);
+
   return (
     <>
       <Container
@@ -18,11 +33,8 @@ function UsersManagement() {
           <Toolbar />
         </Row>
 
-        <Row
-          className="overflow-auto m-0 col-md-10 col-12"
-          // style={{ maxHeight: 400 }}
-        >
-          <UsersTable />
+        <Row className="overflow-auto m-0 col-md-10 col-12">
+          <UsersTable users={allUsers} />
         </Row>
       </Container>
     </>
