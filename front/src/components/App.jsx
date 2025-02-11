@@ -7,7 +7,7 @@ import UsersManagement from "./Main/UsersManagement/UsersManagement.jsx";
 import { toast, ToastContainer } from "react-toastify";
 import { UsersContext } from "../contexts/UsersContext.js";
 import "react-toastify/dist/ReactToastify.css";
-import api from "../utils/api.js";
+import api from "../utils/Api.js";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
