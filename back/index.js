@@ -9,9 +9,12 @@ import "dotenv/config";
 
 const app = express();
 
-const allowedOrigins = ["http://localhost:3000"];
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://customisable-forms-app-front.vercel.app",
+];
 app.use(cors({ origin: allowedOrigins, credentials: true }));
-app.use(bodyParser.json({ origin: "http://localhost:3000" }));
+app.use(bodyParser.json({ origin: allowedOrigins }));
 app.use(cookieParser());
 
 app.use("/users", users);
