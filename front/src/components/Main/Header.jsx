@@ -5,10 +5,12 @@ import Form from "react-bootstrap/esm/Form";
 import formLogo from "../../assets/form_logo.png";
 import Menu from "./Menu";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UsersContext } from "../../contexts/UsersContext";
 
 function Header() {
   const navigate = useNavigate();
+  const { user } = useContext(UsersContext);
   const [show, setShow] = useState(false);
 
   const handleShow = () => setShow(true);
@@ -54,11 +56,17 @@ function Header() {
             </Form>
           </Col>
           <Col className="col-3">
-            <i
-              className="bi bi-person-circle fs-4 float-end"
-              style={{ color: "#673AB7", cursor: "pointer" }}
-              onClick={() => handleUserLoginClick()}
-            ></i>
+            {user ? (
+              <p className="text-end text-truncate m-0">
+                Hi, {user.first_name}!
+              </p>
+            ) : (
+              <i
+                className="bi bi-person-circle fs-4 float-end"
+                style={{ color: "#673AB7", cursor: "pointer" }}
+                onClick={() => handleUserLoginClick()}
+              ></i>
+            )}
           </Col>
         </Row>
       </Navbar>

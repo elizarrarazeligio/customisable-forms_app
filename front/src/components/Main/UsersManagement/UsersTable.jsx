@@ -28,8 +28,8 @@ function UsersTable({ users }) {
           </tr>
         </thead>
         <tbody className="align-middle">
-          {users.map((user, ind) => {
-            return <UserRegister key={ind} user={user} />;
+          {users.map((user) => {
+            return <UserRegister key={user.user_id} user={user} />;
           })}
         </tbody>
       </Table>

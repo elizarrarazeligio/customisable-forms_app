@@ -36,7 +36,13 @@ users.post("/login", (req, res) => {
       if (user.status === true) throw "Blocked account.";
 
       const token = jwt.sign(
-        { id: user.user_id, email: user.email },
+        {
+          id: user.user_id,
+          email: user.email,
+          first_name: user.first_name,
+          status: user.status,
+          admin: user.admin,
+        },
         process.env.JWT_SECRET,
         { expiresIn: "10s" }
       );

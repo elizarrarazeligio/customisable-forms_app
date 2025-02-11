@@ -15,8 +15,8 @@ function App() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  const getUserToken = () => {
-    api
+  const getUserToken = async () => {
+    await api
       .getToken()
       .then((res) => setUser(res.response))
       .catch((err) => {

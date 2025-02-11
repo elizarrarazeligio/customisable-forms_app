@@ -26,8 +26,8 @@ class Api {
     });
   }
 
-  getToken() {
-    return fetch(`${this._baseUrl}/users/token`, {
+  async getToken() {
+    return await fetch(`${this._baseUrl}/users/token`, {
       headers: this._headers,
       credentials: "include",
     }).then((res) => {

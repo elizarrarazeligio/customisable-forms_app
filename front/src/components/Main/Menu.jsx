@@ -1,8 +1,12 @@
 import Offcanvas from "react-bootstrap/esm/Offcanvas";
 import ListGroup from "react-bootstrap/esm/ListGroup";
 import formLogo from "../../assets/form_logo.png";
+import { useContext } from "react";
+import { UsersContext } from "../../contexts/UsersContext";
 
 function Menu(props) {
+  const { user } = useContext(UsersContext);
+
   return (
     <>
       <Offcanvas show={props.show} onHide={props.handleHide}>
@@ -18,15 +22,21 @@ function Menu(props) {
             <ListGroup.Item action href="home">
               Home Page
             </ListGroup.Item>
-            <ListGroup.Item action href="">
-              My Profile
-            </ListGroup.Item>
-            <ListGroup.Item action href="management">
-              User Management
-            </ListGroup.Item>
-            <ListGroup.Item action href="">
-              Logout
-            </ListGroup.Item>
+            {user && (
+              <div className="list-group-flush">
+                <ListGroup.Item action href="">
+                  My Profile
+                </ListGroup.Item>
+                {user.admin && (
+                  <ListGroup.Item action href="management">
+                    User Management
+                  </ListGroup.Item>
+                )}
+                <ListGroup.Item action href="">
+                  Logout
+                </ListGroup.Item>
+              </div>
+            )}
           </ListGroup>
         </Offcanvas.Body>
       </Offcanvas>
