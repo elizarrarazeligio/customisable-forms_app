@@ -20,10 +20,8 @@ function App() {
     api
       .loginUser(userData)
       .then((res) => toast.success(res.message))
-      .then(() => {
-        getUserToken();
-        navigate("/home");
-      })
+      .then(() => getUserToken())
+      .then(() => navigate("/home"))
       .catch((err) => err.then((res) => toast.error(res.message)));
   };
 
