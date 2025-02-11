@@ -36,21 +36,21 @@ class Api {
     });
   }
 
-  // registerUser(data) {
-  //   return fetch(`${this._baseUrl}/register`, {
-  //     method: "POST",
-  //     headers: this._headers,
-  //     body: JSON.stringify({
-  //       first_name: data.first_name,
-  //       last_name: data.last_name,
-  //       email: data.email,
-  //       password: data.password,
-  //     }),
-  //   }).then((res) => {
-  //     if (res.ok) return res.json();
-  //     return Promise.reject(res.json());
-  //   });
-  // }
+  registerUser(data) {
+    return fetch(`${this._baseUrl}/users/register`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        password: data.password,
+      }),
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(res.json());
+    });
+  }
 
   // checkUser(id) {
   //   return fetch(`${this._baseUrl}/users/check`, {

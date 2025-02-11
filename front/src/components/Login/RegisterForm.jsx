@@ -5,16 +5,29 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { useRef } from "react";
+import api from "../../utils/Api";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-function RegisterForm({ onFormSubmit }) {
+function RegisterForm() {
+  const navigate = useNavigate();
+
   const nameRef = useRef();
   const lastNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
 
+  const onRegisterSubmit = (userData) => {
+    api
+      .registerUser(userData)
+      .then((res) => toast.success(res.message))
+      .then(() => navigate("/"))
+      .catch((err) => err.then((res) => toast.error(res.message)));
+  };
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    onFormSubmit({
+    onRegisterSubmit({
       first_name: nameRef.current.value,
       last_name: lastNameRef.current.value,
       email: emailRef.current.value,

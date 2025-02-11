@@ -99,7 +99,9 @@ users.post("/register", async (req, res) => {
         response: user,
       });
     })
-    .catch((err) => res.status(400).send(err));
+    .catch((err) =>
+      res.status(400).send({ status: "error", message: err.errors[0].message })
+    );
 });
 
 export default users;
