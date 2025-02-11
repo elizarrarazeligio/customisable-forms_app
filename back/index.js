@@ -13,7 +13,7 @@ const allowedOrigins = [
   "http://localhost:3000",
   "https://customisable-forms-app-front.vercel.app",
 ];
-app.use(cors({ origin: allowedOrigins, credentials: true }));
+app.use(cors());
 app.use(bodyParser.json({ origin: allowedOrigins }));
 app.use(cookieParser());
 
