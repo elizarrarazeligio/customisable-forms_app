@@ -44,7 +44,6 @@ users.post("/login", (req, res) => {
       res
         .cookie("token", token, {
           httpOnly: true,
-          sameSite: "strict",
         })
         .send({
           status: "success",
