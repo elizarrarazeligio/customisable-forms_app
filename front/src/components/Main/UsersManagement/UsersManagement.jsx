@@ -9,6 +9,7 @@ function UsersManagement() {
   const [allUsers, setAllUsers] = useState([]);
   const [check, setCheck] = useState(false);
   const [checkAll, setCheckAll] = useState(false);
+  const [status, setStatus] = useState([]);
 
   const setUsers = () => {
     api
@@ -19,7 +20,7 @@ function UsersManagement() {
 
   useEffect(() => {
     setUsers();
-  }, [check, checkAll]);
+  }, [check, checkAll, status]);
 
   return (
     <>
@@ -32,7 +33,7 @@ function UsersManagement() {
         </Row>
 
         <Row className="m-0 col-md-10 col-12">
-          <Toolbar />
+          <Toolbar setStatus={setStatus} />
         </Row>
 
         <Row className="overflow-auto m-0 col-md-10 col-12">

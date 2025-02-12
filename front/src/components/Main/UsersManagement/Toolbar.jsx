@@ -1,9 +1,20 @@
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { toast } from "react-toastify";
+import api from "../../../utils/Api";
 
-function Toolbar() {
+function Toolbar({ setStatus }) {
   //   const { handleStatusClick, handleDeleteUser } = useContext(UsersContext);
+  const handleClickStatus = (status) => {
+    api
+      .setUserStatus(status)
+      .then((res) => {
+        toast.success(res.message);
+        setStatus([status]);
+      })
+      .catch((err) => err.then((res) => toast.error(res.message)));
+  };
 
   return (
     <>
@@ -15,7 +26,7 @@ function Toolbar() {
           <Button
             className="btn btn-light btn-lg d-flex align-items-center px-1 py-1 me-1"
             type="button"
-            // onClick={() => handleStatusClick(0)}
+            onClick={() => handleClickStatus(true)}
           >
             <i className="bi bi-lock-fill fs-6 text-secondary px-1"></i>
             <p className="fs-6 m-0 pl-1 me-2 text-secondary">Block</p>
@@ -23,7 +34,7 @@ function Toolbar() {
           <Button
             className="btn btn-light btn-lg d-flex align-items-center px-1 py-1 me-1"
             type="button"
-            // onClick={() => handleStatusClick(1)}
+            onClick={() => handleClickStatus(false)}
           >
             <i className="bi bi-unlock-fill fs-6 text-secondary px-1"></i>
           </Button>

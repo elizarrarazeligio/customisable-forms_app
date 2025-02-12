@@ -141,8 +141,37 @@ users.patch("/check-all", (req, res) => {
       },
     }
   )
-    .then((check) => res.send({ affectedRows: check }))
+    .then((check) => res.send({ affectedRows: check[0] }))
     .catch((err) => res.status(400).send(err));
+});
+
+// ========= PATCH Block/Unblock Users ==========
+users.patch("/status", (req, res) => {
+  const { status } = req.body;
+
+  User.update(
+    { status: status },
+    {
+      where: {
+        checked: true,
+      },
+    }
+  )
+    .then((rows) => {
+      if (rows[0] == 0) throw "Select at least one register.";
+      if (status) {
+        res.send({
+          status: "success",
+          message: "User(s) successfully unblocked.",
+        });
+      } else {
+        res.send({
+          status: "success",
+          message: "User(s) successfully blocked.",
+        });
+      }
+    })
+    .catch((err) => res.status(400).send({ status: "error", message: err }));
 });
 
 export default users;
