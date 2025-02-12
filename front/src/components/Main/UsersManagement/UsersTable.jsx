@@ -3,9 +3,15 @@ import Table from "react-bootstrap/Table";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import api from "../../../utils/Api";
 
-function UsersTable({ users, check, setCheck }) {
+function UsersTable({ users, check, setCheck, checkAll, setCheckAll }) {
   const handleCheckUser = (e) => {
     api.checkUser(e.currentTarget.id).then(() => setCheck(!check));
+  };
+
+  const handleCheckAll = (e) => {
+    api
+      .checkAllUsers(e.currentTarget.checked)
+      .then(() => setCheckAll(!checkAll));
   };
 
   return (
@@ -19,9 +25,9 @@ function UsersTable({ users, check, setCheck }) {
                 id="toggle-check"
                 type="checkbox"
                 variant="outline-primary"
-                // checked={checkedAll}
+                checked={checkAll}
                 value="1"
-                // onChange={(e) => handleCheckAll(e)}
+                onChange={(e) => handleCheckAll(e)}
               >
                 <i className="bi bi-caret-down-fill"></i>
               </ToggleButton>

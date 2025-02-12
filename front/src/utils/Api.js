@@ -62,18 +62,18 @@ class Api {
     });
   }
 
-  // checkAllUsers(status) {
-  //   return fetch(`${this._baseUrl}/users/check/all`, {
-  //     method: "PATCH",
-  //     headers: this._headers,
-  //     body: JSON.stringify({
-  //       status,
-  //     }),
-  //   }).then((res) => {
-  //     if (res.ok) return res.json();
-  //     return Promise.reject(`Error: ${res.status}`);
-  //   });
-  // }
+  checkAllUsers(status) {
+    return fetch(`${this._baseUrl}/users/check-all`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        status,
+      }),
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
 
   // setUserStatus(status) {
   //   return fetch(`${this._baseUrl}/users`, {

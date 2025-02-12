@@ -129,4 +129,20 @@ users.patch("/:id/check", (req, res) => {
     .catch((err) => res.status(400).send(err));
 });
 
+// =========== PATCH Check All Users ============
+users.patch("/check-all", (req, res) => {
+  const { status } = req.body;
+
+  User.update(
+    { checked: status },
+    {
+      where: {
+        checked: !status,
+      },
+    }
+  )
+    .then((check) => res.send({ affectedRows: check }))
+    .catch((err) => res.status(400).send(err));
+});
+
 export default users;
