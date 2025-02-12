@@ -1,6 +1,6 @@
 import Form from "react-bootstrap/Form";
 
-function UserRegister({ user }) {
+function UserRegister({ user, handleCheckUser }) {
   return (
     <>
       <tr>
@@ -11,7 +11,7 @@ function UserRegister({ user }) {
               className="ms-1"
               id={user.user_id}
               checked={user.checked}
-              // onChange={(e) => handleCheckUser(e)}
+              onChange={(e) => handleCheckUser(e)}
             />
           </Form>
         </td>

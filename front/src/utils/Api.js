@@ -52,18 +52,15 @@ class Api {
     });
   }
 
-  // checkUser(id) {
-  //   return fetch(`${this._baseUrl}/users/check`, {
-  //     method: "PATCH",
-  //     headers: this._headers,
-  //     body: JSON.stringify({
-  //       id,
-  //     }),
-  //   }).then((res) => {
-  //     if (res.ok) return res.json();
-  //     return Promise.reject(`Error: ${res.status}`);
-  //   });
-  // }
+  checkUser(id) {
+    return fetch(`${this._baseUrl}/users/${id}/check`, {
+      method: "PATCH",
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
 
   // checkAllUsers(status) {
   //   return fetch(`${this._baseUrl}/users/check/all`, {

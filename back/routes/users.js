@@ -1,14 +1,17 @@
-import { response, Router } from "express";
+import { Router } from "express";
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
+import { literal } from "sequelize";
 
 const users = Router();
 
 // =============== GET All Users ================
 users.get("/", (req, res) => {
-  User.findAll()
+  User.findAll({
+    order: ["user_id"],
+  })
     .then((users) => res.send(users))
     .catch((err) => res.status(404).send(err));
 });
@@ -44,7 +47,7 @@ users.post("/login", (req, res) => {
           admin: user.admin,
         },
         process.env.JWT_SECRET,
-        { expiresIn: "10s" }
+        { expiresIn: "1h" }
       );
 
       res
@@ -108,6 +111,22 @@ users.post("/register", async (req, res) => {
     .catch((err) =>
       res.status(400).send({ status: "error", message: err.errors[0].message })
     );
+});
+
+// ========== PATCH Check User By ID ============
+users.patch("/:id/check", (req, res) => {
+  const { id } = req.params;
+
+  User.update(
+    { checked: literal("NOT checked") },
+    {
+      where: {
+        user_id: id,
+      },
+    }
+  )
+    .then((check) => res.send({ affectedRows: check[0] }))
+    .catch((err) => res.status(400).send(err));
 });
 
 export default users;

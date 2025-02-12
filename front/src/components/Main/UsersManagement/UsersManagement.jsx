@@ -7,6 +7,7 @@ import api from "../../../utils/Api";
 
 function UsersManagement() {
   const [allUsers, setAllUsers] = useState([]);
+  const [check, setCheck] = useState(false);
 
   const setUsers = () => {
     api
@@ -17,7 +18,7 @@ function UsersManagement() {
 
   useEffect(() => {
     setUsers();
-  }, []);
+  }, [check]);
 
   return (
     <>
@@ -34,7 +35,7 @@ function UsersManagement() {
         </Row>
 
         <Row className="overflow-auto m-0 col-md-10 col-12">
-          <UsersTable users={allUsers} />
+          <UsersTable users={allUsers} setCheck={setCheck} check={check} />
         </Row>
       </Container>
     </>

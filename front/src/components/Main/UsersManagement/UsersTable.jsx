@@ -1,8 +1,13 @@
 import UserRegister from "./UserRegister";
 import Table from "react-bootstrap/Table";
 import ToggleButton from "react-bootstrap/ToggleButton";
+import api from "../../../utils/Api";
 
-function UsersTable({ users }) {
+function UsersTable({ users, check, setCheck }) {
+  const handleCheckUser = (e) => {
+    api.checkUser(e.currentTarget.id).then(() => setCheck(!check));
+  };
+
   return (
     <>
       <Table striped className="table-sm">
@@ -29,7 +34,13 @@ function UsersTable({ users }) {
         </thead>
         <tbody className="align-middle">
           {users.map((user) => {
-            return <UserRegister key={user.user_id} user={user} />;
+            return (
+              <UserRegister
+                key={user.user_id}
+                user={user}
+                handleCheckUser={handleCheckUser}
+              />
+            );
           })}
         </tbody>
       </Table>
