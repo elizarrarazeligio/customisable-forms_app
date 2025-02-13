@@ -5,6 +5,7 @@ import Collapse from "react-bootstrap/esm/Collapse";
 import addTemplate from "../../../assets/add.jpg";
 import FormTemplate from "./FormTemplate";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Templates() {
   const [check, setCheck] = useState(false);
@@ -32,15 +33,17 @@ function Templates() {
         </Row>
         <Row className="col-md-10 col-12 pb-2 mx-auto">
           <Col className="col-6 col-md-4 col-xl-3 justify-content-center px-2 py-1 rounded">
-            <img
-              src={addTemplate}
-              alt="template"
-              className="object-fit-cover border rounded-top w-100 col-12"
-              style={{ height: 150 }}
-            />
-            <p className="badge text-dark fw-semibold fs-6 text-bg-light w-100 m-0 pt-2 text-truncate rounded-0 rounded-bottom">
-              New Template
-            </p>
+            <Link to="/new-template">
+              <img
+                src={addTemplate}
+                alt="template"
+                className="object-fit-cover border rounded-top w-100 col-12"
+                style={{ height: 150 }}
+              />
+              <p className="badge text-dark fw-semibold fs-6 text-bg-light w-100 m-0 pt-2 text-truncate rounded-0 rounded-bottom">
+                New Template
+              </p>
+            </Link>
           </Col>
           {Array.from({ length: 3 }).map((i, ind) => {
             return <FormTemplate key={ind} />;
