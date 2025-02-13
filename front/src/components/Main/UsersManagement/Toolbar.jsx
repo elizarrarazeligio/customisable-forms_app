@@ -12,7 +12,17 @@ function Toolbar({ setStatus }) {
         toast.success(res.message);
         setStatus([status]);
       })
-      .catch((err) => err.then((res) => toast.error(res.message.parent.line)));
+      .catch((err) => err.then((res) => toast.error(res.message)));
+  };
+
+  const handleAdminStatus = (status) => {
+    api
+      .setAdminStatus(status)
+      .then((res) => {
+        toast.success(res.message);
+        setStatus([status]);
+      })
+      .catch((err) => err.then((res) => toast.error(res.message)));
   };
 
   const handleDeleteUser = () => {
@@ -59,12 +69,14 @@ function Toolbar({ setStatus }) {
           <Button
             className="btn btn-light btn-lg d-flex align-items-center px-1 py-0 me-1"
             type="button"
+            onClick={() => handleAdminStatus(true)}
           >
             <i className="bi bi-person-fill-check fs-5 text-success"></i>
           </Button>
           <Button
             className="btn btn-light btn-lg d-flex align-items-center px-1 py-0"
             type="button"
+            onClick={() => handleAdminStatus(false)}
           >
             <i className="bi bi-person-fill-x fs-5 text-danger"></i>
           </Button>

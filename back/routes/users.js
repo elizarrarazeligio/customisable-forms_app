@@ -174,6 +174,36 @@ users.patch("/status", (req, res) => {
     .catch((err) => res.status(400).send({ status: "error", message: err }));
 });
 
+// ========= PATCH Update Admin Status ==========
+// ========= PATCH Block/Unblock Users ==========
+users.patch("/admin", (req, res) => {
+  const { status } = req.body;
+
+  User.update(
+    { admin: status },
+    {
+      where: {
+        checked: true,
+      },
+    }
+  )
+    .then((rows) => {
+      if (rows[0] == 0) throw "Select at least one register.";
+      if (status) {
+        res.send({
+          status: "success",
+          message: "User(s) successfully unblocked.",
+        });
+      } else {
+        res.send({
+          status: "success",
+          message: "User(s) successfully blocked.",
+        });
+      }
+    })
+    .catch((err) => res.status(400).send({ status: "error", message: err }));
+});
+
 // ============ DELETE Checked User =============
 users.delete("/", (req, res) => {
   User.destroy({

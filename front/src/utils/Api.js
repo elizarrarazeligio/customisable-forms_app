@@ -88,6 +88,19 @@ class Api {
     });
   }
 
+  setAdminStatus(status) {
+    return fetch(`${this._baseUrl}/users/admin`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        status,
+      }),
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(res.json());
+    });
+  }
+
   deleteUser() {
     return fetch(`${this._baseUrl}/users`, {
       method: "DELETE",
