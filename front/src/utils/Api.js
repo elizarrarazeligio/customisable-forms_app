@@ -88,15 +88,15 @@ class Api {
     });
   }
 
-  // deleteUser() {
-  //   return fetch(`${this._baseUrl}/users`, {
-  //     method: "DELETE",
-  //     headers: this._headers,
-  //   }).then((res) => {
-  //     if (res.ok) return res.json();
-  //     return Promise.reject(res.json());
-  //   });
-  // }
+  deleteUser() {
+    return fetch(`${this._baseUrl}/users`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(res.json());
+    });
+  }
 }
 
 const api = new Api({

@@ -174,4 +174,22 @@ users.patch("/status", (req, res) => {
     .catch((err) => res.status(400).send({ status: "error", message: err }));
 });
 
+// ============ DELETE Checked User =============
+users.delete("/", (req, res) => {
+  User.destroy({
+    where: {
+      checked: true,
+    },
+  })
+    .then((rows) => {
+      if (rows == 0) throw "Select at least one register.";
+      res.send({
+        status: "success",
+        message: "User(s) successfully deleted.",
+        affectedRows: rows,
+      });
+    })
+    .catch((err) => res.status(400).send({ status: "error", message: err }));
+});
+
 export default users;

@@ -5,13 +5,22 @@ import { toast } from "react-toastify";
 import api from "../../../utils/Api";
 
 function Toolbar({ setStatus }) {
-  //   const { handleStatusClick, handleDeleteUser } = useContext(UsersContext);
   const handleClickStatus = (status) => {
     api
       .setUserStatus(status)
       .then((res) => {
         toast.success(res.message);
         setStatus([status]);
+      })
+      .catch((err) => err.then((res) => toast.error(res.message.parent.line)));
+  };
+
+  const handleDeleteUser = () => {
+    api
+      .deleteUser()
+      .then((res) => {
+        toast.success(res.message);
+        setStatus([res.affectedRows]);
       })
       .catch((err) => err.then((res) => toast.error(res.message)));
   };
@@ -41,7 +50,7 @@ function Toolbar({ setStatus }) {
           <Button
             className="btn btn-light btn-lg d-flex align-items-center px-1 py-1 me-1"
             type="button"
-            // onClick={() => handleDeleteUser()}
+            onClick={() => handleDeleteUser()}
           >
             <i className="bi bi-trash-fill fs-6 text-danger px-1"></i>
           </Button>
