@@ -24,7 +24,7 @@ function Menu(props) {
             </ListGroup.Item>
             {user && (
               <div className="list-group-flush">
-                <ListGroup.Item action href="">
+                <ListGroup.Item action href="profile">
                   My Profile
                 </ListGroup.Item>
                 {user.admin && (

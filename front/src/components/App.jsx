@@ -4,6 +4,8 @@ import RegisterForm from "./Login/RegisterForm";
 import Main from "./Main/Main.jsx";
 import HomePage from "./Main/HomePage/HomePage.jsx";
 import UsersManagement from "./Main/UsersManagement/UsersManagement.jsx";
+import Profile from "./Main/Profile/Profile.jsx";
+import Template from "./Main/Template/Template.jsx";
 import { toast, ToastContainer } from "react-toastify";
 import { UsersContext } from "../contexts/UsersContext.js";
 import "react-toastify/dist/ReactToastify.css";
@@ -38,7 +40,9 @@ function App() {
           </Route>
           <Route path="/" element={<Main />}>
             <Route path="/home" element={<HomePage />} />
-            <Route path="/management" element={<UsersManagement />}></Route>
+            <Route path="/management" element={<UsersManagement />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/new-template" element={<Template />} />
           </Route>
         </Routes>
         <ToastContainer
