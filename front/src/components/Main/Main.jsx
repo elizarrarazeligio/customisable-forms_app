@@ -11,9 +11,10 @@ function Main() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userData.status === "success") {
+    if (userData.status == "success") {
       setUser(userData.response);
-    } else if (userData.status === "error") {
+    } else if (userData.status == "error") {
+      setUser(null);
       toast.error(userData.message);
       navigate("/");
     }
