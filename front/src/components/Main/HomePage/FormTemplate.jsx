@@ -1,21 +1,18 @@
 import Col from "react-bootstrap/esm/Col";
 import defaultForm from "../../../assets/form.jpg";
 
-function FormTemplate() {
-  const foto = "";
-  const titulo = "";
-
+function FormTemplate({ template }) {
   return (
     <>
       <Col className="col-6 col-md-4 col-xl-3 justify-content-center px-2 py-1 rounded">
         <img
-          src={foto ? foto : defaultForm}
+          src={template ? template.image : defaultForm}
           alt="template"
           className="object-fit-cover border rounded-top w-100 col-12"
           style={{ height: 150 }}
         />
         <p className="badge text-dark fw-semibold fs-6 text-bg-light w-100 m-0 pt-2 text-truncate rounded-0 rounded-bottom">
-          {titulo ? titulo : "<No title>"}
+          {template ? template.title : "<No title>"}
         </p>
       </Col>
     </>

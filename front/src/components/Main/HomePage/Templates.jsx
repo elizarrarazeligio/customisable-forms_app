@@ -7,7 +7,7 @@ import FormTemplate from "./FormTemplate";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function Templates() {
+function Templates({ templates }) {
   const [check, setCheck] = useState(false);
 
   return (
@@ -45,8 +45,8 @@ function Templates() {
               </p>
             </Link>
           </Col>
-          {Array.from({ length: 3 }).map((i, ind) => {
-            return <FormTemplate key={ind} />;
+          {templates.slice(0, 3).map((template, ind) => {
+            return <FormTemplate key={ind} template={template} />;
           })}
 
           <Collapse in={check}>
