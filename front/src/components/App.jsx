@@ -1,9 +1,9 @@
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { UsersContext } from "../contexts/UsersContext.js";
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import api from "../utils/Api.js";
+import userApi from "../utils/userApi.js";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -25,7 +25,7 @@ function App() {
 }
 
 const getUserData = async () => {
-  return await api.getToken().catch((err) => err);
+  return await userApi.getToken().catch((err) => err);
 };
 
 export { App, getUserData };

@@ -1,4 +1,4 @@
-class Api {
+class UserApi {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
@@ -123,11 +123,11 @@ class Api {
   }
 }
 
-const api = new Api({
+const userApi = new UserApi({
   baseUrl: import.meta.env.VITE_API_URL,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-export default api;
+export default userApi;

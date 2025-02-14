@@ -5,14 +5,14 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UsersContext } from "../../contexts/UsersContext";
 import { toast } from "react-toastify";
-import api from "../../utils/Api";
+import userApi from "../../utils/userApi.js";
 
 function Menu(props) {
   const { user } = useContext(UsersContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    api
+    userApi
       .logoutUser()
       .then((res) => {
         navigate("/");

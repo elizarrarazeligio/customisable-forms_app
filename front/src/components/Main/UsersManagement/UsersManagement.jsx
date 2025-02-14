@@ -3,7 +3,7 @@ import Row from "react-bootstrap/esm/Row";
 import UsersTable from "./UsersTable";
 import Toolbar from "./Toolbar";
 import { useEffect, useState } from "react";
-import api from "../../../utils/Api";
+import userApi from "../../../utils/userApi.js";
 
 function UsersManagement() {
   const [allUsers, setAllUsers] = useState([]);
@@ -12,7 +12,7 @@ function UsersManagement() {
   const [status, setStatus] = useState([]);
 
   const setUsers = () => {
-    api
+    userApi
       .getAllUsers()
       .then((res) => setAllUsers(res))
       .catch((err) => console.log(err));

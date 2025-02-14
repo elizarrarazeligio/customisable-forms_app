@@ -2,11 +2,11 @@ import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
-import api from "../../../utils/Api";
+import userApi from "../../../utils/userApi.js";
 
 function Toolbar({ setStatus }) {
   const handleClickStatus = (status) => {
-    api
+    userApi
       .setUserStatus(status)
       .then((res) => {
         toast.success(res.message);
@@ -16,7 +16,7 @@ function Toolbar({ setStatus }) {
   };
 
   const handleAdminStatus = (status) => {
-    api
+    userApi
       .setAdminStatus(status)
       .then((res) => {
         toast.success(res.message);
@@ -26,7 +26,7 @@ function Toolbar({ setStatus }) {
   };
 
   const handleDeleteUser = () => {
-    api
+    userApi
       .deleteUser()
       .then((res) => {
         toast.success(res.message);

@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { useRef } from "react";
-import api from "../../utils/Api";
+import userApi from "../../utils/userApi.js";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +18,7 @@ function RegisterForm() {
   const passwordRef = useRef();
 
   const onRegisterSubmit = (userData) => {
-    api
+    userApi
       .registerUser(userData)
       .then((res) => toast.success(res.message))
       .then(() => navigate("/"))

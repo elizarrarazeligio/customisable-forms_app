@@ -175,7 +175,6 @@ users.patch("/status", (req, res) => {
 });
 
 // ========= PATCH Update Admin Status ==========
-// ========= PATCH Block/Unblock Users ==========
 users.patch("/admin", (req, res) => {
   const { status } = req.body;
 
@@ -192,12 +191,12 @@ users.patch("/admin", (req, res) => {
       if (status) {
         res.send({
           status: "success",
-          message: "User(s) successfully unblocked.",
+          message: "User(s) now is admin.",
         });
       } else {
         res.send({
           status: "success",
-          message: "User(s) successfully blocked.",
+          message: "User(s) removed from admins.",
         });
       }
     })

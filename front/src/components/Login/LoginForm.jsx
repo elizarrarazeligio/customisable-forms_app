@@ -7,7 +7,7 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import formLogo from "../../assets/form_logo.png";
 import { toast } from "react-toastify";
-import api from "../../utils/Api.js";
+import userApi from "../../utils/userApi.js";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ function LoginForm() {
   const passwordRef = useRef();
 
   const onLoginSubmit = (userData) => {
-    api
+    userApi
       .loginUser(userData)
       .then((res) => toast.success(res.message))
       .then(() => navigate("/home"))

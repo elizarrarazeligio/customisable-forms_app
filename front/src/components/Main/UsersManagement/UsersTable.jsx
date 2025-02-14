@@ -1,15 +1,15 @@
 import UserRegister from "./UserRegister";
 import Table from "react-bootstrap/Table";
 import ToggleButton from "react-bootstrap/ToggleButton";
-import api from "../../../utils/Api";
+import userApi from "../../../utils/userApi.js";
 
 function UsersTable({ users, check, setCheck, checkAll, setCheckAll }) {
   const handleCheckUser = (e) => {
-    api.checkUser(e.currentTarget.id).then(() => setCheck(!check));
+    userApi.checkUser(e.currentTarget.id).then(() => setCheck(!check));
   };
 
   const handleCheckAll = (e) => {
-    api
+    userApi
       .checkAllUsers(e.currentTarget.checked)
       .then(() => setCheckAll(!checkAll));
   };
