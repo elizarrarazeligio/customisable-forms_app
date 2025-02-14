@@ -55,7 +55,6 @@ users.post("/login", (req, res) => {
           httpOnly: true,
           secure: true,
           sameSite: "none",
-          path: "/",
         })
         .send({
           status: "success",
