@@ -1,4 +1,4 @@
-import App from "./App.jsx";
+import { App, getUserData } from "./App.jsx";
 import Login from "./Login/Login";
 import LoginForm from "./Login/LoginForm";
 import RegisterForm from "./Login/RegisterForm";
@@ -20,7 +20,7 @@ const router = createBrowserRouter(
         <Route path="/" element={<LoginForm />} />
         <Route path="register" element={<RegisterForm />} />
       </Route>
-      <Route element={<Main />}>
+      <Route element={<Main />} loader={getUserData}>
         <Route path="/home" element={<HomePage />} />
         <Route path="/management" element={<UsersManagement />} />
         <Route path="/profile" element={<Profile />} />
