@@ -2,10 +2,24 @@ import Offcanvas from "react-bootstrap/esm/Offcanvas";
 import ListGroup from "react-bootstrap/esm/ListGroup";
 import formLogo from "../../assets/form_logo.png";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { UsersContext } from "../../contexts/UsersContext";
+import { toast } from "react-toastify";
+import api from "../../utils/Api";
 
 function Menu(props) {
   const { user } = useContext(UsersContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    api
+      .logoutUser()
+      .then((res) => {
+        navigate("/");
+        toast.success(res.message);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -32,7 +46,7 @@ function Menu(props) {
                     User Management
                   </ListGroup.Item>
                 )}
-                <ListGroup.Item action href="">
+                <ListGroup.Item action onClick={() => handleLogout()}>
                   Logout
                 </ListGroup.Item>
               </div>

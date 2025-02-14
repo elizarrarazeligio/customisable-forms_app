@@ -26,6 +26,17 @@ class Api {
     });
   }
 
+  logoutUser() {
+    return fetch(`${this._baseUrl}/users/logout`, {
+      method: "POST",
+      headers: this.headers,
+      credentials: "include",
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(res.json());
+    });
+  }
+
   async getToken() {
     return await fetch(`${this._baseUrl}/users/token`, {
       headers: this._headers,

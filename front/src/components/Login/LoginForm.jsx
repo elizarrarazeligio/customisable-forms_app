@@ -18,10 +18,8 @@ function LoginForm() {
   const onLoginSubmit = (userData) => {
     api
       .loginUser(userData)
-      .then((res) => {
-        toast.success(res.message);
-        navigate("/home");
-      })
+      .then((res) => toast.success(res.message))
+      .then(() => navigate("/home"))
       .catch((err) => err.then((res) => toast.error(res.message)));
   };
 

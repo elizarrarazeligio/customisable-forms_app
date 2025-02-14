@@ -54,7 +54,7 @@ users.post("/login", (req, res) => {
         .cookie("token", token, {
           httpOnly: true,
           secure: true,
-          sameSite: "none",
+          sameSite: "strict",
           path: "/",
         })
         .send({
@@ -220,6 +220,13 @@ users.delete("/", (req, res) => {
       });
     })
     .catch((err) => res.status(400).send({ status: "error", message: err }));
+});
+
+// ============== POST User Logout ==============
+users.post("/logout", (req, res) => {
+  res
+    .clearCookie("token")
+    .send({ status: "succes", message: "Logout successful!" });
 });
 
 export default users;
