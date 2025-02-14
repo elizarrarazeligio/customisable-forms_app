@@ -1,16 +1,8 @@
-import Login from "./Login/Login";
-import LoginForm from "./Login/LoginForm";
-import RegisterForm from "./Login/RegisterForm";
-import Main from "./Main/Main.jsx";
-import HomePage from "./Main/HomePage/HomePage.jsx";
-import UsersManagement from "./Main/UsersManagement/UsersManagement.jsx";
-import Profile from "./Main/Profile/Profile.jsx";
-import Template from "./Main/Template/Template.jsx";
 import { toast, ToastContainer } from "react-toastify";
 import { UsersContext } from "../contexts/UsersContext.js";
 import "react-toastify/dist/ReactToastify.css";
 import api from "../utils/Api.js";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function App() {
@@ -33,18 +25,7 @@ function App() {
   return (
     <>
       <UsersContext.Provider value={{ user, getUserToken }}>
-        <Routes>
-          <Route path="/" element={<Login />}>
-            <Route path="/" element={<LoginForm />} />
-            <Route path="/register" element={<RegisterForm />} />
-          </Route>
-          <Route path="/" element={<Main />}>
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/management" element={<UsersManagement />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/new-template" element={<Template />} />
-          </Route>
-        </Routes>
+        <Outlet />
         <ToastContainer
           position="top-center"
           autoClose={2000}
