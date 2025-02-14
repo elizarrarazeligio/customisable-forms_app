@@ -1,9 +1,9 @@
 import { Router } from "express";
+import { literal } from "sequelize";
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-import { literal } from "sequelize";
 
 const users = Router();
 

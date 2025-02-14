@@ -1,5 +1,5 @@
-import sequelize from "../db.js";
 import { Router } from "express";
+import Form from "../models/Forms.js";
 
 const forms = Router();
 
