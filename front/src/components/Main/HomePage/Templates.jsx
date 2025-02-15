@@ -5,10 +5,20 @@ import Collapse from "react-bootstrap/esm/Collapse";
 import addTemplate from "../../../assets/add.jpg";
 import FormTemplate from "./FormTemplate";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import templateApi from "../../../utils/templateApi";
 
-function Templates({ templates }) {
+function Templates({ templates, user }) {
   const [check, setCheck] = useState(false);
+  const navigate = useNavigate();
+
+  const onNewTemplate = () => {
+    user &&
+      templateApi
+        .newTemplate(user.id)
+        .then((res) => navigate(`/${res.hash}`))
+        .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -32,8 +42,11 @@ function Templates({ templates }) {
           </Col>
         </Row>
         <Row className="col-md-10 col-12 pb-2 mx-auto">
-          <Col className="col-6 col-md-4 col-xl-3 justify-content-center px-2 py-1 rounded">
-            <Link to="/new-template">
+          <Col
+            className="col-6 col-md-4 col-xl-3 justify-content-center px-2 py-1 rounded"
+            onClick={() => onNewTemplate()}
+          >
+            <Link>
               <img
                 src={addTemplate}
                 alt="template"
@@ -45,9 +58,12 @@ function Templates({ templates }) {
               </p>
             </Link>
           </Col>
-          {templates.slice(0, 3).map((template, ind) => {
-            return <FormTemplate key={ind} template={template} />;
-          })}
+          {templates &&
+            templates.slice(0, 3).map((template) => {
+              return (
+                <FormTemplate key={template.template_id} template={template} />
+              );
+            })}
 
           <Collapse in={check}>
             <div className="m-0 p-0" id="example-collapse-text">

@@ -6,7 +6,7 @@ import Main from "./Main/Main.jsx";
 import HomePage from "./Main/HomePage/HomePage.jsx";
 import UsersManagement from "./Main/UsersManagement/UsersManagement.jsx";
 import Profile from "./Main/Profile/Profile.jsx";
-import Template from "./Main/Template/Template.jsx";
+import Template from "./Main/HomePage/Template/Template.jsx";
 import {
   Route,
   createBrowserRouter,
@@ -20,11 +20,11 @@ const router = createBrowserRouter(
         <Route path="/" element={<LoginForm />} />
         <Route path="register" element={<RegisterForm />} />
       </Route>
-      <Route element={<Main />} loader={getUserData}>
+      <Route path="/" element={<Main />} loader={getUserData}>
         <Route path="/home" element={<HomePage />} />
         <Route path="/management" element={<UsersManagement />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/new-template" element={<Template />} />
+        <Route path="/:templateHash" element={<Template />} />
       </Route>
     </Route>
   )

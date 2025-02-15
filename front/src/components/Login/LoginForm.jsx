@@ -21,7 +21,7 @@ function LoginForm() {
     userApi
       .loginUser(userData)
       .then((res) => {
-        setUser(userData);
+        setUser(res);
         toast.success(res.message);
       })
       .then(() => navigate("/home"))

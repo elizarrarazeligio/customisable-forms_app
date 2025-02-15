@@ -24,7 +24,7 @@ function HomePage() {
     <>
       <Container fluid className="bg-white px-2 py-4">
         <Row className="m-0">
-          <Templates templates={templates} />
+          <Templates templates={templates} user={user} />
         </Row>
 
         <Row className="m-0"></Row>
