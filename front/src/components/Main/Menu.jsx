@@ -33,16 +33,16 @@ function Menu(props) {
         <Offcanvas.Body className="pt-0">
           <hr className="mt-0 col-11" />
           <ListGroup className="col-11 list-group-flush">
-            <ListGroup.Item action href="home">
+            <ListGroup.Item action href="/home">
               Home Page
             </ListGroup.Item>
             {user && (
               <div className="list-group-flush">
-                <ListGroup.Item action href="profile">
+                <ListGroup.Item action href="/profile">
                   My Profile
                 </ListGroup.Item>
                 {user.admin && (
-                  <ListGroup.Item action href="management">
+                  <ListGroup.Item action href="/management">
                     User Management
                   </ListGroup.Item>
                 )}

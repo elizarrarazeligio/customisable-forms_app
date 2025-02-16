@@ -35,7 +35,7 @@ function Header() {
               </Col>
               <Menu show={show} handleHide={handleHide} />
               <Navbar.Brand
-                href="home"
+                href="/home"
                 className="d-flex align-items-center p-0 m-0 col-4"
               >
                 <img src={formLogo} alt="formLogo" width={35} height={35} />

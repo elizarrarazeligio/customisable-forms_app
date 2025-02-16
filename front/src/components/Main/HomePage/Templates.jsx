@@ -3,7 +3,7 @@ import Col from "react-bootstrap/esm/Col";
 import ToggleButton from "react-bootstrap/esm/ToggleButton";
 import Collapse from "react-bootstrap/esm/Collapse";
 import addTemplate from "../../../assets/add.jpg";
-import FormTemplate from "./FormTemplate";
+import TemplateCard from "./TemplateCard";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import templateApi from "../../../utils/templateApi";
@@ -61,7 +61,7 @@ function Templates({ templates, user }) {
           {templates &&
             templates.slice(0, 3).map((template) => {
               return (
-                <FormTemplate key={template.template_id} template={template} />
+                <TemplateCard key={template.template_id} template={template} />
               );
             })}
 
@@ -72,7 +72,7 @@ function Templates({ templates, user }) {
               </Col>
               <div className="d-flex col-12 flex-wrap m-0 p-0">
                 {Array.from({ length: 5 }).map((i, ind) => {
-                  return <FormTemplate key={ind} />;
+                  return <TemplateCard key={ind} />;
                 })}
               </div>
             </div>

@@ -2,7 +2,7 @@ import Col from "react-bootstrap/esm/Col";
 import defaultForm from "../../../assets/form.jpg";
 import { Link } from "react-router-dom";
 
-function FormTemplate({ template }) {
+function TemplateCard({ template }) {
   return (
     <>
       <Col className="col-6 col-md-4 col-xl-3 justify-content-center px-2 py-1 rounded">
@@ -22,4 +22,4 @@ function FormTemplate({ template }) {
   );
 }
 
-export default FormTemplate;
+export default TemplateCard;

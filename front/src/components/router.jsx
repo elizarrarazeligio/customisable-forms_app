@@ -6,7 +6,10 @@ import Main from "./Main/Main.jsx";
 import HomePage from "./Main/HomePage/HomePage.jsx";
 import UsersManagement from "./Main/UsersManagement/UsersManagement.jsx";
 import Profile from "./Main/Profile/Profile.jsx";
-import Template from "./Main/HomePage/Template/Template.jsx";
+import TemplateDashboard from "./Main/HomePage/TemplateDashboard/TemplateDashboard.jsx";
+import Template from "./Main/HomePage/TemplateDashboard/TemplateDashboardTabs/Template.jsx";
+import FormsResults from "./Main/HomePage/TemplateDashboard/TemplateDashboardTabs/FormsResults.jsx";
+import Summary from "./Main/HomePage/TemplateDashboard/TemplateDashboardTabs/Summary.jsx";
 import {
   Route,
   createBrowserRouter,
@@ -27,9 +30,13 @@ const router = createBrowserRouter(
         <Route path="/profile" element={<Profile />} />
         <Route
           path="/:templateHash"
-          element={<Template />}
+          element={<TemplateDashboard />}
           loader={getTemplateData}
-        />
+        >
+          <Route path="/:templateHash" element={<Template />} />
+          <Route path="/:templateHash/forms" element={<FormsResults />} />
+          <Route path="/:templateHash/summary" element={<Summary />} />
+        </Route>
       </Route>
     </Route>
   )
