@@ -1,4 +1,4 @@
-import { App, getUserData } from "./App.jsx";
+import App from "./App.jsx";
 import Login from "./Login/Login";
 import LoginForm from "./Login/LoginForm";
 import RegisterForm from "./Login/RegisterForm";
@@ -12,6 +12,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
+import { getUserData, getTemplateData } from "./loaders.js";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,7 +25,11 @@ const router = createBrowserRouter(
         <Route path="/home" element={<HomePage />} />
         <Route path="/management" element={<UsersManagement />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/:templateHash" element={<Template />} />
+        <Route
+          path="/:templateHash"
+          element={<Template />}
+          loader={getTemplateData}
+        />
       </Route>
     </Route>
   )

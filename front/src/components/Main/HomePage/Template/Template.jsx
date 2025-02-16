@@ -3,32 +3,34 @@ import Form from "react-bootstrap/esm/Form";
 import Button from "react-bootstrap/esm/Button";
 import Question from "./Question";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import templateApi from "../../../../utils/templateApi";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Template() {
-  const [template, setTemplate] = useState([]);
-  const [questions, setQuestions] = useState(1);
-  const params = useParams();
   const navigate = useNavigate();
+  const templateData = useLoaderData();
+
+  const [template, setTemplate] = useState(templateData.response);
+  const [title, setTitle] = useState(template.title);
+  const [description, setDescription] = useState(template.description);
+  const [image, setImage] = useState(template.image);
+  const [questions, setQuestions] = useState(1);
 
   const titleRef = useRef();
   const descriptionRef = useRef();
   const imageRef = useRef();
-
-  const templateInfo = (templateHash) => {
-    templateApi
-      .getTemplateInfo(templateHash)
-      .then((res) => setTemplate(res))
-      .catch((err) => navigate("/home"));
-  };
 
   const handleTemplateSubmit = (e) => {
     e.preventDefault();
   };
 
   useEffect(() => {
-    templateInfo(params.templateHash);
+    if (templateData.status == "success") {
+      setTemplate(templateData.response);
+    } else if (templateData.status == "error") {
+      toast.error(templateData.message);
+      navigate("/home");
+    }
   }, []);
 
   return (
@@ -39,7 +41,8 @@ function Template() {
       <Container fluid className="bg-white px-2 pt-2 pb-4  rounded mb-1">
         <Form.Group className="my-2 mx-sm-4 mx-3" id="title">
           <Form.Control
-            // value={template.title}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             type="text"
             name="title"
             ref={titleRef}
@@ -50,7 +53,8 @@ function Template() {
         </Form.Group>
         <Form.Group className="mt-1 mx-sm-4 mx-3" id="description">
           <Form.Control
-            // value={template.description}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             as="textarea"
             rows={1}
             name="description"
@@ -62,6 +66,8 @@ function Template() {
         </Form.Group>
         <Form.Group className="my-2 mx-sm-4 mx-3 w-75" id="image">
           <Form.Control
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
             type="url"
             name="image"
             ref={imageRef}

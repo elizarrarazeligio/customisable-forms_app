@@ -11,8 +11,11 @@ class TemplateApi {
     });
   }
 
-  getTemplateInfo(hash) {
-    return fetch(`${this._baseUrl}/templates/${hash}`).then((res) => {
+  async getTemplateInfo(hash) {
+    return await fetch(`${this._baseUrl}/templates/${hash}`, {
+      headers: this._headers,
+      credentials: "include",
+    }).then((res) => {
       if (res.ok) return res.json();
       return Promise.reject(res.json());
     });

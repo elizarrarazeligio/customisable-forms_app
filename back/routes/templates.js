@@ -18,8 +18,11 @@ templates.get("/:hash", (req, res) => {
   const { hash } = req.params;
 
   Template.findOne({ where: { hash } })
-    .then((template) => res.send(template))
-    .catch((err) => res.status(400).send(err));
+    .then((template) => {
+      if (template == null) throw "No template found";
+      res.send({ status: "success", response: template });
+    })
+    .catch((err) => res.status(404).send({ status: "error", message: err }));
 });
 
 // ============= POST New Template ==============

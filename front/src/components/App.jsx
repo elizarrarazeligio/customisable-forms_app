@@ -3,7 +3,6 @@ import { UsersContext } from "../contexts/UsersContext.js";
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import userApi from "../utils/userApi.js";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -24,8 +23,4 @@ function App() {
   );
 }
 
-const getUserData = async () => {
-  return await userApi.getToken().catch((err) => err);
-};
-
-export { App, getUserData };
+export default App;
