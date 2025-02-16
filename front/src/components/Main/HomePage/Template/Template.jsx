@@ -28,10 +28,10 @@ function Template() {
     if (templateData.status == "success") {
       setTemplate(templateData.response);
     } else if (templateData.status == "error") {
-      toast.error(templateData.message);
+      toast.error(templateData.response);
       navigate("/home");
     }
-  }, []);
+  }, [templateData]);
 
   return (
     <Form

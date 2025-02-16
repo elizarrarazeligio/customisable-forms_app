@@ -22,7 +22,7 @@ templates.get("/:hash", (req, res) => {
       if (template == null) throw "No template found";
       res.send({ status: "success", response: template });
     })
-    .catch((err) => res.status(404).send({ status: "error", message: err }));
+    .catch((err) => res.status(404).send({ status: "error", response: err }));
 });
 
 // ============= POST New Template ==============
