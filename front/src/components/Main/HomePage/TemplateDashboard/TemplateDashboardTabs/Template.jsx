@@ -4,6 +4,8 @@ import Form from "react-bootstrap/esm/Form";
 import Question from "./Question";
 import { useOutletContext } from "react-router-dom";
 import { useState } from "react";
+import templateApi from "../../../../../utils/templateApi";
+import { toast } from "react-toastify";
 
 function Template() {
   const [template] = useOutletContext();
@@ -15,6 +17,14 @@ function Template() {
 
   const handleTemplateSubmit = (e) => {
     e.preventDefault();
+    templateApi
+      .updateTemplateInfo(template.hash, {
+        title,
+        description,
+        image,
+      })
+      .then((res) => toast.success(res.message))
+      .catch((err) => console.log(err));
   };
 
   return (

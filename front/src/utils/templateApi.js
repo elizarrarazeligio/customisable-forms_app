@@ -41,6 +41,22 @@ class TemplateApi {
       return Promise.reject(res.json());
     });
   }
+
+  updateTemplateInfo(hash, data) {
+    return fetch(`${this._baseUrl}/templates/${hash}/update`, {
+      method: "PATCH",
+      headers: this._headers,
+      credentials: "include",
+      body: JSON.stringify({
+        title: data.title,
+        description: data.description,
+        image: data.image,
+      }),
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(res.json());
+    });
+  }
 }
 
 const templateApi = new TemplateApi({

@@ -2,6 +2,7 @@ import { Router } from "express";
 import Template from "../models/Templates.js";
 import User from "../models/User.js";
 import crypto from "crypto";
+import { where } from "sequelize";
 
 const templates = Router();
 
@@ -75,5 +76,27 @@ templates.post("/new", (req, res) => {
 });
 
 // ========= PATCH Update Template Info =========
+templates.patch("/:hash/update", (req, res) => {
+  const { hash } = req.params;
+  const { title, description, image } = req.body;
+
+  Template.update(
+    {
+      title,
+      description,
+      image,
+    },
+    { where: { hash } }
+  )
+    .then((rows) => {
+      if (rows[0] == 0) throw "No changes made.";
+      res.send({
+        status: "success",
+        message: "Template updated succesfully!",
+        affectedRows: rows[0],
+      });
+    })
+    .catch((err) => res.status(400).send({ status: "error", message: err }));
+});
 
 export default templates;
