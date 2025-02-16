@@ -2,7 +2,7 @@ import Row from "react-bootstrap/esm/Row";
 import Table from "react-bootstrap/esm/Table";
 import TemplateRegister from "./TemplateRegister";
 
-function TemplatesTable() {
+function TemplatesTable({ templates }) {
   return (
     <>
       <Row className="col-lg-9 col-11 mx-auto pt-4 px-0">
@@ -10,14 +10,17 @@ function TemplatesTable() {
         <Table hover className="">
           <thead>
             <tr>
-              <th className="col-sm-8 col-6">Name</th>
-              <th className="col-sm-3 col-5">Last updated</th>
+              <th className="col-sm-6 col-6">Name</th>
+              <th className="col-sm-5 col-5">Created on</th>
               <th className="col-1"></th>
             </tr>
           </thead>
           <tbody className="align-middle">
-            {Array.from({ length: 1 }).map((i, ind) => (
-              <TemplateRegister key={ind} />
+            {templates.map((template) => (
+              <TemplateRegister
+                key={template.template_id}
+                template={template}
+              />
             ))}
           </tbody>
         </Table>

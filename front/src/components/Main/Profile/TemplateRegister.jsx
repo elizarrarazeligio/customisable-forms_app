@@ -1,12 +1,18 @@
 import CloseButton from "react-bootstrap/esm/CloseButton";
+import { useNavigate } from "react-router-dom";
 
-function TemplateRegister() {
+function TemplateRegister({ template }) {
+  const navigate = useNavigate();
+
   return (
     <>
-      <tr>
-        <td>Formulario de consultas</td>
-        <td>30/01/2024</td>
+      <tr onClick={() => navigate(`/${template.hash}`)}>
+        <td>{template.title}</td>
         <td>
+          {`${template.created_at.slice(0, 10)} at 
+          ${template.created_at.slice(11, 19)}`}
+        </td>
+        <td onClick={(e) => e.stopPropagation()}>
           <CloseButton></CloseButton>
         </td>
       </tr>

@@ -2,19 +2,12 @@ import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Templates from "./Templates";
 import { UsersContext } from "../../../contexts/UsersContext";
-import { useContext, useEffect, useState } from "react";
-import templateApi from "../../../utils/templateApi";
+import { useContext, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
 
 function HomePage() {
   const { user } = useContext(UsersContext);
-  const [templates, setTemplates] = useState([]);
-
-  const getTemplates = (user_id) => {
-    templateApi
-      .getUserTemplates(user_id)
-      .then((res) => setTemplates(res))
-      .catch((err) => console.log(err));
-  };
+  const [templates, getTemplates] = useOutletContext();
 
   useEffect(() => {
     user && getTemplates(user.id);

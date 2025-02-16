@@ -1,11 +1,16 @@
-import { useContext } from "react";
 import TemplatesTable from "./TemplatesTable";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import { UsersContext } from "../../../contexts/UsersContext";
+import { useContext, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
 
 function Profile() {
   const { user } = useContext(UsersContext);
+  const [templates, getTemplates] = useOutletContext();
+  useEffect(() => {
+    user && getTemplates(user.id);
+  }, [user]);
 
   return (
     <>
@@ -15,12 +20,10 @@ function Profile() {
         </Row>
 
         <Row className="m-0">
-          <TemplatesTable />
+          <TemplatesTable templates={templates} />
         </Row>
 
-        <Row className="m-0">
-          <TemplatesTable />
-        </Row>
+        <Row className="m-0"></Row>
       </Container>
     </>
   );

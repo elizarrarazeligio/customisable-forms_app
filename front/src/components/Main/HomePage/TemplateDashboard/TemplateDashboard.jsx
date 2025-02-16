@@ -29,13 +29,13 @@ function TemplateDashboard() {
   return (
     <Container className="col-lg-10 col-12 flex-column mx-auto p-0">
       <Nav
-        className="col-10 mx-auto d-flex justify-content-center border-0 nav-tabs"
+        className="col-lg-10 col-11 mx-auto d-flex justify-content-center border-0 nav-tabs"
         defaultActiveKey="general"
       >
         <Nav.Item>
           <Nav.Link as="div" eventKey="general" className="m-0 p-0">
             <Link to={`/${templateHash}`} className="text-dark nav-link">
-              General Settings
+              General
             </Link>
           </Nav.Link>
         </Nav.Item>
