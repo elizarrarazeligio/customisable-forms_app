@@ -1,8 +1,23 @@
 import { Router } from "express";
 import Template from "../models/Templates.js";
+import User from "../models/User.js";
 import crypto from "crypto";
 
 const templates = Router();
+
+// ============= GET All Templates ==============
+templates.get("/", (req, res) => {
+  Template.findAll({
+    order: ["created_at"],
+    include: {
+      model: User,
+      required: true,
+      attributes: ["email", "first_name"],
+    },
+  })
+    .then((templates) => res.send(templates))
+    .catch((err) => res.status(400).send(err));
+});
 
 // ============ GET User's Templates ============
 templates.get("/user/:user_id", (req, res) => {

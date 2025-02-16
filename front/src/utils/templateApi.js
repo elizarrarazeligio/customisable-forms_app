@@ -4,6 +4,13 @@ class TemplateApi {
     this._headers = headers;
   }
 
+  async getAllTemplates() {
+    return await fetch(`${this._baseUrl}/templates`).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(res.json());
+    });
+  }
+
   getUserTemplates(user_id) {
     return fetch(`${this._baseUrl}/templates/user/${user_id}`).then((res) => {
       if (res.ok) return res.json();

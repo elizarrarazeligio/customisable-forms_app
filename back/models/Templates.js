@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../db.js";
+import User from "./User.js";
 
 const Template = sequelize.define("template", {
   template_id: {
@@ -40,5 +41,10 @@ const Template = sequelize.define("template", {
     allowNull: false,
   },
 });
+
+User.hasMany(Template, {
+  foreignKey: "user_id",
+});
+Template.belongsTo(User, { foreignKey: "user_id" });
 
 export default Template;

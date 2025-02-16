@@ -15,7 +15,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import { getUserData, getTemplateData } from "./loaders.js";
+import { getUserData, getTemplates, getTemplateData } from "./loaders.js";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,7 +25,7 @@ const router = createBrowserRouter(
         <Route path="register" element={<RegisterForm />} />
       </Route>
       <Route path="/" element={<Main />} loader={getUserData}>
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} loader={getTemplates} />
         <Route path="/management" element={<UsersManagement />} />
         <Route path="/profile" element={<Profile />} />
         <Route

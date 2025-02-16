@@ -2,14 +2,22 @@ import TemplatesTable from "./TemplatesTable";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import { UsersContext } from "../../../contexts/UsersContext";
-import { useContext, useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import templateApi from "../../../utils/templateApi";
 
 function Profile() {
   const { user } = useContext(UsersContext);
-  const [templates, getTemplates] = useOutletContext();
+  const [templates, setTemplates] = useState([]);
+
+  const getUserTemplates = (user_id) => {
+    templateApi
+      .getUserTemplates(user_id)
+      .then((res) => setTemplates(res))
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
-    user && getTemplates(user.id);
+    user && getUserTemplates(user.id);
   }, [user]);
 
   return (
