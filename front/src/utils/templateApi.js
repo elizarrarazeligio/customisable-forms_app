@@ -57,6 +57,16 @@ class TemplateApi {
       return Promise.reject(res.json());
     });
   }
+
+  deleteTemplate(template_id) {
+    return fetch(`${this._baseUrl}/templates/${template_id}/delete`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(res.json());
+    });
+  }
 }
 
 const templateApi = new TemplateApi({

@@ -2,7 +2,7 @@ import Row from "react-bootstrap/esm/Row";
 import Table from "react-bootstrap/esm/Table";
 import TemplateRegister from "./TemplateRegister";
 
-function TemplatesTable({ templates }) {
+function TemplatesTable({ templates, setManageChange }) {
   return (
     <>
       <Row className="col-lg-9 col-11 mx-auto pt-4 px-0">
@@ -20,6 +20,7 @@ function TemplatesTable({ templates }) {
               <TemplateRegister
                 key={template.template_id}
                 template={template}
+                setManageChange={setManageChange}
               />
             ))}
           </tbody>

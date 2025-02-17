@@ -8,6 +8,7 @@ import templateApi from "../../../utils/templateApi";
 function Profile() {
   const { user } = useContext(UsersContext);
   const [templates, setTemplates] = useState([]);
+  const [manageChange, setManageChange] = useState([]);
 
   const getUserTemplates = (user_id) => {
     templateApi
@@ -18,7 +19,7 @@ function Profile() {
 
   useEffect(() => {
     user && getUserTemplates(user.id);
-  }, [user]);
+  }, [user, manageChange]);
 
   return (
     <>
@@ -28,7 +29,10 @@ function Profile() {
         </Row>
 
         <Row className="m-0">
-          <TemplatesTable templates={templates} />
+          <TemplatesTable
+            templates={templates}
+            setManageChange={setManageChange}
+          />
         </Row>
 
         <Row className="m-0"></Row>
