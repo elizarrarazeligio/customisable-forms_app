@@ -7,6 +7,8 @@ import TemplateCard from "./TemplateCard";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import templateApi from "../../../utils/templateApi";
+import questionApi from "../../../utils/questionApi";
+import { toast } from "react-toastify";
 
 function Templates({ templates, user }) {
   const [check, setCheck] = useState(false);
@@ -16,7 +18,13 @@ function Templates({ templates, user }) {
     user &&
       templateApi
         .newTemplate(user.id)
-        .then((res) => navigate(`/${res.hash}`))
+        .then((res) => {
+          questionApi
+            .addQuestion(res.template_id, 1)
+            .catch((err) => console.log(err));
+          toast.success(res.message);
+          navigate(`/${res.hash}`);
+        })
         .catch((err) => console.log(err));
   };
 

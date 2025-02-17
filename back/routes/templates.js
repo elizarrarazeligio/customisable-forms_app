@@ -66,7 +66,9 @@ templates.post("/new", (req, res) => {
         .then((rows) => {
           res.send({
             status: "success",
+            message: "New template created!",
             hash,
+            template_id: template.template_id,
           });
         })
         .catch((err) => console.log(err));

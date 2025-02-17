@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../db.js";
+import Template from "./Templates.js";
 
 const Question = sequelize.define("question", {
   question_id: {
@@ -18,6 +19,7 @@ const Question = sequelize.define("question", {
   field: {
     type: DataTypes.STRING,
     allowNull: false,
+    defaultValue: "Single-Line",
   },
   title: {
     type: DataTypes.STRING,
@@ -33,5 +35,10 @@ const Question = sequelize.define("question", {
     defaultValue: false,
   },
 });
+
+Template.hasMany(Question, {
+  foreignKey: "template_id",
+});
+Question.belongsTo(Template, { foreignKey: "template_id" });
 
 export default Question;
