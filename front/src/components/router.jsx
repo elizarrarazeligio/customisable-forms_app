@@ -15,7 +15,12 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import { getUserData, getTemplates, getTemplateData } from "./loaders.js";
+import {
+  getUserData,
+  getTemplates,
+  getTemplateData,
+  getQuestions,
+} from "./loaders.js";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,7 +38,11 @@ const router = createBrowserRouter(
           element={<TemplateDashboard />}
           loader={getTemplateData}
         >
-          <Route path="/:templateHash" element={<Template />} />
+          <Route
+            path="/:templateHash"
+            element={<Template />}
+            loader={getQuestions}
+          />
           <Route path="/:templateHash/forms" element={<FormsResults />} />
           <Route path="/:templateHash/summary" element={<Summary />} />
         </Route>

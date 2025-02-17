@@ -3,7 +3,7 @@ import Form from "react-bootstrap/esm/Form";
 function QuestionType({ questionType }) {
   const renderQuestionType = (val) => {
     switch (val) {
-      case 0:
+      case "Single-Line":
         return (
           <Form.Control
             type="text"
@@ -12,7 +12,7 @@ function QuestionType({ questionType }) {
             disabled
           />
         );
-      case 1:
+      case "Multiple-Line":
         return (
           <Form.Control
             as="textarea"
@@ -22,7 +22,7 @@ function QuestionType({ questionType }) {
             disabled
           />
         );
-      case 2:
+      case "Positive Integers":
         return (
           <Form.Control
             type="number"
@@ -31,7 +31,7 @@ function QuestionType({ questionType }) {
             disabled
           />
         );
-      case 3:
+      case "Checkboxes":
         return;
     }
   };

@@ -1,3 +1,4 @@
+import questionApi from "../utils/questionApi";
 import templateApi from "../utils/templateApi";
 import userApi from "../utils/userApi";
 
@@ -15,4 +16,10 @@ const getTemplateData = async ({ req, params }) => {
     .catch((err) => err);
 };
 
-export { getUserData, getTemplates, getTemplateData };
+const getQuestions = async ({ req, params }) => {
+  return await questionApi
+    .getTemplateQuestions(params.templateHash)
+    .catch((err) => err);
+};
+
+export { getUserData, getTemplates, getTemplateData, getQuestions };
