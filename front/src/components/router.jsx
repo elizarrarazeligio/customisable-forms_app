@@ -10,6 +10,10 @@ import TemplateDashboard from "./Main/HomePage/TemplateDashboard/TemplateDashboa
 import Template from "./Main/HomePage/TemplateDashboard/TemplateDashboardTabs/Template.jsx";
 import FormsResults from "./Main/HomePage/TemplateDashboard/TemplateDashboardTabs/FormsResults.jsx";
 import Summary from "./Main/HomePage/TemplateDashboard/TemplateDashboardTabs/Summary.jsx";
+import CreateForm from "./Main/HomePage/TemplateDashboard/TemplateDashboardTabs/CreateForm.jsx";
+import Form from "./Main/HomePage/Form/Form.jsx";
+import PrivateAdmin from "./PrivateRoutes/PrivateAdmin.jsx";
+import PrivateTemplates from "./PrivateRoutes/PrivateTemplates.jsx";
 import {
   Route,
   createBrowserRouter,
@@ -21,8 +25,6 @@ import {
   getTemplateData,
   getQuestions,
 } from "./loaders.js";
-import Form from "./Main/HomePage/Form/Form.jsx";
-import PrivateAdmin from "./PrivateRoutes/PrivateAdmin.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -39,21 +41,24 @@ const router = createBrowserRouter(
           <Route path="/management" element={<UsersManagement />} />
         </Route>
 
-        <Route
-          path="/:templateHash"
-          element={<TemplateDashboard />}
-          loader={getTemplateData}
-        >
-          <Route
-            path="/:templateHash"
-            element={<Template />}
-            loader={getQuestions}
-          />
-          <Route path="/:templateHash/forms" element={<FormsResults />} />
-          <Route path="/:templateHash/summary" element={<Summary />} />
+        <Route element={<PrivateTemplates />} loader={getTemplateData}>
+          <Route path="/:templateHash" element={<TemplateDashboard />}>
+            <Route
+              path="/:templateHash"
+              element={<Template />}
+              loader={getQuestions}
+            />
+            <Route path="/:templateHash/results" element={<FormsResults />} />
+            <Route path="/:templateHash/summary" element={<Summary />} />
+          </Route>
         </Route>
+        <Route
+          path="/:templateHash/form"
+          element={<CreateForm />}
+          loader={getTemplateData}
+        />
 
-        <Route path="/form" element={<Form />}></Route>
+        <Route path="/form/:formHash" element={<Form />} />
       </Route>
     </Route>
   )

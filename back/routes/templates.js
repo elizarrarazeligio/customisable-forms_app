@@ -2,6 +2,7 @@ import { Router } from "express";
 import Template from "../models/Templates.js";
 import User from "../models/User.js";
 import crypto from "crypto";
+import Question from "../models/Questions.js";
 
 const templates = Router();
 
@@ -32,7 +33,10 @@ templates.get("/user/:user_id", (req, res) => {
 templates.get("/:hash", (req, res) => {
   const { hash } = req.params;
 
-  Template.findOne({ where: { hash } })
+  Template.findOne({
+    include: { model: Question, required: true, attributes: ["description"] },
+    where: { hash },
+  })
     .then((template) => {
       if (template == null) throw "No template found";
       res.send({ status: "success", response: template });
