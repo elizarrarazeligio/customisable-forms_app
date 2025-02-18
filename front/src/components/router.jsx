@@ -21,18 +21,24 @@ import {
   getTemplateData,
   getQuestions,
 } from "./loaders.js";
+import Form from "./Main/HomePage/Form/Form.jsx";
+import PrivateAdmin from "./PrivateRoutes/PrivateAdmin.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route element={<Login />}>
+      <Route path="/" element={<Login />}>
         <Route path="/" element={<LoginForm />} />
-        <Route path="register" element={<RegisterForm />} />
+        <Route path="/register" element={<RegisterForm />} />
       </Route>
       <Route path="/" element={<Main />} loader={getUserData}>
         <Route path="/home" element={<HomePage />} loader={getTemplates} />
-        <Route path="/management" element={<UsersManagement />} />
         <Route path="/profile" element={<Profile />} />
+
+        <Route element={<PrivateAdmin />}>
+          <Route path="/management" element={<UsersManagement />} />
+        </Route>
+
         <Route
           path="/:templateHash"
           element={<TemplateDashboard />}
@@ -46,6 +52,8 @@ const router = createBrowserRouter(
           <Route path="/:templateHash/forms" element={<FormsResults />} />
           <Route path="/:templateHash/summary" element={<Summary />} />
         </Route>
+
+        <Route path="/form" element={<Form />}></Route>
       </Route>
     </Route>
   )
