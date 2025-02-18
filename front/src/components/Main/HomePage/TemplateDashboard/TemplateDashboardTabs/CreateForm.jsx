@@ -2,19 +2,23 @@ import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Button from "react-bootstrap/esm/Button";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { UsersContext } from "../../../../../contexts/UsersContext";
+import formApi from "../../../../../utils/formApi";
 
 function CreateForm() {
   const templateData = useLoaderData();
   const navigate = useNavigate();
+  const { user } = useContext(UsersContext);
+
   const [formInfo, setFormInfo] = useState(templateData.response);
   const [loaded, setLoaded] = useState(false);
 
   const createNewForm = () => {
     formApi
-      .newForm(template.template_id, user.id)
+      .newForm(formInfo.template_id, user.id)
       .then((res) => {
         toast.success(res.message);
         navigate(`/form/${res.hash}`);
@@ -75,7 +79,7 @@ function CreateForm() {
           border: "#0CCA98",
         }}
         type="button"
-        onClick={() => console.log("hola")}
+        onClick={() => createNewForm()}
       >
         <p className="m-0 p-0 fw-semibold">Create Form</p>
       </Button>

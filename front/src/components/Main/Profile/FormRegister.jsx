@@ -1,15 +1,15 @@
 import CloseButton from "react-bootstrap/esm/CloseButton";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import templateApi from "../../../utils/templateApi";
+import formApi from "../../../utils/formApi";
 
-function TemplateRegister({ template, setManageChange }) {
+function FormRegister({ form, setManageChange }) {
   const navigate = useNavigate();
 
   const handleDeleteTemplate = (e) => {
     e.stopPropagation();
-    templateApi
-      .deleteTemplate(template.template_id)
+    formApi
+      .deleteForm(form.form_id)
       .then((res) => {
         setManageChange([true]);
         toast.success(res.message);
@@ -19,11 +19,11 @@ function TemplateRegister({ template, setManageChange }) {
 
   return (
     <>
-      <tr onClick={() => navigate(`/${template.hash}`)}>
-        <td>{template.title}</td>
+      <tr onClick={() => navigate(`/form/${form.hash}`)}>
+        <td>Form from "{form.template.title}"</td>
         <td>
-          {`${template.created_at.slice(0, 10)} at 
-          ${template.created_at.slice(11, 19)}`}
+          {`${form.created_at.slice(0, 10)} at 
+          ${form.created_at.slice(11, 19)}`}
         </td>
         <td onClick={(e) => handleDeleteTemplate(e)}>
           <CloseButton></CloseButton>
@@ -33,4 +33,4 @@ function TemplateRegister({ template, setManageChange }) {
   );
 }
 
-export default TemplateRegister;
+export default FormRegister;
