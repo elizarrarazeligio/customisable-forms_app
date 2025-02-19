@@ -36,20 +36,22 @@ function Form() {
           ))}
         </Row>
       </Container>
-      <Container className="m-0 p-0">
-        <Button
-          className="p-0 d-flex align-items-center justify-content-center ms-auto mt-1 col-md-3 col-sm-6 col-12 float-end"
-          style={{
-            height: 35,
-            backgroundColor: "#0CCA98",
-            border: "#0CCA98",
-          }}
-          type="submit"
-          disabled={user.admin || user.id == formInfo.user_id ? false : true}
-        >
-          <p className="m-0 p-0 fw-semibold">Submit Answers</p>
-        </Button>
-      </Container>
+
+      {(user.admin || user.id == formInfo.user_id) && (
+        <Container className="m-0 p-0">
+          <Button
+            className="p-0 d-flex align-items-center justify-content-center ms-auto mt-1 col-md-3 col-sm-6 col-12 float-end"
+            style={{
+              height: 35,
+              backgroundColor: "#0CCA98",
+              border: "#0CCA98",
+            }}
+            type="submit"
+          >
+            <p className="m-0 p-0 fw-semibold">Submit Answers</p>
+          </Button>
+        </Container>
+      )}
     </form>
   );
 }

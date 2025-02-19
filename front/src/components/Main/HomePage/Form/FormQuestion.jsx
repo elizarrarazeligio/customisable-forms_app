@@ -49,7 +49,8 @@ function FormQuestion({ ind, question, formInfo }) {
         </Form.Label>
         {renderQuestionType(question.field)}
       </Form.Group>
-      <hr />
+
+      {formInfo.template.questions.length != ind + 1 && <hr />}
     </>
   );
 }
