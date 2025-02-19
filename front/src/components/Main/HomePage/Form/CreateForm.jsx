@@ -7,6 +7,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { UsersContext } from "../../../../contexts/UsersContext";
 import formApi from "../../../../utils/formApi";
+import answerApi from "../../../../utils/answerApi";
 
 function CreateForm() {
   const templateData = useLoaderData();
@@ -21,6 +22,11 @@ function CreateForm() {
     formApi
       .newForm(formInfo.template_id, user.id)
       .then((res) => {
+        formInfo.questions.map((question) => {
+          answerApi
+            .addAnswerInput(res.form_id, question.question_id)
+            .catch((err) => err.then((res) => toast.error(res.message)));
+        });
         toast.success(res.message);
         navigate(`/form/${res.hash}`);
       })

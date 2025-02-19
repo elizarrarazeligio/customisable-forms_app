@@ -37,12 +37,11 @@ templates.get("/:hash", (req, res) => {
     include: {
       model: Question,
       required: true,
-      attributes: ["description", "show"],
+      attributes: ["question_id", "description", "show"],
     },
     where: { hash },
   })
     .then((template) => {
-      console.log(template);
       if (template == null) throw "No template found";
       res.send({ status: "success", response: template });
     })
