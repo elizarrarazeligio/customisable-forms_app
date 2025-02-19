@@ -1,7 +1,10 @@
 import Form from "react-bootstrap/esm/Form";
 import FormQuestionType from "./FormQuestionType";
+import { useState } from "react";
 
 function FormQuestion({ ind, question, formInfo }) {
+  const [answer, setAnswer] = useState();
+
   return (
     <>
       <Form.Group className="mb-4 mt-2">

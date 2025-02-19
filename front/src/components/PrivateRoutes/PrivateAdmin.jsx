@@ -5,7 +5,7 @@ import { UsersContext } from "../../contexts/UsersContext";
 function PrivateAdmin() {
   const { user } = useContext(UsersContext);
 
-  return user.admin ? <Outlet /> : <Navigate to="/home" />;
+  return user && user.admin ? <Outlet /> : <Navigate to="/home" />;
 }
 
 export default PrivateAdmin;

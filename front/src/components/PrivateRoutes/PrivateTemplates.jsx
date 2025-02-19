@@ -19,7 +19,7 @@ function PrivateTemplates() {
     }
   }, [templateData]);
 
-  return user.admin || user.id == template.user_id ? (
+  return user && (user.admin || user.id == template.user_id) ? (
     <Outlet context={[template]} />
   ) : (
     template.hash && <Navigate to={`/${template.hash}/form`} />

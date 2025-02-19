@@ -46,7 +46,7 @@ forms.get("/:hash", (req, res) => {
       if (form == null) throw "No form found";
       res.send({ status: "success", response: form });
     })
-    .catch((err) => res.status(404).send({ status: "error", response: err }));
+    .catch((err) => res.status(404).send({ status: "error", message: err }));
 });
 
 // =============== POST New Form ================
