@@ -25,9 +25,15 @@ function Footer() {
             </p>
           </Col>
           <Col className="m-0 p-0 d-flex align-items-center justify-content-sm-end justify-content-center gap-1 col-sm-4 col-12 mt-1">
-            <i className="bi bi-instagram fs-4 text-muted opacity-75"></i>
-            <i className="bi bi-github fs-4 text-muted opacity-75"></i>
-            <i className="bi bi-linkedin fs-4 text-muted opacity-75"></i>
+            <a href="https://www.instagram.com/elizarrarazeligio/">
+              <i className="bi bi-instagram fs-4 text-muted opacity-75"></i>
+            </a>
+            <a href="https://github.com/elizarrarazeligio">
+              <i className="bi bi-github fs-4 text-muted opacity-75"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/elizarrarazeligio/">
+              <i className="bi bi-linkedin fs-4 text-muted opacity-75"></i>
+            </a>
           </Col>
         </Row>
       </Container>
