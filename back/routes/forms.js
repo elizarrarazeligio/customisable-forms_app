@@ -37,10 +37,10 @@ forms.get("/:hash", (req, res) => {
           required: true,
           attributes: ["question_id", "description", "field"],
           where: { show: true },
-          order: ["number"],
         },
       },
     ],
+    order: [[Template, Question, "number"]],
   })
     .then((form) => {
       if (form == null) throw "No form found";
