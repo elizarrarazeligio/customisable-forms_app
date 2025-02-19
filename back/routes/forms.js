@@ -37,6 +37,7 @@ forms.get("/:hash", (req, res) => {
           required: true,
           attributes: ["description", "field"],
           where: { show: true },
+          order: ["number"],
         },
       },
     ],

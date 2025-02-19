@@ -10,7 +10,7 @@ import TemplateDashboard from "./Main/HomePage/TemplateDashboard/TemplateDashboa
 import Template from "./Main/HomePage/TemplateDashboard/TemplateDashboardTabs/Template.jsx";
 import FormsResults from "./Main/HomePage/TemplateDashboard/TemplateDashboardTabs/FormsResults.jsx";
 import Summary from "./Main/HomePage/TemplateDashboard/TemplateDashboardTabs/Summary.jsx";
-import CreateForm from "./Main/HomePage/TemplateDashboard/TemplateDashboardTabs/CreateForm.jsx";
+import CreateForm from "./Main/HomePage/Form/CreateForm.jsx";
 import Form from "./Main/HomePage/Form/Form.jsx";
 import PrivateAdmin from "./PrivateRoutes/PrivateAdmin.jsx";
 import PrivateTemplates from "./PrivateRoutes/PrivateTemplates.jsx";

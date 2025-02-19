@@ -5,8 +5,8 @@ import Button from "react-bootstrap/esm/Button";
 import { useContext, useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { UsersContext } from "../../../../../contexts/UsersContext";
-import formApi from "../../../../../utils/formApi";
+import { UsersContext } from "../../../../contexts/UsersContext";
+import formApi from "../../../../utils/formApi";
 
 function CreateForm() {
   const templateData = useLoaderData();
@@ -82,6 +82,7 @@ function CreateForm() {
         }}
         type="button"
         onClick={() => createNewForm()}
+        disabled={shownQuestions.length ? false : true}
       >
         <p className="m-0 p-0 fw-semibold">Create Form</p>
       </Button>
