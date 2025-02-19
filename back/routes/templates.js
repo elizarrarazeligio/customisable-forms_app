@@ -34,10 +34,15 @@ templates.get("/:hash", (req, res) => {
   const { hash } = req.params;
 
   Template.findOne({
-    include: { model: Question, required: true, attributes: ["description"] },
+    include: {
+      model: Question,
+      required: true,
+      attributes: ["description", "show"],
+    },
     where: { hash },
   })
     .then((template) => {
+      console.log(template);
       if (template == null) throw "No template found";
       res.send({ status: "success", response: template });
     })

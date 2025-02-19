@@ -15,6 +15,7 @@ function CreateForm() {
 
   const [formInfo, setFormInfo] = useState(templateData.response);
   const [loaded, setLoaded] = useState(false);
+  const shownQuestions = formInfo.questions.filter((question) => question.show);
 
   const createNewForm = () => {
     formApi
@@ -29,11 +30,12 @@ function CreateForm() {
   useEffect(() => {
     if (templateData.status == "success") {
       setLoaded(true);
+      setFormInfo(templateData.response);
     } else if (templateData.status == "error") {
       navigate("/home");
       toast.error(templateData.response);
     }
-  }, []);
+  }, [templateData]);
 
   return (
     <>
@@ -53,7 +55,7 @@ function CreateForm() {
       </Container>
 
       {loaded &&
-        formInfo.questions.map((question, ind) => {
+        shownQuestions.map((question, ind) => {
           return (
             <Container
               key={ind + 1}

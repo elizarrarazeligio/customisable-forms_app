@@ -16,7 +16,7 @@ function Template() {
   const [description, setDescription] = useState(template.description);
   const [image, setImage] = useState(template.image);
   const [questions, setQuestions] = useState(questionsData.response);
-  const [submitted, setSubmitted] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
   const [change, setChange] = useState([]);
 
   const handleTemplateSubmit = (e) => {
@@ -27,9 +27,11 @@ function Template() {
         description,
         image,
       })
-      .then((res) => toast.success(res.message))
+      .then((res) => {
+        setSubmitted(true);
+        toast.success(res.message);
+      })
       .catch((err) => console.log(err));
-    setSubmitted([true]);
   };
 
   const handleQuestionUpdate = (question_id, data) => {

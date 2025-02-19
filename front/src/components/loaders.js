@@ -1,3 +1,4 @@
+import formApi from "../utils/formApi";
 import questionApi from "../utils/questionApi";
 import templateApi from "../utils/templateApi";
 import userApi from "../utils/userApi";
@@ -22,4 +23,14 @@ const getQuestions = async ({ req, params }) => {
     .catch((err) => err);
 };
 
-export { getUserData, getTemplates, getTemplateData, getQuestions };
+const getFormData = async ({ req, params }) => {
+  return await formApi.getFormInfo(params.formHash).catch((err) => err);
+};
+
+export {
+  getUserData,
+  getTemplates,
+  getTemplateData,
+  getQuestions,
+  getFormData,
+};
