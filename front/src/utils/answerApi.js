@@ -4,18 +4,17 @@ class AnswerApi {
     this._headers = headers;
   }
 
-  //   async getTemplateQuestions(hash) {
-  //     return await fetch(`${this._baseUrl}/questions/${hash}`, {
-  //       headers: this._headers,
-  //       credentials: "include",
-  //     }).then((res) => {
-  //       if (res.ok) return res.json();
-  //       return Promise.reject(res.json());
-  //     });
-  //   }
+  getFormQuestionAnswer(form_id, question_id) {
+    return fetch(
+      `${this._baseUrl}/answers/form/${form_id}/question/${question_id}`
+    ).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(res.json());
+    });
+  }
 
   addAnswerInput(form_id, question_id) {
-    return fetch(`${this._baseUrl}/answers/${form_id}/add`, {
+    return fetch(`${this._baseUrl}/answers/form/${form_id}/add`, {
       method: "POST",
       headers: this._headers,
       credentials: "include",

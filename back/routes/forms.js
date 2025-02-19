@@ -35,7 +35,7 @@ forms.get("/:hash", (req, res) => {
         include: {
           model: Question,
           required: true,
-          attributes: ["description", "field"],
+          attributes: ["question_id", "description", "field"],
           where: { show: true },
           order: ["number"],
         },

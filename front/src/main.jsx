@@ -6,7 +6,9 @@ import "./blocks/index.css";
 import router from "./components/router";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  // <StrictMode>
+  <>
     <RouterProvider router={router} />
-  </StrictMode>
+  </>
+  // </StrictMode>
 );

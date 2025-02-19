@@ -9,6 +9,7 @@ import { UsersContext } from "../../../../contexts/UsersContext";
 function Form() {
   const formData = useLoaderData();
   const { user } = useContext(UsersContext);
+
   const [formInfo, setFormInfo] = useState(formData.response);
 
   const handleFormSubmit = (e) => {
@@ -16,7 +17,6 @@ function Form() {
     console.log("hola");
   };
 
-  console.log(formInfo);
   return (
     <form
       className="col-lg-10 col-12 mx-auto d-flex flex-column align-items-center"

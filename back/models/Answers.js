@@ -19,7 +19,8 @@ const Answer = sequelize.define("answer", {
   },
   answer: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
+    defaultValue: "",
   },
 });
 

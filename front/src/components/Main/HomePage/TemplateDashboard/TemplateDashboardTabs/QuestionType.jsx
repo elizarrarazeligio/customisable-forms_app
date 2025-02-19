@@ -38,7 +38,7 @@ function QuestionType({ questionType }) {
 
   return (
     <>
-      <Form.Group className="my-2" controlId="">
+      <Form.Group className="my-2">
         {renderQuestionType(questionType)}
       </Form.Group>
     </>
