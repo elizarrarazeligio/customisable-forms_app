@@ -8,7 +8,7 @@ function ProfileTable({ title, array, setManageChange }) {
     <>
       <Row className="col-lg-9 col-11 mx-auto pt-4 px-0">
         <p className="fw-bold fs-5 m-0 px-2 text-muted">{title}</p>
-        <Table hover className="" striped>
+        <Table hover striped>
           <thead>
             <tr>
               <th className="col-sm-6 col-6">Name</th>
@@ -17,20 +17,28 @@ function ProfileTable({ title, array, setManageChange }) {
             </tr>
           </thead>
           <tbody className="align-middle">
-            {array.map((item, ind) =>
-              Object.hasOwn(item, "form_id") ? (
-                <FormRegister
-                  key={ind}
-                  form={item}
-                  setManageChange={setManageChange}
-                />
-              ) : (
-                <TemplateRegister
-                  key={ind}
-                  template={item}
-                  setManageChange={setManageChange}
-                />
+            {array.length != 0 ? (
+              array.map((item, ind) =>
+                Object.hasOwn(item, "form_id") ? (
+                  <FormRegister
+                    key={ind}
+                    form={item}
+                    setManageChange={setManageChange}
+                  />
+                ) : (
+                  <TemplateRegister
+                    key={ind}
+                    template={item}
+                    setManageChange={setManageChange}
+                  />
+                )
               )
+            ) : (
+              <tr>
+                <td colSpan={3} className="text-center text-muted fw-semibold">
+                  No Registers
+                </td>
+              </tr>
             )}
           </tbody>
         </Table>
