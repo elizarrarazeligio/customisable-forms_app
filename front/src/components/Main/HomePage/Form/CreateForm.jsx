@@ -22,11 +22,13 @@ function CreateForm() {
     formApi
       .newForm(formInfo.template_id, user.id)
       .then((res) => {
-        formInfo.questions.map((question) => {
-          answerApi
-            .addAnswerInput(res.form_id, question.question_id)
-            .catch((err) => err.then((res) => toast.error(res.message)));
-        });
+        formInfo.questions
+          .filter((question) => question.show)
+          .map((question) => {
+            answerApi
+              .addAnswerInput(res.form_id, question.question_id)
+              .catch((err) => err.then((res) => toast.error(res.message)));
+          });
         toast.success(res.message);
         navigate(`/form/${res.hash}`);
       })
