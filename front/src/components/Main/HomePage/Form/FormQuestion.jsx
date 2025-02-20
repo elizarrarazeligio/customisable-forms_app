@@ -1,22 +1,34 @@
 import Form from "react-bootstrap/esm/Form";
 import FormQuestionType from "./FormQuestionType";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import answerApi from "../../../../utils/answerApi";
 
-function FormQuestion({ ind, question, formInfo }) {
+function FormQuestion({
+  question,
+  ind,
+  submitted,
+  formInfo,
+  handleAnswerUpdate,
+}) {
   const [answer, setAnswer] = useState("");
 
   useEffect(() => {
     answerApi
       .getFormQuestionAnswer(formInfo.form_id, question.question_id)
       .then((res) => setAnswer(res.response.answer))
-      .catch((err) => {
+      .catch((err) =>
         answerApi
           .addAnswerInput(formInfo.form_id, question.question_id)
-          .then(() => setAnswer(""))
-          .catch((err) => err.then((res) => toast.error(res.message)));
-      });
+          .then((res) => setAnswer(res.response.answer))
+          .catch((err) => err.then((res) => toast.error(res.message)))
+      );
   }, []);
+
+  useEffect(() => {
+    if (!submitted) return;
+    handleAnswerUpdate(formInfo.form_id, question.question_id, answer);
+  }, [submitted]);
 
   return (
     <>

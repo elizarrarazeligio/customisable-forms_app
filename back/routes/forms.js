@@ -31,7 +31,7 @@ forms.get("/:hash", (req, res) => {
       {
         model: Template,
         required: true,
-        attributes: ["title", "description"],
+        attributes: ["title"],
         include: {
           model: Question,
           required: true,

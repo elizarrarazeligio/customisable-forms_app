@@ -34,6 +34,7 @@ function Question({
   };
 
   useEffect(() => {
+    if (!submitted) return;
     handleQuestionUpdate(question.question_id, {
       field: questionType,
       number: ind + 1,

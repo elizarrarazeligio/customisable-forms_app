@@ -5,16 +5,27 @@ import FormQuestion from "./FormQuestion";
 import { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { UsersContext } from "../../../../contexts/UsersContext";
+import { toast } from "react-toastify";
+import answerApi from "../../../../utils/answerApi";
 
 function Form() {
-  const formData = useLoaderData();
   const { user } = useContext(UsersContext);
+  const formData = useLoaderData();
 
   const [formInfo, setFormInfo] = useState(formData.response);
+  const [submitted, setSubmitted] = useState(false);
+  const questions = formInfo.template.questions;
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("hola");
+    setSubmitted([true]);
+    toast.success("Answers submitted successfully!");
+  };
+
+  const handleAnswerUpdate = (form_id, question_id, answer) => {
+    answerApi
+      .updateAnswer(form_id, question_id, answer)
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -31,15 +42,16 @@ function Form() {
         </Row>
 
         <Row className="px-lg-5 px-3 m-0">
-          {formInfo &&
-            formInfo.template.questions.map((question, ind) => (
-              <FormQuestion
-                key={ind}
-                question={question}
-                ind={ind}
-                formInfo={formInfo}
-              />
-            ))}
+          {questions.map((question, ind) => (
+            <FormQuestion
+              key={ind}
+              question={question}
+              ind={ind}
+              submitted={submitted}
+              formInfo={formInfo}
+              handleAnswerUpdate={handleAnswerUpdate}
+            />
+          ))}
         </Row>
       </Container>
 

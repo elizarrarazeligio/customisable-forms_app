@@ -28,7 +28,7 @@ function Template() {
         image,
       })
       .then((res) => {
-        setSubmitted(true);
+        setSubmitted([true]);
         toast.success(res.message);
       })
       .catch((err) => console.log(err));

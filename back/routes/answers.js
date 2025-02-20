@@ -1,5 +1,6 @@
 import { Router } from "express";
 import Answer from "../models/Answers.js";
+import Question from "../models/Questions.js";
 
 const answers = Router();
 
@@ -14,7 +15,10 @@ answers.get("/question/:question_id", (req, res) => {
 answers.get("/form/:form_id/question/:question_id", (req, res) => {
   const { form_id, question_id } = req.params;
 
-  Answer.findAll({ where: { form_id, question_id } })
+  Answer.findAll({
+    attributes: ["answer_id", "answer"],
+    where: { form_id, question_id },
+  })
     .then((answer) => {
       if (answer.length == 0) throw "No answer in question.";
       res.send({ status: "success", response: answer[0] });
@@ -31,9 +35,28 @@ answers.post("/form/:form_id/add", (req, res) => {
       .status(400)
       .send({ status: "error", message: "No form or question related." });
 
-  Answer.create({ form_id, question_id })
+  Answer.create({ form_id, question_id, attributes: ["answer_id", "answer"] })
     .then((answer) => res.send({ status: "success", response: answer }))
     .catch((err) => res.status(400).send(err));
 });
+
+// ============ PATCH Update Answer =============
+answers.patch(
+  "/form/:form_id/question/:question_id/answer/update",
+  (req, res) => {
+    const { form_id, question_id } = req.params;
+    const { answer } = req.body;
+    if (!answer) {
+      res.status(400).send({ status: "error", message: "Incorrect field." });
+    }
+
+    Answer.update({ answer }, { where: { form_id, question_id } })
+      .then((row) => {
+        if (row[0] == 0) throw "No answer changed.";
+        res.send({ status: "success", affectedRows: row[0] });
+      })
+      .catch((err) => res.status(400).send({ status: "error", message: err }));
+  }
+);
 
 export default answers;

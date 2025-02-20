@@ -27,23 +27,22 @@ class AnswerApi {
     });
   }
 
-  //   updateQuestion(question_id, data) {
-  //     return fetch(`${this._baseUrl}/questions/${question_id}/update`, {
-  //       method: "PATCH",
-  //       headers: this._headers,
-  //       credentials: "include",
-  //       body: JSON.stringify({
-  //         field: data.field,
-  //         number: data.number,
-  //         title: data.title,
-  //         description: data.description,
-  //         show: data.show,
-  //       }),
-  //     }).then((res) => {
-  //       if (res.ok) return res.json();
-  //       return Promise.reject(res.json());
-  //     });
-  //   }
+  updateAnswer(form_id, question_id, answer) {
+    return fetch(
+      `${this._baseUrl}/answers/form/${form_id}/question/${question_id}/answer/update`,
+      {
+        method: "PATCH",
+        headers: this._headers,
+        credentials: "include",
+        body: JSON.stringify({
+          answer,
+        }),
+      }
+    ).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(res.json());
+    });
+  }
 }
 
 const answerApi = new AnswerApi({
