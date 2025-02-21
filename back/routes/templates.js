@@ -4,6 +4,7 @@ import User from "../models/User.js";
 import crypto from "crypto";
 import Question from "../models/Questions.js";
 import Form from "../models/Forms.js";
+import { Sequelize } from "sequelize";
 
 const templates = Router();
 
@@ -16,6 +17,32 @@ templates.get("/", (req, res) => {
       required: true,
       attributes: ["email", "first_name"],
     },
+  })
+    .then((templates) => res.send(templates))
+    .catch((err) => res.status(400).send(err));
+});
+
+// ======== GET Most Answered Templates =========
+templates.get("/popular", (req, res) => {
+  Template.findAll({
+    attributes: [
+      "template_id",
+      "title",
+      "image",
+      [
+        Sequelize.literal(
+          "(SELECT COUNT(*) FROM forms WHERE template.template_id = forms.template_id)"
+        ),
+        "forms",
+      ],
+    ],
+    include: {
+      model: User,
+      required: true,
+      attributes: ["first_name", "email"],
+    },
+    order: [["forms", "DESC"]],
+    limit: 5,
   })
     .then((templates) => res.send(templates))
     .catch((err) => res.status(400).send(err));

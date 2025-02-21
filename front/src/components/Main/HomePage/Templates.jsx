@@ -4,7 +4,7 @@ import ToggleButton from "react-bootstrap/esm/ToggleButton";
 import Collapse from "react-bootstrap/esm/Collapse";
 import addTemplate from "../../../assets/add.jpg";
 import TemplateCard from "./TemplateCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import templateApi from "../../../utils/templateApi";
 import questionApi from "../../../utils/questionApi";
@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 
 function Templates({ templates, user }) {
   const [check, setCheck] = useState(false);
+  const [popular, setPopular] = useState([]);
   const navigate = useNavigate();
 
   const onNewTemplate = () => {
@@ -27,6 +28,13 @@ function Templates({ templates, user }) {
         })
         .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    templateApi
+      .getPopularTemplates()
+      .then((res) => setPopular(res))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <>
@@ -82,9 +90,12 @@ function Templates({ templates, user }) {
                 Popular
               </Col>
               <div className="d-flex col-12 flex-wrap m-0 p-0">
-                {Array.from({ length: 5 }).map((i, ind) => {
-                  return <TemplateCard key={ind} />;
-                })}
+                {popular &&
+                  popular
+                    .filter((template) => template.forms != 0)
+                    .map((template, ind) => {
+                      return <TemplateCard key={ind} template={template} />;
+                    })}
               </div>
             </div>
           </Collapse>
