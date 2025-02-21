@@ -3,6 +3,7 @@ import Template from "../models/Templates.js";
 import User from "../models/User.js";
 import crypto from "crypto";
 import Question from "../models/Questions.js";
+import Form from "../models/Forms.js";
 
 const templates = Router();
 
@@ -46,6 +47,32 @@ templates.get("/:hash", (req, res) => {
       res.send({ status: "success", response: template });
     })
     .catch((err) => res.status(404).send({ status: "error", response: err }));
+});
+
+// ============= GET Template Forms =============
+templates.get("/:hash/forms", (req, res) => {
+  const { hash } = req.params;
+
+  Template.findAll({
+    include: {
+      model: Form,
+      required: true,
+      attributes: ["created_at", "hash"],
+      include: {
+        model: User,
+        required: true,
+        attributes: ["first_name", "last_name", "email"],
+      },
+    },
+    attributes: ["template_id", "user_id"],
+    where: { hash },
+    order: [[Form, "created_at"]],
+  })
+    .then((forms) => {
+      if (forms.length == 0) throw "No template forms found.";
+      res.send({ status: "success", response: forms[0] });
+    })
+    .catch((err) => res.send({ status: "error", response: err }));
 });
 
 // ============= POST New Template ==============

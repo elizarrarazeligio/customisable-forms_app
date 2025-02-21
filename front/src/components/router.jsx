@@ -7,9 +7,9 @@ import HomePage from "./Main/HomePage/HomePage.jsx";
 import UsersManagement from "./Main/UsersManagement/UsersManagement.jsx";
 import Profile from "./Main/Profile/Profile.jsx";
 import TemplateDashboard from "./Main/HomePage/TemplateDashboard/TemplateDashboard.jsx";
-import Template from "./Main/HomePage/TemplateDashboard/TemplateDashboardTabs/Template.jsx";
-import FormsResults from "./Main/HomePage/TemplateDashboard/TemplateDashboardTabs/FormsResults.jsx";
-import Summary from "./Main/HomePage/TemplateDashboard/TemplateDashboardTabs/Summary.jsx";
+import Template from "./Main/HomePage/TemplateDashboard/TemplateDashboardTabs/Template/Template.jsx";
+import FormsResults from "./Main/HomePage/TemplateDashboard/TemplateDashboardTabs/FormsResults/FormsResults.jsx";
+import Summary from "./Main/HomePage/TemplateDashboard/TemplateDashboardTabs/Summary/Summary.jsx";
 import CreateForm from "./Main/HomePage/Form/CreateForm.jsx";
 import Form from "./Main/HomePage/Form/Form.jsx";
 import PrivateAdmin from "./PrivateRoutes/PrivateAdmin.jsx";
@@ -25,6 +25,7 @@ import {
   getTemplateData,
   getQuestions,
   getFormData,
+  getTemplateAnsweredForms,
 } from "./loaders.js";
 
 const router = createBrowserRouter(
@@ -49,7 +50,11 @@ const router = createBrowserRouter(
               element={<Template />}
               loader={getQuestions}
             />
-            <Route path="/:templateHash/results" element={<FormsResults />} />
+            <Route
+              path="/:templateHash/results"
+              element={<FormsResults />}
+              loader={getTemplateAnsweredForms}
+            />
             <Route path="/:templateHash/summary" element={<Summary />} />
           </Route>
         </Route>

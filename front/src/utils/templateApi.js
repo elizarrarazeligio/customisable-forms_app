@@ -28,6 +28,16 @@ class TemplateApi {
     });
   }
 
+  async getTemplateForms(hash) {
+    return await fetch(`${this._baseUrl}/templates/${hash}/forms`, {
+      headers: this._headers,
+      credentials: "include",
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(res.json());
+    });
+  }
+
   newTemplate(user_id) {
     return fetch(`${this._baseUrl}/templates/new`, {
       method: "POST",

@@ -6,7 +6,7 @@ import Button from "react-bootstrap/esm/Button";
 import QuestionType from "./QuestionType";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import questionApi from "../../../../../utils/questionApi";
+import questionApi from "../../../../../../utils/questionApi";
 
 function Question({
   question,

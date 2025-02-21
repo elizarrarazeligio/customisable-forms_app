@@ -5,8 +5,8 @@ import Question from "./Question";
 import { useLoaderData, useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import templateApi from "../../../../../utils/templateApi";
-import questionApi from "../../../../../utils/questionApi";
+import templateApi from "../../../../../../utils/templateApi";
+import questionApi from "../../../../../../utils/questionApi";
 
 function Template() {
   const [template] = useOutletContext();
