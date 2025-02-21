@@ -29,6 +29,7 @@ templates.get("/popular", (req, res) => {
       "template_id",
       "title",
       "image",
+      "hash",
       [
         Sequelize.literal(
           "(SELECT COUNT(*) FROM forms WHERE template.template_id = forms.template_id)"
