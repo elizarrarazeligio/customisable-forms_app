@@ -1,4 +1,5 @@
 import Form from "react-bootstrap/esm/Form";
+import Button from "react-bootstrap/esm/Button";
 
 function QuestionType({ questionType }) {
   const renderQuestionType = (val) => {
@@ -32,7 +33,24 @@ function QuestionType({ questionType }) {
           />
         );
       case "Checkboxes":
-        return;
+        return (
+          <Form.Group className="ms-3 d-flex align-items-center pt-1">
+            <Form.Check type="checkbox" disabled />
+            <Form.Control
+              type="text"
+              placeholder="Checkbox Option"
+              className="bg-white rounded-0 w-75 ms-2"
+            />
+            <Button
+              className="m-0 p-1 bg-white border-white"
+              style={{ width: 35 }}
+              onClick={() => console.log("hola")}
+              // disabled={arr.length == 1 ? true : false}
+            >
+              <i className="bi bi-trash-fill text-danger mx-0"></i>
+            </Button>
+          </Form.Group>
+        );
     }
   };
 

@@ -83,6 +83,7 @@ function Question({
             <p className="m-0 mb-1 p-0">Show?</p>
           </Col>
         </Row>
+
         <Row className="mx-sm-4 mx-1">
           <Form.Group className="my-2">
             <Form.Control
@@ -95,10 +96,22 @@ function Question({
             />
           </Form.Group>
         </Row>
+
         <Row className="mx-sm-4 mx-1">
           <QuestionType questionType={questionType} />
         </Row>
-        <Row className="mx-sm-4 mx-1">
+
+        <Row className="mx-sm-4 mx-1 ps-1">
+          {questionType == "Checkboxes" && (
+            <Button
+              className="ms-5 bg-secondary border-secondary"
+              style={{ width: 130 }}
+              onClick={() => console.log("Hola")}
+            >
+              <i class="bi bi-plus-circle-fill"></i> Add option
+            </Button>
+          )}
+
           <Button
             className="m-0 p-1 bg-secondary border-secondary ms-auto me-3"
             style={{ width: 35 }}
