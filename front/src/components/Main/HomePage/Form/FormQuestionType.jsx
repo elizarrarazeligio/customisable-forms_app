@@ -1,8 +1,7 @@
 import Form from "react-bootstrap/esm/Form";
 import FormCheckbox from "./FormCheckbox";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { UsersContext } from "../../../../contexts/UsersContext";
-import checkboxApi from "../../../../utils/checkboxApi";
 
 function FormQuestionType({
   question,
@@ -12,15 +11,7 @@ function FormQuestionType({
   submitted,
 }) {
   const { user } = useContext(UsersContext);
-  const [checkboxes, setCheckboxes] = useState([]);
-
-  useEffect(() => {
-    if (question.field == "Checkboxes")
-      checkboxApi
-        .getQuestionCheckboxes(question.question_id)
-        .then((res) => setCheckboxes(res.response))
-        .catch((err) => err.then((res) => console.log(res)));
-  }, []);
+  const [checkboxes, setCheckboxes] = useState(question.checkboxes);
 
   const renderQuestionType = (val) => {
     switch (val) {
@@ -77,10 +68,14 @@ function FormQuestionType({
         ? checkboxes
             .filter((checkbox) => checkbox.option != "")
             .map((checkbox, ind) => {
+              const checkedAnswers = checkbox.checkedanswers.filter(
+                (check) => check.form_id == formInfo.form_id
+              );
               return (
                 <FormCheckbox
                   key={ind}
                   checkbox={checkbox}
+                  checkedAnswers={checkedAnswers}
                   submitted={submitted}
                   user={user}
                   formInfo={formInfo}

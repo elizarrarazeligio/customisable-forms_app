@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { UsersContext } from "../../../../contexts/UsersContext";
 import formApi from "../../../../utils/formApi";
 import answerApi from "../../../../utils/answerApi";
+import checkboxApi from "../../../../utils/checkboxApi";
 
 function CreateForm() {
   const templateData = useLoaderData();
@@ -18,16 +19,20 @@ function CreateForm() {
   const [loaded, setLoaded] = useState(false);
   const shownQuestions = formInfo.questions.filter((question) => question.show);
 
-  console.log(shownQuestions);
   const createNewForm = () => {
     formApi
       .newForm(formInfo.template_id, user.id)
       .then((res) => {
         shownQuestions.map((question) => {
-          if (question.field !== "Checkboxes")
+          if (question.field !== "Checkboxes") {
             answerApi
               .addAnswerInput(res.form_id, question.question_id)
               .catch((err) => err.then((res) => toast.error(res.message)));
+          } else {
+            checkboxApi
+              .addFormCheckboxes(res.form_id, question.checkboxes)
+              .catch((err) => err.then((res) => toast.error(res.message)));
+          }
         });
         toast.success(res.message);
         navigate(`/form/${res.hash}`);

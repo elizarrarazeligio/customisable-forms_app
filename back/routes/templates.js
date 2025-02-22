@@ -5,6 +5,7 @@ import crypto from "crypto";
 import Question from "../models/Questions.js";
 import Form from "../models/Forms.js";
 import { Sequelize } from "sequelize";
+import Checkbox from "../models/Checkboxes.js";
 
 const templates = Router();
 
@@ -67,7 +68,9 @@ templates.get("/:hash", (req, res) => {
       model: Question,
       required: true,
       attributes: ["question_id", "description", "show", "field"],
+      include: { model: Checkbox, attributes: ["checkbox_id"] },
     },
+    order: [[Question, Checkbox, "checkbox_id"]],
     where: { hash },
   })
     .then((template) => {

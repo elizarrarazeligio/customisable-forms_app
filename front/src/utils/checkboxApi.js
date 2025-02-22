@@ -24,6 +24,20 @@ class CheckboxApi {
     });
   }
 
+  addFormCheckboxes(form_id, checkboxes) {
+    return fetch(`${this._baseUrl}/checkboxes/form/${form_id}/create`, {
+      method: "POST",
+      headers: this._headers,
+      credentials: "include",
+      body: JSON.stringify({
+        checkboxes,
+      }),
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(res.json());
+    });
+  }
+
   updateCheckboxOption(checkbox_id, option) {
     return fetch(`${this._baseUrl}/checkboxes/${checkbox_id}/update`, {
       method: "PATCH",

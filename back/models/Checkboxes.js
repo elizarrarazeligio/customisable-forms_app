@@ -17,11 +17,6 @@ const Checkbox = sequelize.define("checkbox", {
     allowNull: false,
     defaultValue: "",
   },
-  checked: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: false,
-  },
 });
 
 Question.hasMany(Checkbox, { foreignKey: "question_id" });

@@ -28,7 +28,8 @@ function FormQuestion({
 
   useEffect(() => {
     if (!submitted) return;
-    handleAnswerUpdate(formInfo.form_id, question.question_id, answer);
+    if (question.field !== "Checkboxes")
+      handleAnswerUpdate(formInfo.form_id, question.question_id, answer);
   }, [submitted]);
 
   return (

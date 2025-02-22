@@ -2,13 +2,13 @@ import Form from "react-bootstrap/esm/Form";
 import { useEffect, useState } from "react";
 import checkboxApi from "../../../../utils/checkboxApi";
 
-function FormCheckbox({ checkbox, submitted, user, formInfo }) {
-  const [checked, setChecked] = useState(checkbox.checked);
+function FormCheckbox({ checkbox, submitted, user, formInfo, checkedAnswers }) {
+  const [checked, setChecked] = useState(checkedAnswers[0].checked);
 
   useEffect(() => {
     if (!submitted) return;
     checkboxApi
-      .updateCheckboxStatus(checkbox.checkbox_id, checked)
+      .updateCheckboxStatus(checkedAnswers[0].checkedanswer_id, checked)
       .catch((err) => err.then((res) => console.log(res)));
   }, [submitted]);
 

@@ -3,7 +3,11 @@ import Form from "../models/Forms.js";
 import crypto from "crypto";
 import Template from "../models/Templates.js";
 import Question from "../models/Questions.js";
+import Checkbox from "../models/Checkboxes.js";
+import CheckedAnswer from "../models/CheckedAnswers.js";
 import User from "../models/User.js";
+import { col, Op, Sequelize, where } from "sequelize";
+import { Col } from "sequelize/lib/utils";
 
 const forms = Router();
 
@@ -37,6 +41,16 @@ forms.get("/:hash", (req, res) => {
           required: true,
           attributes: ["question_id", "description", "field"],
           where: { show: true },
+          include: {
+            model: Checkbox,
+            attributes: ["checkbox_id", "option"],
+            separate: true,
+            order: [["checkbox_id"]],
+            include: {
+              model: CheckedAnswer,
+              attributes: ["checkedanswer_id", "checked", "form_id"],
+            },
+          },
         },
       },
     ],
