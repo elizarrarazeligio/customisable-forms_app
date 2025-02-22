@@ -74,15 +74,19 @@ function FormQuestionType({
   return (
     <>
       {checkboxes && question.field == "Checkboxes"
-        ? checkboxes.map((checkbox, ind) => {
-            return (
-              <FormCheckbox
-                key={ind}
-                checkbox={checkbox}
-                submitted={submitted}
-              />
-            );
-          })
+        ? checkboxes
+            .filter((checkbox) => checkbox.option != "")
+            .map((checkbox, ind) => {
+              return (
+                <FormCheckbox
+                  key={ind}
+                  checkbox={checkbox}
+                  submitted={submitted}
+                  user={user}
+                  formInfo={user}
+                />
+              );
+            })
         : renderQuestionType(question.field)}
     </>
   );
