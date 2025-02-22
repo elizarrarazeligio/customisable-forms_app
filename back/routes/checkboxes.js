@@ -27,6 +27,20 @@ checkboxes.post("/question/:question_id/new", (req, res) => {
     );
 });
 
+// =========== UPDATE Checkbox Option ===========
+checkboxes.patch("/:checkbox_id/update", (req, res) => {
+  const { checkbox_id } = req.params;
+  const { option } = req.body;
+  if (!option)
+    res
+      .status(400)
+      .send({ status: "error", message: "Fields required not filled." });
+
+  Checkbox.update({ option }, { where: { checkbox_id } })
+    .then((rows) => res.send({ status: "success", affectedRows: rows[0] }))
+    .catch((err) => res.status(400).send(err));
+});
+
 // ============== DELETE Checkbox ===============
 checkboxes.delete("/:checkbox_id/delete", (req, res) => {
   const { checkbox_id } = req.params;

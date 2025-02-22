@@ -1,9 +1,15 @@
 import Form from "react-bootstrap/esm/Form";
 import Button from "react-bootstrap/esm/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import checkboxApi from "../../../../../../utils/checkboxApi";
 
-function CheckboxOption({ checkbox, setCheckboxChange, checkboxes }) {
+function CheckboxOption({
+  checkbox,
+  setCheckboxChange,
+  checkboxes,
+  submitted,
+}) {
   const [option, setOption] = useState(checkbox.option);
 
   const handleDeleteCheckbox = () => {
@@ -12,6 +18,13 @@ function CheckboxOption({ checkbox, setCheckboxChange, checkboxes }) {
       .then(() => setCheckboxChange([true]))
       .catch((err) => err.then(console.log(err)));
   };
+
+  useEffect(() => {
+    if (!submitted) return;
+    checkboxApi
+      .updateCheckboxOption(checkbox.checkbox_id, option)
+      .catch((err) => err.then((res) => toast.error(res.message)));
+  }, [submitted]);
 
   return (
     <Form.Group className="ms-3 d-flex align-items-center pb-2">

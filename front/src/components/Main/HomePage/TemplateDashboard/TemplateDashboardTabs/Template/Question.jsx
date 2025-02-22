@@ -112,6 +112,7 @@ function Question({
             questionId={question.question_id}
             checkboxChange={checkboxChange}
             setCheckboxChange={setCheckboxChange}
+            submitted={submitted}
           />
         </Row>
 

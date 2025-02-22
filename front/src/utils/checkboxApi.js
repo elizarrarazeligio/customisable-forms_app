@@ -24,6 +24,20 @@ class CheckboxApi {
     });
   }
 
+  updateCheckboxOption(checkbox_id, option) {
+    return fetch(`${this._baseUrl}/checkboxes/${checkbox_id}/update`, {
+      method: "PATCH",
+      headers: this._headers,
+      credentials: "include",
+      body: JSON.stringify({
+        option,
+      }),
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(res.json());
+    });
+  }
+
   deleteCheckbox(checkbox_id) {
     return fetch(`${this._baseUrl}/checkboxes/${checkbox_id}/delete`, {
       method: "DELETE",
