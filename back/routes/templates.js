@@ -66,7 +66,7 @@ templates.get("/:hash", (req, res) => {
     include: {
       model: Question,
       required: true,
-      attributes: ["question_id", "description", "show"],
+      attributes: ["question_id", "description", "show", "field"],
     },
     where: { hash },
   })

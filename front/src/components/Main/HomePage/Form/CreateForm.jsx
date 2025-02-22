@@ -18,17 +18,17 @@ function CreateForm() {
   const [loaded, setLoaded] = useState(false);
   const shownQuestions = formInfo.questions.filter((question) => question.show);
 
+  console.log(shownQuestions);
   const createNewForm = () => {
     formApi
       .newForm(formInfo.template_id, user.id)
       .then((res) => {
-        formInfo.questions
-          .filter((question) => question.show)
-          .map((question) => {
+        shownQuestions.map((question) => {
+          if (question.field !== "Checkboxes")
             answerApi
               .addAnswerInput(res.form_id, question.question_id)
               .catch((err) => err.then((res) => toast.error(res.message)));
-          });
+        });
         toast.success(res.message);
         navigate(`/form/${res.hash}`);
       })

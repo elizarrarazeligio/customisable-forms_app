@@ -17,12 +17,13 @@ function FormQuestion({
     answerApi
       .getFormQuestionAnswer(formInfo.form_id, question.question_id)
       .then((res) => setAnswer(res.response.answer))
-      .catch((err) =>
-        answerApi
-          .addAnswerInput(formInfo.form_id, question.question_id)
-          .then((res) => setAnswer(res.response.answer))
-          .catch((err) => err.then((res) => toast.error(res.message)))
-      );
+      .catch((err) => {
+        if (question.field !== "Checkboxes")
+          answerApi
+            .addAnswerInput(formInfo.form_id, question.question_id)
+            .then((res) => setAnswer(res.response.answer))
+            .catch((err) => err.then((res) => toast.error(res.message)));
+      });
   }, []);
 
   useEffect(() => {

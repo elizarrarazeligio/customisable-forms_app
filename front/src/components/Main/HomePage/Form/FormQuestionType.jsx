@@ -83,7 +83,7 @@ function FormQuestionType({
                   checkbox={checkbox}
                   submitted={submitted}
                   user={user}
-                  formInfo={user}
+                  formInfo={formInfo}
                 />
               );
             })
