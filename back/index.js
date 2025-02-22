@@ -8,8 +8,9 @@ import forms from "./routes/forms.js";
 import answers from "./routes/answers.js";
 import comments from "./routes/comments.js";
 import questions from "./routes/questions.js";
-import "dotenv/config";
 import topics from "./routes/topics.js";
+import checkboxes from "./routes/checkboxes.js";
+import "dotenv/config";
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use("/forms", forms);
 app.use("/answers", answers);
 app.use("/comments", comments);
 app.use("/questions", questions);
+app.use("/checkboxes", checkboxes);
 app.use("/topics", topics);
 
 app.listen(process.env.API_PORT, () => {
