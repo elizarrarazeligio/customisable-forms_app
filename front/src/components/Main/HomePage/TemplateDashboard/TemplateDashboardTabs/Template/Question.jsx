@@ -7,6 +7,7 @@ import QuestionType from "./QuestionType";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import questionApi from "../../../../../../utils/questionApi";
+import checkboxApi from "../../../../../../utils/checkboxApi";
 
 function Question({
   question,
@@ -22,6 +23,7 @@ function Question({
   );
   const [show, setShow] = useState(question.show);
   const [questionType, setQuestionType] = useState(question.field);
+  const [checkboxChange, setCheckboxChange] = useState(false);
 
   const handleDeleteQuestion = () => {
     questionApi
@@ -31,6 +33,13 @@ function Question({
         setChange([true]);
       })
       .catch((err) => err.then((res) => toast.error(res.message)));
+  };
+
+  const handleAddCheckbox = () => {
+    checkboxApi
+      .addCheckbox(question.question_id)
+      .then(() => setCheckboxChange([true]))
+      .catch((err) => err.then(console.log(err)));
   };
 
   useEffect(() => {
@@ -98,7 +107,12 @@ function Question({
         </Row>
 
         <Row className="mx-sm-4 mx-1">
-          <QuestionType questionType={questionType} />
+          <QuestionType
+            questionType={questionType}
+            questionId={question.question_id}
+            checkboxChange={checkboxChange}
+            setCheckboxChange={setCheckboxChange}
+          />
         </Row>
 
         <Row className="mx-sm-4 mx-1 ps-1">
@@ -106,9 +120,9 @@ function Question({
             <Button
               className="ms-5 bg-secondary border-secondary"
               style={{ width: 130 }}
-              onClick={() => console.log("Hola")}
+              onClick={() => handleAddCheckbox()}
             >
-              <i class="bi bi-plus-circle-fill"></i> Add option
+              <i className="bi bi-plus-circle-fill"></i> Add option
             </Button>
           )}
 

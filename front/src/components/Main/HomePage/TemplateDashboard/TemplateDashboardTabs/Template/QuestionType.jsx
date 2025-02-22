@@ -1,7 +1,29 @@
 import Form from "react-bootstrap/esm/Form";
-import Button from "react-bootstrap/esm/Button";
+import CheckboxOption from "./CheckboxOption";
+import { useEffect, useState } from "react";
+import checkboxApi from "../../../../../../utils/checkboxApi";
 
-function QuestionType({ questionType }) {
+function QuestionType({
+  questionType,
+  questionId,
+  checkboxChange,
+  setCheckboxChange,
+}) {
+  const [checkboxes, setCheckboxes] = useState([]);
+
+  useEffect(() => {
+    if (questionType == "Checkboxes")
+      checkboxApi
+        .getQuestionCheckboxes(questionId)
+        .then((res) => setCheckboxes(res.response))
+        .catch((err) => {
+          checkboxApi
+            .addCheckbox(questionId)
+            .then(() => setCheckboxChange([true]))
+            .catch((err) => err.then(console.log(err)));
+        });
+  }, [questionType, checkboxChange]);
+
   const renderQuestionType = (val) => {
     switch (val) {
       case "Single-Line":
@@ -32,32 +54,24 @@ function QuestionType({ questionType }) {
             disabled
           />
         );
-      case "Checkboxes":
-        return (
-          <Form.Group className="ms-3 d-flex align-items-center pt-1">
-            <Form.Check type="checkbox" disabled />
-            <Form.Control
-              type="text"
-              placeholder="Checkbox Option"
-              className="bg-white rounded-0 w-75 ms-2"
-            />
-            <Button
-              className="m-0 p-1 bg-white border-white"
-              style={{ width: 35 }}
-              onClick={() => console.log("hola")}
-              // disabled={arr.length == 1 ? true : false}
-            >
-              <i className="bi bi-trash-fill text-danger mx-0"></i>
-            </Button>
-          </Form.Group>
-        );
     }
   };
 
   return (
     <>
       <Form.Group className="my-2">
-        {renderQuestionType(questionType)}
+        {checkboxes && questionType == "Checkboxes"
+          ? checkboxes.map((checkbox, ind) => {
+              return (
+                <CheckboxOption
+                  key={ind}
+                  checkbox={checkbox}
+                  setCheckboxChange={setCheckboxChange}
+                  checkboxes={checkboxes}
+                />
+              );
+            })
+          : renderQuestionType(questionType)}
       </Form.Group>
     </>
   );

@@ -8,10 +8,7 @@ const checkboxes = Router();
 checkboxes.get("/question/:question_id", (req, res) => {
   const { question_id } = req.params;
 
-  Checkbox.findAll({
-    where: { question_id },
-    include: { model: Question, attributes: ["field"] },
-  })
+  Checkbox.findAll({ where: { question_id } })
     .then((checkboxes) => {
       if (checkboxes.length == 0) throw "No checkboxes in question.";
       res.send({ status: "success", response: checkboxes });
