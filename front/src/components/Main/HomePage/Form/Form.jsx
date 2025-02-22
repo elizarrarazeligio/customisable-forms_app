@@ -25,7 +25,7 @@ function Form() {
   const handleAnswerUpdate = (form_id, question_id, answer) => {
     answerApi
       .updateAnswer(form_id, question_id, answer)
-      .catch((err) => console.log(err));
+      .catch((err) => err.then(res => console.log(res)));
   };
 
   return (

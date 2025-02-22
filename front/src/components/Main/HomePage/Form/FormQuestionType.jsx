@@ -1,9 +1,26 @@
 import Form from "react-bootstrap/esm/Form";
-import { useContext } from "react";
+import FormCheckbox from "./FormCheckbox";
+import { useContext, useEffect, useState } from "react";
 import { UsersContext } from "../../../../contexts/UsersContext";
+import checkboxApi from "../../../../utils/checkboxApi";
 
-function FormQuestionType({ question, formInfo, answer, setAnswer }) {
+function FormQuestionType({
+  question,
+  formInfo,
+  answer,
+  setAnswer,
+  submitted,
+}) {
   const { user } = useContext(UsersContext);
+  const [checkboxes, setCheckboxes] = useState([]);
+
+  useEffect(() => {
+    if (question.field == "Checkboxes")
+      checkboxApi
+        .getQuestionCheckboxes(question.question_id)
+        .then((res) => setCheckboxes(res.response))
+        .catch((err) => err.then((res) => console.log(res)));
+  }, []);
 
   const renderQuestionType = (val) => {
     switch (val) {
@@ -51,12 +68,24 @@ function FormQuestionType({ question, formInfo, answer, setAnswer }) {
             required
           />
         );
-      case "Checkboxes":
-        return;
     }
   };
 
-  return <>{renderQuestionType(question.field)}</>;
+  return (
+    <>
+      {checkboxes && question.field == "Checkboxes"
+        ? checkboxes.map((checkbox, ind) => {
+            return (
+              <FormCheckbox
+                key={ind}
+                checkbox={checkbox}
+                submitted={submitted}
+              />
+            );
+          })
+        : renderQuestionType(question.field)}
+    </>
+  );
 }
 
 export default FormQuestionType;

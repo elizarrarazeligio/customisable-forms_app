@@ -41,6 +41,7 @@ function FormQuestion({
           formInfo={formInfo}
           answer={answer}
           setAnswer={setAnswer}
+          submitted={submitted}
         />
       </Form.Group>
 

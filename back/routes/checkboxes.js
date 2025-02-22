@@ -1,6 +1,5 @@
 import { Router } from "express";
 import Checkbox from "../models/Checkboxes.js";
-import Question from "../models/Questions.js";
 
 const checkboxes = Router();
 
@@ -8,7 +7,7 @@ const checkboxes = Router();
 checkboxes.get("/question/:question_id", (req, res) => {
   const { question_id } = req.params;
 
-  Checkbox.findAll({ where: { question_id } })
+  Checkbox.findAll({ where: { question_id }, order: [["checkbox_id"]] })
     .then((checkboxes) => {
       if (checkboxes.length == 0) throw "No checkboxes in question.";
       res.send({ status: "success", response: checkboxes });
@@ -27,7 +26,7 @@ checkboxes.post("/question/:question_id/new", (req, res) => {
     );
 });
 
-// =========== UPDATE Checkbox Option ===========
+// =========== PATCH Checkbox Option ============
 checkboxes.patch("/:checkbox_id/update", (req, res) => {
   const { checkbox_id } = req.params;
   const { option } = req.body;
@@ -37,6 +36,16 @@ checkboxes.patch("/:checkbox_id/update", (req, res) => {
       .send({ status: "error", message: "Fields required not filled." });
 
   Checkbox.update({ option }, { where: { checkbox_id } })
+    .then((rows) => res.send({ status: "success", affectedRows: rows[0] }))
+    .catch((err) => res.status(400).send(err));
+});
+
+// =========== PATCH Checkbox Status ============
+checkboxes.patch("/:checkbox_id/checked", (req, res) => {
+  const { checkbox_id } = req.params;
+  const { checked } = req.body;
+
+  Checkbox.update({ checked }, { where: { checkbox_id } })
     .then((rows) => res.send({ status: "success", affectedRows: rows[0] }))
     .catch((err) => res.status(400).send(err));
 });
