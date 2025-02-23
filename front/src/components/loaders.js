@@ -17,6 +17,12 @@ const getTemplateData = async ({ req, params }) => {
     .catch((err) => err);
 };
 
+const getTemplateResults = async ({ req, params }) => {
+  return await templateApi
+    .getTemplateAnswers(params.templateHash)
+    .catch((err) => err);
+};
+
 const getTemplateAnsweredForms = async ({ req, params }) => {
   return await templateApi
     .getTemplateForms(params.templateHash)
@@ -40,4 +46,5 @@ export {
   getQuestions,
   getFormData,
   getTemplateAnsweredForms,
+  getTemplateResults,
 };

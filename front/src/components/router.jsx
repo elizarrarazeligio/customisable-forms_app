@@ -26,6 +26,7 @@ import {
   getQuestions,
   getFormData,
   getTemplateAnsweredForms,
+  getTemplateResults,
 } from "./loaders.js";
 
 const router = createBrowserRouter(
@@ -55,7 +56,11 @@ const router = createBrowserRouter(
               element={<FormsResults />}
               loader={getTemplateAnsweredForms}
             />
-            <Route path="/:templateHash/summary" element={<Summary />} />
+            <Route
+              path="/:templateHash/summary"
+              element={<Summary />}
+              loader={getTemplateResults}
+            />
           </Route>
         </Route>
 

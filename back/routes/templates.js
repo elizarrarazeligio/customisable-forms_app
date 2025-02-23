@@ -86,7 +86,7 @@ templates.get("/:hash", (req, res) => {
 templates.get("/:hash/answers", (req, res) => {
   const { hash } = req.params;
 
-  Template.findAll({
+  Template.findOne({
     include: {
       model: Question,
       required: true,
@@ -111,8 +111,8 @@ templates.get("/:hash/answers", (req, res) => {
     attributes: ["template_id", "title"],
     where: { hash },
   })
-    .then((template) => res.send(template))
-    .catch((err) => res.status(400).send(err));
+    .then((template) => res.send({ status: "success", response: template }))
+    .catch((err) => res.status(404).send({ status: "error", response: err }));
 });
 
 // ============= GET Template Forms =============

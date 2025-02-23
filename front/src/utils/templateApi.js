@@ -35,6 +35,16 @@ class TemplateApi {
     });
   }
 
+  async getTemplateAnswers(hash) {
+    return await fetch(`${this._baseUrl}/templates/${hash}/answers`, {
+      headers: this._headers,
+      credentials: "include",
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(res.json());
+    });
+  }
+
   async getTemplateForms(hash) {
     return await fetch(`${this._baseUrl}/templates/${hash}/forms`, {
       headers: this._headers,
