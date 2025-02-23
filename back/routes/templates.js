@@ -70,9 +70,14 @@ templates.get("/:hash", (req, res) => {
       model: Question,
       required: true,
       attributes: ["question_id", "description", "show", "field"],
-      include: { model: Checkbox, attributes: ["checkbox_id"] },
+      include: {
+        model: Checkbox,
+        separate: true,
+        attributes: ["checkbox_id"],
+        order: [["checkbox_id"]],
+      },
     },
-    order: [[Question, Checkbox, "checkbox_id"]],
+    order: [[Question, "number"]],
     where: { hash },
   })
     .then((template) => {
@@ -110,6 +115,7 @@ templates.get("/:hash/answers", (req, res) => {
     },
     attributes: ["template_id", "title"],
     where: { hash },
+    order: [[Question, "number"]],
   })
     .then((template) => res.send({ status: "success", response: template }))
     .catch((err) => res.status(404).send({ status: "error", response: err }));

@@ -12,7 +12,6 @@ checkboxes.get("/question/:question_id", (req, res) => {
     where: { question_id },
     include: {
       model: CheckedAnswers,
-      required: true,
       attributes: ["checkedanswer_id", "checked"],
     },
     order: [["checkbox_id"]],

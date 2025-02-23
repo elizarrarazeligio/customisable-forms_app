@@ -3,6 +3,7 @@ import FormQuestionType from "./FormQuestionType";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import answerApi from "../../../../utils/answerApi";
+import checkboxApi from "../../../../utils/checkboxApi";
 
 function FormQuestion({
   question,
@@ -12,17 +13,24 @@ function FormQuestion({
   handleAnswerUpdate,
 }) {
   const [answer, setAnswer] = useState("");
+  const [checkboxes, setCheckboxes] = useState(question.checkboxes);
 
   useEffect(() => {
     answerApi
       .getFormQuestionAnswer(formInfo.form_id, question.question_id)
       .then((res) => setAnswer(res.response.answer))
       .catch((err) => {
-        if (question.field !== "Checkboxes")
+        if (question.field !== "Checkboxes") {
           answerApi
             .addAnswerInput(formInfo.form_id, question.question_id)
             .then((res) => setAnswer(res.response.answer))
             .catch((err) => err.then((res) => toast.error(res.message)));
+        } else if (checkboxes.length == 0) {
+          checkboxApi
+            .addFormCheckboxes(formInfo.form_id, question.checkboxes)
+            .then((res) => setCheckboxes(res.response))
+            .catch((err) => err.then((res) => toast.error(res.message)));
+        }
       });
   }, []);
 
@@ -44,6 +52,7 @@ function FormQuestion({
           answer={answer}
           setAnswer={setAnswer}
           submitted={submitted}
+          checkboxes={checkboxes}
         />
       </Form.Group>
 

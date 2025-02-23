@@ -45,6 +45,9 @@ function Checkboxes({ answers }) {
           },
         }}
       />
+      <p className="m-0 p-0 text-muted fw-semibold" style={{ fontSize: "0.6rem" }}>
+        Click on bars from Bar Char to view the option's votes.
+      </p>
     </div>
   );
 }

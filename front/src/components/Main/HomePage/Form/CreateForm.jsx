@@ -16,39 +16,30 @@ function CreateForm() {
   const { user } = useContext(UsersContext);
 
   const [formInfo, setFormInfo] = useState(templateData.response);
-  const [loaded, setLoaded] = useState(false);
   const shownQuestions = formInfo.questions.filter((question) => question.show);
 
   const createNewForm = () => {
     formApi
       .newForm(formInfo.template_id, user.id)
       .then((res) => {
-        shownQuestions.map((question) => {
-          if (question.field !== "Checkboxes") {
-            answerApi
-              .addAnswerInput(res.form_id, question.question_id)
-              .catch((err) => err.then((res) => toast.error(res.message)));
-          } else {
-            checkboxApi
-              .addFormCheckboxes(res.form_id, question.checkboxes)
-              .catch((err) => err.then((res) => toast.error(res.message)));
-          }
-        });
+        formInfo.questions
+          .filter((question) => question.show)
+          .map((question) => {
+            if (question.field !== "Checkboxes") {
+              answerApi
+                .addAnswerInput(res.form_id, question.question_id)
+                .catch((err) => err.then((res) => toast.error(res.message)));
+            } else {
+              checkboxApi
+                .addFormCheckboxes(res.form_id, question.checkboxes)
+                .catch((err) => err.then((res) => toast.error(res.message)));
+            }
+          });
         toast.success(res.message);
         navigate(`/form/${res.hash}`);
       })
       .catch((err) => console.log(err));
   };
-
-  useEffect(() => {
-    if (templateData.status == "success") {
-      setLoaded(true);
-      setFormInfo(templateData.response);
-    } else if (templateData.status == "error") {
-      navigate("/home");
-      toast.error(templateData.response);
-    }
-  }, [templateData]);
 
   return (
     <>
@@ -67,8 +58,9 @@ function CreateForm() {
         </Row>
       </Container>
 
-      {loaded &&
-        shownQuestions.map((question, ind) => {
+      {formInfo.questions
+        .filter((question) => question.show)
+        .map((question, ind) => {
           return (
             <Container
               key={ind + 1}

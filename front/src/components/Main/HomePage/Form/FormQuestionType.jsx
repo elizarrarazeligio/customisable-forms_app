@@ -9,9 +9,9 @@ function FormQuestionType({
   answer,
   setAnswer,
   submitted,
+  checkboxes,
 }) {
   const { user } = useContext(UsersContext);
-  const [checkboxes, setCheckboxes] = useState(question.checkboxes);
 
   const renderQuestionType = (val) => {
     switch (val) {
