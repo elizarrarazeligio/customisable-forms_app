@@ -61,8 +61,10 @@ function Form() {
                 type="text"
                 className="form-control"
                 disabled
-                value={`${formInfo.created_at.slice(0, 10)}
-                at ${formInfo.created_at.slice(11, 19)}`}
+                value={`${formInfo.created_at.slice(
+                  0,
+                  10
+                )} at ${formInfo.created_at.slice(11, 19)}`}
               />
             </div>
           </Row>
