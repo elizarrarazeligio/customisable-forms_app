@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { response, Router } from "express";
 import Form from "../models/Forms.js";
 import crypto from "crypto";
 import Template from "../models/Templates.js";
@@ -6,8 +6,6 @@ import Question from "../models/Questions.js";
 import Checkbox from "../models/Checkboxes.js";
 import CheckedAnswer from "../models/CheckedAnswers.js";
 import User from "../models/User.js";
-import { col, Op, Sequelize, where } from "sequelize";
-import { Col } from "sequelize/lib/utils";
 
 const forms = Router();
 
@@ -98,6 +96,21 @@ forms.post("/new", (req, res) => {
         .catch((err) => res.status(400).send(err));
     })
     .catch((err) => res.status(400).send({ status: "error", message: err }));
+});
+
+// ============= PATCH Update Form ==============
+forms.patch("/:form_id/update", (req, res) => {
+  const { form_id } = req.params;
+  const { topic_id, tags } = req.body;
+  if (topic_id == null)
+    res.status(400).send({
+      status: "error",
+      message: "Not null values for topic accepted.",
+    });
+
+  Form.update({ topic_id, tags }, { where: { form_id } })
+    .then((row) => res.send({ status: "success", affectedRows: row[0] }))
+    .catch((err) => res.status(400).send({ status: "error", response: err }));
 });
 
 // ================ DELETE Form =================

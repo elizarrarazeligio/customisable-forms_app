@@ -36,6 +36,21 @@ class FormApi {
     });
   }
 
+  updateForm(form_id, topic_id, tags) {
+    return fetch(`${this._baseUrl}/forms/${form_id}/update`, {
+      method: "PATCH",
+      headers: this._headers,
+      credentials: "include",
+      body: JSON.stringify({
+        topic_id,
+        tags,
+      }),
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(res.json());
+    });
+  }
+
   deleteForm(form_id) {
     return fetch(`${this._baseUrl}/forms/${form_id}/delete`, {
       method: "DELETE",
