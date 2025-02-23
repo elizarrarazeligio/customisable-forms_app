@@ -41,6 +41,35 @@ function Form() {
           <hr />
         </Row>
 
+        <Row className="px-lg-5 px-3 m-0 col-12 d-flex flex-column">
+          <Row className="d-flex col-md-6 col-sm-10 col-12 align-items-center pb-2">
+            <label className="form-label col-2 fw-semibold m-0">Email:</label>
+            <div className="col-10">
+              <input
+                type="text"
+                className="form-control"
+                disabled
+                value={formInfo.user.email}
+              />
+            </div>
+          </Row>
+
+          <Row className="d-flex col-md-6 col-sm-10 col-12 align-items-center pb-4">
+            <label className="form-label col-2 fw-semibold m-0">Date:</label>
+            <div className="col-10">
+              <input
+                type="text"
+                className="form-control"
+                disabled
+                value={`${formInfo.created_at.slice(0, 10)}
+                at ${formInfo.created_at.slice(11, 19)}`}
+              />
+            </div>
+          </Row>
+
+          <hr />
+        </Row>
+
         <Row className="px-lg-5 px-3 m-0">
           {questions.map((question, ind) => (
             <FormQuestion
