@@ -40,13 +40,30 @@ function Checkboxes({ answers }) {
           },
           scales: {
             x: {
-              display: false,
+              display: true,
+              ticks: {
+                font: {
+                  size: "8px",
+                },
+                callback: function (value) {
+                  const label = this.getLabelForValue(value);
+                  if (label.length > 20) {
+                    return window.innerWidth >= 1200
+                      ? `${label.substring(0, 20)}...`
+                      : `${label.substring(0, 10)}...`;
+                  }
+                  return label;
+                },
+              },
             },
           },
         }}
       />
-      <p className="m-0 p-0 text-muted fw-semibold" style={{ fontSize: "0.6rem" }}>
-        Click on bars from Bar Char to view the option's votes.
+      <p
+        className="m-0 p-0 text-muted fw-semibold"
+        style={{ fontSize: "0.6rem" }}
+      >
+        Hover on bars from Bar Char to view the option's votes.
       </p>
     </div>
   );
