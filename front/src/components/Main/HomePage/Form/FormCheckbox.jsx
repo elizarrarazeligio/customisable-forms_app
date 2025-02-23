@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import checkboxApi from "../../../../utils/checkboxApi";
 
 function FormCheckbox({ checkbox, submitted, user, formInfo, checkedAnswers }) {
-  const [checked, setChecked] = useState(checkedAnswers[0].checked);
+  const [checked, setChecked] = useState(checkedAnswers[0]?.checked);
 
   useEffect(() => {
     if (!submitted) return;

@@ -14,6 +14,9 @@ function FormQuestion({
 }) {
   const [answer, setAnswer] = useState("");
   const [checkboxes, setCheckboxes] = useState(question.checkboxes);
+  const [addChecked, setAddChecked] = useState(
+    checkboxes.every((checkbox) => checkbox.checkedanswers.length == 0)
+  );
 
   useEffect(() => {
     answerApi
@@ -25,7 +28,7 @@ function FormQuestion({
             .addAnswerInput(formInfo.form_id, question.question_id)
             .then((res) => setAnswer(res.response.answer))
             .catch((err) => err.then((res) => toast.error(res.message)));
-        } else if (checkboxes.length == 0) {
+        } else if (addChecked) {
           checkboxApi
             .addFormCheckboxes(formInfo.form_id, question.checkboxes)
             .then((res) => setCheckboxes(res.response))
