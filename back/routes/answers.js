@@ -1,15 +1,7 @@
 import { Router } from "express";
 import Answer from "../models/Answers.js";
-import Question from "../models/Questions.js";
 
 const answers = Router();
-
-// =========== GET Question's Answers ===========
-answers.get("/question/:question_id", (req, res) => {
-  const { question_id } = req.params;
-
-  Answer.findAll;
-});
 
 // ========= GET Form's Question Answer =========
 answers.get("/form/:form_id/question/:question_id", (req, res) => {

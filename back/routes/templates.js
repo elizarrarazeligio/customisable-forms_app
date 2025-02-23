@@ -6,6 +6,8 @@ import Question from "../models/Questions.js";
 import Form from "../models/Forms.js";
 import { Sequelize } from "sequelize";
 import Checkbox from "../models/Checkboxes.js";
+import Answer from "../models/Answers.js";
+import CheckedAnswer from "../models/CheckedAnswers.js";
 
 const templates = Router();
 
@@ -78,6 +80,39 @@ templates.get("/:hash", (req, res) => {
       res.send({ status: "success", response: template });
     })
     .catch((err) => res.status(404).send({ status: "error", response: err }));
+});
+
+// ============ GET Template Answers ============
+templates.get("/:hash/answers", (req, res) => {
+  const { hash } = req.params;
+
+  Template.findAll({
+    include: {
+      model: Question,
+      required: true,
+      attributes: ["question_id", "field", "description"],
+      include: [
+        { model: Answer, attributes: ["answer"] },
+        {
+          model: Checkbox,
+          separate: true,
+          attributes: [
+            "option",
+            [
+              Sequelize.literal(
+                "(SELECT COUNT(*) FROM checkedanswers WHERE checked = true AND checkbox_id = checkbox.checkbox_id)"
+              ),
+              "count",
+            ],
+          ],
+        },
+      ],
+    },
+    attributes: ["template_id", "title"],
+    where: { hash },
+  })
+    .then((template) => res.send(template))
+    .catch((err) => res.status(400).send(err));
 });
 
 // ============= GET Template Forms =============
