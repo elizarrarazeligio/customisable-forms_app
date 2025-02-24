@@ -9,6 +9,7 @@ function QuestionType({
   checkboxChange,
   setCheckboxChange,
   submitted,
+  setSubmitted,
 }) {
   const [checkboxes, setCheckboxes] = useState([]);
 
@@ -70,6 +71,7 @@ function QuestionType({
                   setCheckboxChange={setCheckboxChange}
                   checkboxes={checkboxes}
                   submitted={submitted}
+                  setSubmitted={setSubmitted}
                 />
               );
             })

@@ -101,6 +101,7 @@ function Template() {
               arr={arr}
               handleQuestionUpdate={handleQuestionUpdate}
               submitted={submitted}
+              setSubmitted={setSubmitted}
               setChange={setChange}
             />
           );

@@ -9,6 +9,7 @@ function CheckboxOption({
   setCheckboxChange,
   checkboxes,
   submitted,
+  setSubmitted,
 }) {
   const [option, setOption] = useState(checkbox.option);
 
@@ -23,6 +24,7 @@ function CheckboxOption({
     if (!submitted) return;
     checkboxApi
       .updateCheckboxOption(checkbox.checkbox_id, option)
+      .then(() => setSubmitted(false))
       .catch((err) => err.then((res) => toast.error(res.message)));
   }, [submitted]);
 

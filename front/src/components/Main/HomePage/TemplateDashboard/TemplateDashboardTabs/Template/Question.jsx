@@ -15,6 +15,7 @@ function Question({
   arr,
   handleQuestionUpdate,
   submitted,
+  setSubmitted,
   setChange,
 }) {
   const [questionTitle, setQuestionTitle] = useState(question.title);
@@ -113,6 +114,7 @@ function Question({
             checkboxChange={checkboxChange}
             setCheckboxChange={setCheckboxChange}
             submitted={submitted}
+            setSubmitted={setSubmitted}
           />
         </Row>
 

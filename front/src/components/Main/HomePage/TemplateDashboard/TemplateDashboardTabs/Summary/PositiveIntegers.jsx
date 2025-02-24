@@ -13,7 +13,7 @@ function PositiveIntegers({ answers }) {
           style={{ height: 75 }}
         >
           <p className="h1 fw-bold" style={{ fontSize: "3.5rem" }}>
-            {sum / array.length}
+            {array.length > 0 ? sum / array.length : ""}
           </p>
         </div>
         <p className="m-0 fw-bold text-white" style={{ fontSize: "0.7rem" }}>
