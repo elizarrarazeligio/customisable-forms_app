@@ -14,6 +14,7 @@ import CreateForm from "./Main/HomePage/Form/CreateForm.jsx";
 import Form from "./Main/HomePage/Form/Form.jsx";
 import PrivateAdmin from "./PrivateRoutes/PrivateAdmin.jsx";
 import PrivateTemplates from "./PrivateRoutes/PrivateTemplates.jsx";
+import PrivateForm from "./PrivateRoutes/PrivateForm.jsx";
 import {
   Route,
   createBrowserRouter,
@@ -69,7 +70,14 @@ const router = createBrowserRouter(
           element={<CreateForm />}
           loader={getTemplateData}
         />
-        <Route path="/form/:formHash" element={<Form />} loader={getFormData} />
+
+        <Route element={<PrivateForm />}>
+          <Route
+            path="/form/:formHash"
+            element={<Form />}
+            loader={getFormData}
+          />
+        </Route>
       </Route>
     </Route>
   )

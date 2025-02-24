@@ -38,6 +38,16 @@ function Login() {
               </Link>
             </ButtonGroup>
           </Row>
+
+          <Row className="mx-auto p-0 m-0 text-center mt-2 fw-semibold">
+            <Link
+              to="home"
+              style={{ fontSize: "0.7rem" }}
+              className="link-opacity-25-hover mt-1 text-secondary"
+            >
+              Continue as guest
+            </Link>
+          </Row>
         </Container>
       </div>
     </>

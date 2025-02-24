@@ -78,21 +78,22 @@ function CreateForm() {
           );
         })}
 
-      {user.id != formInfo.user_id && (
-        <Button
-          className="p-0 d-flex align-items-center justify-content-center ms-auto mt-1 mx-auto col-md-2 col-sm-4 col-12"
-          style={{
-            height: 35,
-            backgroundColor: "#0CCA98",
-            border: "#0CCA98",
-          }}
-          type="button"
-          onClick={() => createNewForm()}
-          disabled={shownQuestions.length ? false : true}
-        >
-          <p className="m-0 p-0 fw-semibold">Create Form</p>
-        </Button>
-      )}
+      {!user ||
+        (user.id != formInfo.user_id && (
+          <Button
+            className="p-0 d-flex align-items-center justify-content-center ms-auto mt-1 mx-auto col-md-2 col-sm-4 col-12"
+            style={{
+              height: 35,
+              backgroundColor: "#0CCA98",
+              border: "#0CCA98",
+            }}
+            type="button"
+            onClick={() => createNewForm()}
+            disabled={shownQuestions.length ? false : true}
+          >
+            <p className="m-0 p-0 fw-semibold">Create Form</p>
+          </Button>
+        ))}
     </>
   );
 }

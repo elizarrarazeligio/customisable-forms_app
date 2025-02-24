@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Outlet, useLoaderData, useNavigate } from "react-router-dom";
 import { UsersContext } from "../../contexts/UsersContext";
 import { toast } from "react-toastify";
+import userApi from "../../utils/userApi";
 
 function Main() {
   const userData = useLoaderData();
@@ -13,10 +14,17 @@ function Main() {
   useEffect(() => {
     if (userData.status == "success") {
       setUser(userData.response);
-    } else if (userData.status == "error") {
-      setUser(null);
-      toast.error(userData.message);
-      navigate("/");
+    } else if (
+      userData.status == "error" &&
+      userData.message == "Invalid token."
+    ) {
+      userApi
+        .logoutUser()
+        .then(() => {
+          toast.error(userData.message);
+          navigate("/");
+        })
+        .catch((err) => console.log(err));
     }
   }, [userData]);
 
