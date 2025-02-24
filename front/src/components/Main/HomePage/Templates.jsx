@@ -23,9 +23,10 @@ function Templates({ templates, user }) {
           questionApi
             .addQuestion(res.template_id, 1)
             .catch((err) => console.log(err));
-          toast.success(res.message);
-          navigate(`/${res.hash}`);
+          return res;
         })
+        .then((res) => toast.success(res.message))
+        .then(() => navigate(`/${res.hash}`))
         .catch((err) => console.log(err));
   };
 
