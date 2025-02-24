@@ -3,6 +3,7 @@ import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/esm/Button";
 import FormSelect from "react-bootstrap/esm/FormSelect";
 import FormQuestion from "./FormQuestion";
+import Tags from "./Tags";
 import { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { UsersContext } from "../../../../contexts/UsersContext";
@@ -19,6 +20,8 @@ function Form() {
   const [submitted, setSubmitted] = useState(false);
   const [topic, setTopic] = useState(formData.response.topic_id);
   const [topics, setTopics] = useState([]);
+  const [tags, setTags] = useState(formData.response.tags);
+
   const questions = formInfo.template.questions;
 
   const handleFormSubmit = (e) => {
@@ -120,6 +123,10 @@ function Form() {
               handleAnswerUpdate={handleAnswerUpdate}
             />
           ))}
+        </Row>
+
+        <Row className="px-lg-5 px-3 m-0">
+          <Tags tags={tags} setTags={setTags} />
         </Row>
       </Container>
 
