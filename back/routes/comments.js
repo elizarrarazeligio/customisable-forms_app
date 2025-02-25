@@ -19,7 +19,7 @@ comments.get("/template/:template_id", (req, res) => {
   })
     .then((comments) => res.send({ status: "success", response: comments }))
     .catch((err) =>
-      res.status(404).send({ status: "error", message: "No comments found." })
+      res.status(400).send({ status: "error", message: "No comments found." })
     );
 });
 
