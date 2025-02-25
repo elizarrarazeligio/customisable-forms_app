@@ -81,7 +81,7 @@ function Templates({ templates, user }) {
             </Col>
           )}
           {templates &&
-            templates.slice(0, 5).map((template) => {
+            templates.slice(0, 4).map((template) => {
               return (
                 <TemplateCard key={template.template_id} template={template} />
               );

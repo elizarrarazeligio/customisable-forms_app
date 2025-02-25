@@ -17,11 +17,10 @@ comments.get("/template/:template_id", (req, res) => {
     },
     order: [["created_at", "ASC"]],
   })
-    .then((comments) => {
-      if (comments.length == 0) throw "No comments found.";
-      res.send({ status: "success", response: comments });
-    })
-    .catch((err) => res.status(404).send({ status: "error", message: err }));
+    .then((comments) => res.send({ status: "success", response: comments }))
+    .catch((err) =>
+      res.status(404).send({ status: "error", message: "No comments found." })
+    );
 });
 
 // ============== POST New Comment ==============
