@@ -5,13 +5,14 @@ import Collapse from "react-bootstrap/esm/Collapse";
 import Button from "react-bootstrap/esm/Button";
 import ToggleButton from "react-bootstrap/esm/ToggleButton";
 import Comments from "./Comments";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { UsersContext } from "../../../../contexts/UsersContext";
 import formApi from "../../../../utils/formApi";
 import answerApi from "../../../../utils/answerApi";
 import checkboxApi from "../../../../utils/checkboxApi";
+import likeApi from "../../../../utils/likeApi";
 
 function CreateForm() {
   const templateData = useLoaderData();
@@ -19,7 +20,8 @@ function CreateForm() {
   const { user } = useContext(UsersContext);
 
   const [check, setCheck] = useState(false);
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState(null);
+  const [likes, setLikes] = useState([]);
   const [formInfo, setFormInfo] = useState(templateData.response);
   const shownQuestions = formInfo.questions.filter((question) => question.show);
 
@@ -45,6 +47,30 @@ function CreateForm() {
       })
       .catch((err) => console.log(err));
   };
+
+  const handleLike = () => {
+    likeApi
+      .likeTemplate(templateData.response.template_id, user.id)
+      .then(() => setLike(true));
+  };
+
+  const handleLikeDelete = () => {
+    const like = likes.filter((like) => like.user_id == user.id);
+    likeApi
+      .deleteLike(like[0].like_id)
+      .then(() => setLike(false))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    likeApi
+      .getTemplateLikes(templateData.response.template_id)
+      .then((res) => {
+        if (res.likes.some((like) => like.user_id == user.id)) setLike(true);
+        setLikes(res.likes);
+      })
+      .catch((err) => err.then((res) => console.log(res)));
+  }, []);
 
   return (
     <>
@@ -123,11 +149,11 @@ function CreateForm() {
               type="checkbox"
               variant="outline-danger"
               checked={like}
-              onChange={() => setLike(!like)}
+              onChange={() => (like ? handleLikeDelete() : handleLike())}
               disabled={user ? false : true}
             >
               <i className="bi bi-heart-fill me-1"></i>
-              <span className="p-0 m-0">5</span>
+              <span className="p-0 m-0">{likes.length}</span>
             </ToggleButton>
           </Col>
         </Row>
