@@ -1,5 +1,6 @@
 import { Router } from "express";
 import Comment from "../models/Comments.js";
+import User from "../models/User.js";
 
 const comments = Router();
 
@@ -9,7 +10,12 @@ comments.get("/template/:template_id", (req, res) => {
 
   Comment.findAll({
     where: { template_id },
-    order: [["created_at", "DESC"]],
+    include: {
+      model: User,
+      required: true,
+      attributes: ["first_name", "last_name"],
+    },
+    order: [["created_at", "ASC"]],
   })
     .then((comments) => {
       if (comments.length == 0) throw "No comments found.";

@@ -1,5 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../db.js";
+import User from "./User.js";
+import Template from "./Templates.js";
 
 const Comment = sequelize.define("comment", {
   comment_id: {
@@ -23,5 +25,11 @@ const Comment = sequelize.define("comment", {
     type: DataTypes.DATE,
   },
 });
+
+User.hasMany(Comment, { foreignKey: "user_id" });
+Comment.belongsTo(User, { foreignKey: "user_id" });
+
+Template.hasMany(Comment, { foreignKey: "template_id" });
+Comment.belongsTo(Template, { foreignKey: "template_id" });
 
 export default Comment;

@@ -1,8 +1,11 @@
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
+import Collapse from "react-bootstrap/esm/Collapse";
 import Button from "react-bootstrap/esm/Button";
-import { useContext, useEffect, useState } from "react";
+import ToggleButton from "react-bootstrap/esm/ToggleButton";
+import Comments from "./Comments";
+import { useContext, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { UsersContext } from "../../../../contexts/UsersContext";
@@ -15,6 +18,8 @@ function CreateForm() {
   const navigate = useNavigate();
   const { user } = useContext(UsersContext);
 
+  const [check, setCheck] = useState(false);
+  const [like, setLike] = useState(false);
   const [formInfo, setFormInfo] = useState(templateData.response);
   const shownQuestions = formInfo.questions.filter((question) => question.show);
 
@@ -94,6 +99,45 @@ function CreateForm() {
             <p className="m-0 p-0 fw-semibold">Create Form</p>
           </Button>
         ))}
+
+      <Container className="col-lg-6 col-md-8 col-12 flex-column mx-auto bg-white px-md-2 px-0 py-2 rounded mt-2">
+        <Row className="m-0 p-0 d-flex align-items-center text-center">
+          <Col className="col-1 col-sm-3" />
+          <Col className="d-flex align-items-center justify-content-sm-center gap-2 col-sm-6 col-8 ">
+            <span className="text-muted fw-semibold">Display comments</span>
+            <ToggleButton
+              className="btn btn-sm m-0 px-1 py-0"
+              id="toggle1"
+              type="checkbox"
+              variant="outline-secondary"
+              checked={check}
+              onChange={() => setCheck(!check)}
+            >
+              <i className="bi bi-caret-down-fill p-0 m-0"></i>
+            </ToggleButton>
+          </Col>
+          <Col className="col-3 d-flex align-items-center justify-content-sm-end justify-content-center">
+            <ToggleButton
+              className="btn btn-sm m-0 py-0"
+              id="toggle2"
+              type="checkbox"
+              variant="outline-danger"
+              checked={like}
+              onChange={() => setLike(!like)}
+            >
+              <i className="bi bi-heart-fill me-1"></i>
+              <span className="p-0 m-0">5</span>
+            </ToggleButton>
+          </Col>
+        </Row>
+        <Row className="m-0 px-2">
+          <Collapse in={check}>
+            <div className="m-0 p-0" id="collapse">
+              <Comments templateId={templateData.response.template_id} />
+            </div>
+          </Collapse>
+        </Row>
+      </Container>
     </>
   );
 }

@@ -5,14 +5,16 @@ class CommentApi {
   }
 
   getTemplateComments(template_id) {
-    return fetch(`${this._baseUrl}/template/${template_id}`).then((res) => {
-      if (res.ok) return res.json();
-      return Promise.reject(res.json());
-    });
+    return fetch(`${this._baseUrl}/comments/template/${template_id}`).then(
+      (res) => {
+        if (res.ok) return res.json();
+        return Promise.reject(res.json());
+      }
+    );
   }
 
   addComment(template_id, user_id, description) {
-    return fetch(`${this._baseUrl}/template/${template_id}/add`, {
+    return fetch(`${this._baseUrl}/comments/template/${template_id}/add`, {
       method: "POST",
       headers: this._headers,
       credentials: "include",
@@ -27,7 +29,7 @@ class CommentApi {
   }
 
   deleteComment(comment_id) {
-    return fetch(`${this._baseUrl}/${comment_id}/delete`, {
+    return fetch(`${this._baseUrl}/comments/${comment_id}/delete`, {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
@@ -43,3 +45,5 @@ const commentApi = new CommentApi({
     "Content-Type": "application/json",
   },
 });
+
+export default commentApi;

@@ -42,9 +42,7 @@ const Template = sequelize.define("template", {
   },
 });
 
-User.hasMany(Template, {
-  foreignKey: "user_id",
-});
+User.hasMany(Template, { foreignKey: "user_id" });
 Template.belongsTo(User, { foreignKey: "user_id" });
 
 export default Template;
