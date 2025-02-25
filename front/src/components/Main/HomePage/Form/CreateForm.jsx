@@ -124,6 +124,7 @@ function CreateForm() {
               variant="outline-danger"
               checked={like}
               onChange={() => setLike(!like)}
+              disabled={user ? false : true}
             >
               <i className="bi bi-heart-fill me-1"></i>
               <span className="p-0 m-0">5</span>
@@ -133,7 +134,10 @@ function CreateForm() {
         <Row className="m-0 px-2">
           <Collapse in={check}>
             <div className="m-0 p-0" id="collapse">
-              <Comments templateId={templateData.response.template_id} />
+              <Comments
+                templateId={templateData.response.template_id}
+                user={user}
+              />
             </div>
           </Collapse>
         </Row>

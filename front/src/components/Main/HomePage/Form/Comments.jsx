@@ -1,15 +1,12 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
 import InputGroup from "react-bootstrap/esm/InputGroup";
 import commentApi from "../../../../utils/commentApi";
-import { UsersContext } from "../../../../contexts/UsersContext";
 
-function Comments({ templateId }) {
-  const { user } = useContext(UsersContext);
-
+function Comments({ templateId, user }) {
   const [comments, setComments] = useState([]);
   const [description, setDescription] = useState("");
   const [commentsChange, setCommentsChange] = useState(false);
@@ -58,17 +55,19 @@ function Comments({ templateId }) {
               </Row>
               <Row>{comment.description}</Row>
             </Col>
-            <Col className="col-1 p-0 m-0">
-              <Button
-                className="m-0 p-1 bg-danger border-danger float-end"
-                style={{ width: 35 }}
-                type="button"
-                id={comment.comment_id}
-                onClick={(e) => handleDeleteComment(e)}
-              >
-                <i className="bi bi-trash-fill"></i>
-              </Button>
-            </Col>
+            {user && (user.admin || user.id == comment.user_id) && (
+              <Col className="col-1 p-0 m-0">
+                <Button
+                  className="m-0 p-1 bg-danger border-danger float-end"
+                  style={{ width: 35 }}
+                  type="button"
+                  id={comment.comment_id}
+                  onClick={(e) => handleDeleteComment(e)}
+                >
+                  <i className="bi bi-trash-fill"></i>
+                </Button>
+              </Col>
+            )}
             <hr />
           </Row>
         ))
@@ -76,23 +75,25 @@ function Comments({ templateId }) {
         <h5 className="text-center text-muted mb-3">No comments added yet</h5>
       )}
 
-      <Row className="mx-4 mb-2">
-        <InputGroup className="m-0 p-0">
-          <Form.Control
-            placeholder="Enter your comment"
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <Button
-            variant="secondary"
-            type="button"
-            onClick={() => handleCommentSubmit()}
-          >
-            Enter
-          </Button>
-        </InputGroup>
-      </Row>
+      {user && (
+        <Row className="mx-4 mb-2">
+          <InputGroup className="m-0 p-0">
+            <Form.Control
+              placeholder="Enter your comment"
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <Button
+              variant="secondary"
+              type="button"
+              onClick={() => handleCommentSubmit()}
+            >
+              Enter
+            </Button>
+          </InputGroup>
+        </Row>
+      )}
     </>
   );
 }
