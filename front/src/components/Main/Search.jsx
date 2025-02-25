@@ -13,7 +13,7 @@ function Search({ templates, search }) {
         }`}
         style={{ zIndex: 1 }}
       >
-        <ListGroup className="list-group-flush border col-12 mx-0 rounded-1">
+        <ListGroup className="list-group-flush border col-lg-11 col-12 mx-auto rounded-3">
           {templates &&
             templates.map((template, ind) => (
               <ListGroup.Item
