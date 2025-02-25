@@ -28,7 +28,7 @@ comments.post("/template/:template_id/add", (req, res) => {
   const { template_id } = req.params;
   const { description, user_id } = req.body;
   if (!description || !user_id) {
-    res
+    return res
       .status(400)
       .send({ status: "error", message: "There can't be empty comments." });
   }

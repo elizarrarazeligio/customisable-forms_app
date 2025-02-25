@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import Comment from "./Comment";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
@@ -23,7 +24,7 @@ function Comments({ templateId, user }) {
       .addComment(templateId, user.id, description)
       .then(() => setCommentsChange([true]))
       .then(() => setDescription(""))
-      .catch((err) => err.then((res) => console.log(res)));
+      .catch((err) => err.then((res) => toast.error(res.message)));
   };
 
   const handleLike = () => {
@@ -120,6 +121,7 @@ function Comments({ templateId, user }) {
                     variant="secondary"
                     type="button"
                     onClick={() => handleCommentSubmit()}
+                    disabled={description ? false : true}
                   >
                     Enter
                   </Button>
