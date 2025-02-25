@@ -1,8 +1,10 @@
 import Container from "react-bootstrap/esm/Container";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
 import Question from "./Question";
-import { useLoaderData, useOutletContext } from "react-router-dom";
+import { useLoaderData, useNavigate, useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import templateApi from "../../../../../../utils/templateApi";
@@ -11,6 +13,7 @@ import questionApi from "../../../../../../utils/questionApi";
 function Template() {
   const [template] = useOutletContext();
   const questionsData = useLoaderData();
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState(template.title);
   const [description, setDescription] = useState(template.description);
@@ -117,18 +120,36 @@ function Template() {
           <p className="m-0 ms-2 p-0">Add question</p>
         </Button>
 
-        <Button
-          className="p-0 d-flex align-items-center justify-content-center ms-auto mt-1"
-          style={{
-            height: 35,
-            width: 120,
-            backgroundColor: "#0CCA98",
-            border: "#0CCA98",
-          }}
-          type="submit"
-        >
-          <p className="m-0 p-0 fw-semibold">Publish</p>
-        </Button>
+        <Row className="m-0 ms-auto col-12 col-sm-6 col-xl-4">
+          <Col className="col-6 p-0 pe-1">
+            <Button
+              className="p-0 d-flex align-items-center justify-content-center mt-1 w-100"
+              style={{
+                height: 35,
+                backgroundColor: "#CBC3E3",
+                border: "#CBC3E3",
+              }}
+              type="button"
+              onClick={() => navigate(`/${template.hash}/form`)}
+            >
+              <p className="m-0 p-0 fw-semibold">Preview</p>
+            </Button>
+          </Col>
+
+          <Col className="col-6 p-0">
+            <Button
+              className="p-0 d-flex align-items-center justify-content-center mt-1 w-100"
+              style={{
+                height: 35,
+                backgroundColor: "#0CCA98",
+                border: "#0CCA98",
+              }}
+              type="submit"
+            >
+              <p className="m-0 p-0 fw-semibold">Publish</p>
+            </Button>
+          </Col>
+        </Row>
       </Form>
     </>
   );
