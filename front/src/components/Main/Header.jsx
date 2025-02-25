@@ -4,14 +4,19 @@ import Col from "react-bootstrap/esm/Col";
 import Form from "react-bootstrap/esm/Form";
 import formLogo from "../../assets/form_logo.png";
 import Menu from "./Menu";
+import Search from "./Search";
 import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UsersContext } from "../../contexts/UsersContext";
+import templateApi from "../../utils/templateApi";
 
 function Header() {
   const navigate = useNavigate();
   const { user } = useContext(UsersContext);
+
   const [show, setShow] = useState(false);
+  const [templates, setTemplates] = useState([]);
+  const [search, setSearch] = useState("");
 
   const handleShow = () => setShow(true);
   const handleHide = () => setShow(false);
@@ -19,6 +24,10 @@ function Header() {
   const handleUserLoginClick = (evt) => {
     navigate("/");
   };
+
+  useEffect(() => {
+    templateApi.getAllTemplates().then((res) => setTemplates(res));
+  }, []);
 
   return (
     <>
@@ -46,13 +55,17 @@ function Header() {
             </Row>
           </Col>
           <Col className="col-6 justify-self-center">
-            <Form>
+            <Form className="d-flex flex-column">
               <Form.Control
                 type="search"
                 placeholder="Search"
-                aria-label="Search"
                 className="rounded-pill form-control-md"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
+              <div>
+                <Search templates={templates} search={search} />
+              </div>
             </Form>
           </Col>
           <Col className="col-3">
