@@ -10,7 +10,7 @@ likes.get("/template/:template_id", (req, res) => {
   Like.findAll({ where: { template_id } })
     .then((likes) => res.send({ status: "success", likes }))
     .catch((err) =>
-      res.status(400).send({ status: "error", message: "No likes." })
+      res.status(400).send({ status: "error", message: "No likes to show." })
     );
 });
 
