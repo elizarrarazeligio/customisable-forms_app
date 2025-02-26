@@ -1,13 +1,14 @@
 import { Router } from "express";
+import { Sequelize } from "sequelize";
 import Template from "../models/Templates.js";
 import User from "../models/User.js";
-import crypto from "crypto";
 import Question from "../models/Questions.js";
+import crypto from "crypto";
 import Form from "../models/Forms.js";
-import { Sequelize } from "sequelize";
 import Checkbox from "../models/Checkboxes.js";
 import Answer from "../models/Answers.js";
-import CheckedAnswer from "../models/CheckedAnswers.js";
+import Comment from "../models/Comments.js";
+import lunr from "lunr";
 
 const templates = Router();
 
@@ -23,6 +24,35 @@ templates.get("/", (req, res) => {
   })
     .then((templates) => res.send(templates))
     .catch((err) => res.status(400).send(err));
+});
+
+// ========== GET Templates By Search ===========
+templates.get("/search", (req, res) => {
+  const { search } = req.query;
+
+  Template.findAll({
+    attributes: ["template_id", "title", "description"],
+    include: [
+      { model: Question, attributes: ["template_id", "description"] },
+      { model: Comment, attributes: ["template_id", "description"] },
+    ],
+  })
+    .then((templates) => {
+      const index = lunr(function () {
+        this.field("title");
+        this.field("description");
+        this.ref("template_id");
+
+        templates.forEach((template) => {
+          this.add(template);
+          template.questions.forEach((question) => this.add(question));
+          template.comments.forEach((comment) => this.add(comment));
+        });
+      });
+      const refs = index.search(search).map((i) => parseInt(i.ref));
+      res.send(refs);
+    })
+    .catch((err) => res.status(500).send(err));
 });
 
 // ======== GET Most Answered Templates =========

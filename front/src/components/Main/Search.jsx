@@ -2,8 +2,19 @@ import Container from "react-bootstrap/esm/Container";
 import Col from "react-bootstrap/esm/Col";
 import ListGroup from "react-bootstrap/esm/ListGroup";
 import templateApi from "../../utils/templateApi";
+import { useEffect, useState } from "react";
 
 function Search({ templates, search }) {
+  const [results, setResults] = useState([]);
+  const templateSearch = templates.filter((template) =>
+    results.includes(template.template_id)
+  );
+
+  useEffect(() => {
+    search &&
+      templateApi.searchTemplates(search).then((res) => setResults(res));
+  }, [search]);
+
   return (
     <>
       <Container
@@ -14,8 +25,8 @@ function Search({ templates, search }) {
         style={{ zIndex: 1 }}
       >
         <ListGroup className="list-group-flush border col-lg-11 col-12 mx-auto rounded-3">
-          {templates &&
-            templates.map((template, ind) => (
+          {templateSearch &&
+            templateSearch.map((template, ind) => (
               <ListGroup.Item
                 key={ind}
                 style={{ fontSize: "0.8rem" }}

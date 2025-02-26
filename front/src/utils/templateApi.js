@@ -11,6 +11,15 @@ class TemplateApi {
     });
   }
 
+  searchTemplates(search) {
+    return fetch(`${this._baseUrl}/templates/search?search=${search}`).then(
+      (res) => {
+        if (res.ok) return res.json();
+        return Promise.reject(res.json());
+      }
+    );
+  }
+
   getPopularTemplates() {
     return fetch(`${this._baseUrl}/templates/popular`).then((res) => {
       if (res.ok) return res.json();
