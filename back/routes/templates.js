@@ -86,7 +86,10 @@ templates.get("/popular", (req, res) => {
 templates.get("/user/:user_id", (req, res) => {
   const { user_id } = req.params;
 
-  Template.findAll({ order: ["created_at"], where: { user_id: user_id } })
+  Template.findAll({
+    order: [["created_at", "DESC"]],
+    where: { user_id: user_id },
+  })
     .then((templates) => res.send(templates))
     .catch((err) => res.status(400).send(err));
 });

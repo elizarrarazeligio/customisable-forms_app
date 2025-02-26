@@ -14,7 +14,7 @@ forms.get("/user/:user_id", (req, res) => {
   const { user_id } = req.params;
 
   Form.findAll({
-    order: ["created_at"],
+    order: [["created_at", "DESC"]],
     where: { user_id },
     include: { model: Template, required: true, attributes: ["title"] },
   })

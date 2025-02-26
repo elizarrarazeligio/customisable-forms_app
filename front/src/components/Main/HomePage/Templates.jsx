@@ -19,8 +19,8 @@ function Templates({ templates, user }) {
     user &&
       templateApi
         .newTemplate(user.id)
-        .then((res) => {
-          questionApi
+        .then(async (res) => {
+          await questionApi
             .addQuestion(res.template_id, 1)
             .catch((err) => console.log(err));
           return res;
