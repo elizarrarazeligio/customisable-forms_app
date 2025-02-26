@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { response, Router } from "express";
 import Checkbox from "../models/Checkboxes.js";
 import CheckedAnswers from "../models/CheckedAnswers.js";
 
@@ -50,6 +50,16 @@ checkboxes.post("/form/:form_id/create", (req, res) => {
     );
 });
 
+// ======= POST Individual Checked Answer =======
+checkboxes.post("/form/:form_id/checkbox/:checkbox_id", (req, res) => {
+  const { form_id, checkbox_id } = req.params;
+  const { checked } = req.body;
+
+  CheckedAnswers.create({ checkbox_id, form_id, checked })
+    .then((result) => res.send({ status: "success", response: result }))
+    .catch((err) => res.status(400).send({ status: "error", message: err }));
+});
+
 // =========== PATCH Checkbox Option ============
 checkboxes.patch("/:checkbox_id/update", (req, res) => {
   const { checkbox_id } = req.params;
@@ -70,8 +80,11 @@ checkboxes.patch("/:checkedanswer_id/checked", (req, res) => {
   const { checked } = req.body;
 
   CheckedAnswers.update({ checked }, { where: { checkedanswer_id } })
-    .then((rows) => res.send({ status: "success", affectedRows: rows[0] }))
-    .catch((err) => res.status(400).send(err));
+    .then((rows) => {
+      if (rows == 0) throw "Missing checkedanswer.";
+      res.send({ status: "success", affectedRows: rows[0] });
+    })
+    .catch((err) => res.status(404).send({ status: "error", message: err }));
 });
 
 // ============== DELETE Checkbox ===============

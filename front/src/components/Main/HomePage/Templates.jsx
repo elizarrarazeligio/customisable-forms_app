@@ -27,9 +27,8 @@ function Templates({ templates, user }) {
         })
         .then((res) => {
           toast.success(res.message);
-          return res;
+          navigate(`/${res.hash}`);
         })
-        .then((res) => navigate(`/${res.hash}`))
         .catch((err) => console.log(err));
   };
 

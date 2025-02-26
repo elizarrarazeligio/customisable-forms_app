@@ -22,9 +22,9 @@ function Template() {
   const [submitted, setSubmitted] = useState(false);
   const [change, setChange] = useState([]);
 
-  const handleTemplateSubmit = (e) => {
+  const handleTemplateSubmit = async (e) => {
     e.preventDefault();
-    templateApi
+    await templateApi
       .updateTemplateInfo(template.hash, {
         title,
         description,

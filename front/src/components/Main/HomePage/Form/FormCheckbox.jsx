@@ -3,13 +3,20 @@ import { useEffect, useState } from "react";
 import checkboxApi from "../../../../utils/checkboxApi";
 
 function FormCheckbox({ checkbox, submitted, user, formInfo, checkedAnswers }) {
-  const [checked, setChecked] = useState(checkedAnswers[0]?.checked);
+  const [checked, setChecked] = useState(checkedAnswers[0]?.checked || false);
+  const [checkedAnswer, setCheckedAnswer] = useState(checkedAnswers[0]);
 
   useEffect(() => {
     if (!submitted) return;
     checkboxApi
-      .updateCheckboxStatus(checkedAnswers[0].checkedanswer_id, checked)
-      .catch((err) => err.then((res) => console.log(res)));
+      .updateCheckboxStatus(checkedAnswer?.checkedanswer_id || 0, checked)
+      .catch(
+        async () =>
+          await checkboxApi
+            .addCheckedAnswer(checkbox.checkbox_id, formInfo.form_id, checked)
+            .then((res) => setCheckedAnswer(res.response))
+            .catch((err) => console.log(err))
+      );
   }, [submitted]);
 
   return (

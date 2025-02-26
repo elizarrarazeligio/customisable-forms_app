@@ -38,6 +38,23 @@ class CheckboxApi {
     });
   }
 
+  addCheckedAnswer(checkbox_id, form_id, checked) {
+    return fetch(
+      `${this._baseUrl}/checkboxes/form/${form_id}/checkbox/${checkbox_id}`,
+      {
+        method: "POST",
+        headers: this._headers,
+        credentials: "include",
+        body: JSON.stringify({
+          checked,
+        }),
+      }
+    ).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(res.json());
+    });
+  }
+
   updateCheckboxOption(checkbox_id, option) {
     return fetch(`${this._baseUrl}/checkboxes/${checkbox_id}/update`, {
       method: "PATCH",

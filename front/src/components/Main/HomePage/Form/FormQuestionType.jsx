@@ -68,7 +68,7 @@ function FormQuestionType({
         ? checkboxes
             .filter((checkbox) => checkbox.option != "")
             .map((checkbox, ind) => {
-              const checkedAnswers = checkbox.checkedanswers.filter(
+              let checkedAnswers = checkbox.checkedanswers.filter(
                 (check) => check.form_id == formInfo.form_id
               );
               return (
