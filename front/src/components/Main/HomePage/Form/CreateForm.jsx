@@ -10,6 +10,7 @@ import { UsersContext } from "../../../../contexts/UsersContext";
 import formApi from "../../../../utils/formApi";
 import answerApi from "../../../../utils/answerApi";
 import checkboxApi from "../../../../utils/checkboxApi";
+import defaultImage from "../../../../assets/form.jpg";
 
 function CreateForm() {
   const templateData = useLoaderData();
@@ -48,7 +49,8 @@ function CreateForm() {
         <Row className="m-0 p-md-2 p-0 text-center">
           <Col>
             <img
-              src={formInfo.image}
+              src={formInfo.image ? formInfo.image : defaultImage}
+              onError={(e) => (e.currentTarget.src = defaultImage)}
               alt="template"
               className="object-fit-cover border rounded-top w-100 col-12"
               style={{ height: 70 }}

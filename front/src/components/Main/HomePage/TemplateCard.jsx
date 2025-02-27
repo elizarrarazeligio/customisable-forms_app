@@ -9,6 +9,7 @@ function TemplateCard({ template }) {
         <Link to={`/${template && template.hash}`}>
           <img
             src={template && template.image ? template.image : defaultForm}
+            onError={(e) => (e.currentTarget.src = defaultForm)}
             alt="template"
             className="object-fit-cover border rounded-top w-100 col-12"
             style={{ height: 140 }}
