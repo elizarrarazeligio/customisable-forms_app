@@ -87,6 +87,7 @@ class TemplateApi {
         title: data.title,
         description: data.description,
         image: data.image,
+        priv: data.priv,
       }),
     }).then((res) => {
       if (res.ok) return res.json();

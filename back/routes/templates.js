@@ -219,13 +219,14 @@ templates.post("/new", (req, res) => {
 // ========= PATCH Update Template Info =========
 templates.patch("/:hash/update", (req, res) => {
   const { hash } = req.params;
-  const { title, description, image } = req.body;
+  const { title, description, image, priv } = req.body;
 
   Template.update(
     {
       title,
       description,
       image,
+      private: priv,
     },
     { where: { hash } }
   )

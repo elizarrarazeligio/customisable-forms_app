@@ -4,6 +4,7 @@ import Col from "react-bootstrap/esm/Col";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
 import Question from "./Question";
+import AllowedUsers from "./AllowedUsers";
 import { useLoaderData, useNavigate, useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -18,6 +19,9 @@ function Template() {
   const [title, setTitle] = useState(template.title);
   const [description, setDescription] = useState(template.description);
   const [image, setImage] = useState(template.image);
+  const [priv, setPriv] = useState(template.private);
+  const [allowedUsers, setAllowedUsers] = useState(template.allowed_users);
+
   const [questions, setQuestions] = useState(questionsData.response);
   const [submitted, setSubmitted] = useState(false);
   const [change, setChange] = useState([]);
@@ -29,6 +33,7 @@ function Template() {
         title,
         description,
         image,
+        priv,
       })
       .then((res) => {
         setSubmitted([true]);
@@ -93,6 +98,11 @@ function Template() {
               className="border-0 border-bottom border-1 rounded-0"
             />
           </Form.Group>
+          <AllowedUsers
+            priv={priv}
+            setPriv={setPriv}
+            allowedUsers={allowedUsers}
+          />
         </Container>
 
         {questions.map((question, ind, arr) => {

@@ -64,7 +64,11 @@ function Header() {
                 onChange={(e) => setSearch(e.target.value)}
               />
               <div>
-                <Search templates={templates} search={search} />
+                <Search
+                  templates={templates}
+                  search={search}
+                  setSearch={setSearch}
+                />
               </div>
             </Form>
           </Col>

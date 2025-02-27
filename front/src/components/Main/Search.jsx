@@ -4,7 +4,7 @@ import ListGroup from "react-bootstrap/esm/ListGroup";
 import templateApi from "../../utils/templateApi";
 import { useEffect, useState } from "react";
 
-function Search({ templates, search }) {
+function Search({ templates, search, setSearch }) {
   const [results, setResults] = useState([]);
   const templateSearch = templates.filter((template) =>
     results.includes(template.template_id)
@@ -23,6 +23,7 @@ function Search({ templates, search }) {
           !search && "d-none"
         }`}
         style={{ zIndex: 1 }}
+        onKeyDown={(e) => e.key == "Escape" && setSearch("")}
       >
         <ListGroup className="list-group-flush border col-lg-11 col-12 mx-auto rounded-3">
           {templateSearch &&
