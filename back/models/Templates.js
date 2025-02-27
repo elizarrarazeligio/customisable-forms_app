@@ -30,7 +30,7 @@ const Template = sequelize.define("template", {
     defaultValue: false,
   },
   allowed_users: {
-    type: DataTypes.ARRAY(DataTypes.INTEGER),
+    type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: true,
   },
   created_at: {

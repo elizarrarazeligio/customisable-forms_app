@@ -21,10 +21,11 @@ function PrivateTemplates() {
 
   return user && (user.admin || user.id == template.user_id) ? (
     <Outlet context={[template]} />
-  ) : !template.private ? (
+  ) : !template.private ||
+    (template.private && template.allowed_users.includes(user.email)) ? (
     <Navigate to={`/${template.hash}/form`} />
   ) : (
-    toast.error("Restricted access.") && <Navigate to={"/home"} />
+    <Navigate to={"/home"} />
   );
 }
 

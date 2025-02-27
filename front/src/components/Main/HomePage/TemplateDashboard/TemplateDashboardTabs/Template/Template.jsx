@@ -34,6 +34,7 @@ function Template() {
         description,
         image,
         priv,
+        allowedUsers,
       })
       .then((res) => {
         setSubmitted([true]);
@@ -98,10 +99,12 @@ function Template() {
               className="border-0 border-bottom border-1 rounded-0"
             />
           </Form.Group>
+
           <AllowedUsers
             priv={priv}
             setPriv={setPriv}
             allowedUsers={allowedUsers}
+            setAllowedUsers={setAllowedUsers}
           />
         </Container>
 
