@@ -22,7 +22,9 @@ function PrivateTemplates() {
   return user && (user.admin || user.id == template.user_id) ? (
     <Outlet context={[template]} />
   ) : !template.private ||
-    (template.private && template.allowed_users.includes(user.email)) ? (
+    (user &&
+      template.private &&
+      template.allowed_users.includes(user.email)) ? (
     <Navigate to={`/${template.hash}/form`} />
   ) : (
     <Navigate to={"/home"} />
