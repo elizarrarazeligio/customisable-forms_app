@@ -1,4 +1,5 @@
 import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
 import Form from "react-bootstrap/esm/Form";
 import InputGroup from "react-bootstrap/esm/InputGroup";
 import Dropdown from "react-bootstrap/esm/Dropdown";
@@ -44,8 +45,8 @@ function AllowedUsers({
 
   return (
     <>
-      <Row className="pt-2 mx-sm-4 mx-3 d-flex flex-row align-items-center justify-content-end">
-        <Row className={`col-5 ${priv ? "" : "d-none"}`}>
+      <Row className="mt-3 mx-2 d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+        <Col className={`col-lg-5 col-md-9 col-8 ${priv ? "" : "d-none"}`}>
           <InputGroup size="sm">
             <Form.Control
               type="search"
@@ -59,7 +60,7 @@ function AllowedUsers({
                 ))}
             </datalist>
 
-            <DropdownButton variant={themes.button} title="allowed users">
+            <DropdownButton variant={themes.button} title="users">
               {allowedUsers?.map((email, ind) => (
                 <Dropdown.Item
                   className="py-0 d-flex justify-content-between align-items-center"
@@ -76,15 +77,17 @@ function AllowedUsers({
               ))}
             </DropdownButton>
           </InputGroup>
-        </Row>
+        </Col>
 
-        <Form.Check
-          type="switch"
-          checked={priv}
-          onChange={() => setPriv(!priv)}
-          className="col-2 d-flex align-items-center gap-1 py-1"
-          label="Private template"
-        />
+        <Col className="col-lg-2 col-md-3 col-4">
+          <Form.Check
+            type="switch"
+            checked={priv}
+            onChange={() => setPriv(!priv)}
+            className="d-flex align-items-center gap-1"
+            label="Private"
+          />
+        </Col>
       </Row>
     </>
   );
