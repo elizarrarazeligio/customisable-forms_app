@@ -10,6 +10,7 @@ import comments from "./routes/comments.js";
 import questions from "./routes/questions.js";
 import topics from "./routes/topics.js";
 import checkboxes from "./routes/checkboxes.js";
+import contexts from "./routes/contexts.js";
 import likes from "./routes/likes.js";
 import "dotenv/config";
 
@@ -32,6 +33,7 @@ app.use("/questions", questions);
 app.use("/checkboxes", checkboxes);
 app.use("/topics", topics);
 app.use("/likes", likes);
+app.use("/contexts", contexts);
 
 app.listen(process.env.API_PORT, () => {
   console.log("App listening at port:", process.env.API_PORT);

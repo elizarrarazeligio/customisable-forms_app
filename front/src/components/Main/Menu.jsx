@@ -77,17 +77,19 @@ function Menu(props) {
                 </div>
               )}
             </ListGroup>
-            <div className="mt-3 col-11 align-self-center">
-              <Form.Check
-                type="switch"
-                checked={props.theme == "light" ? false : true}
-                onChange={() =>
-                  props.setTheme(props.theme == "light" ? "dark" : "light")
-                }
-                className={`d-flex align-items-center gap-2 py-1 ${themes.text}`}
-                label="Dark Mode"
-              />
-            </div>
+            {user && (
+              <div className="mt-3 col-11 align-self-center">
+                <Form.Check
+                  type="switch"
+                  checked={props.theme == "light" ? false : true}
+                  onChange={() =>
+                    props.setTheme(props.theme == "light" ? "dark" : "light")
+                  }
+                  className={`d-flex align-items-center gap-2 py-1 ${themes.text}`}
+                  label="Dark Mode"
+                />
+              </div>
+            )}
           </div>
         </Offcanvas.Body>
       </Offcanvas>
