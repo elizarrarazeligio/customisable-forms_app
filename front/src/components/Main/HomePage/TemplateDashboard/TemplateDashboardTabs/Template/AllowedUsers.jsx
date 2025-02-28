@@ -84,7 +84,7 @@ function AllowedUsers({
             type="switch"
             checked={priv}
             onChange={() => setPriv(!priv)}
-            className="d-flex align-items-center gap-1"
+            className="d-flex align-items-center gap-1 pt-1"
             label="Private"
           />
         </Col>

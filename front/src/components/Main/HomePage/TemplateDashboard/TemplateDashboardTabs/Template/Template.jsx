@@ -91,7 +91,7 @@ function Template() {
               rows={1}
               name="description"
               placeholder="Template description"
-              className={`${themes.bg3} ${themes.text} fw-semibold border-0 border-bottom border-2 rounded-0`}
+              className="fw-semibold border-0 border-bottom border-2 rounded-0"
               required
             />
           </Form.Group>
@@ -102,7 +102,7 @@ function Template() {
               type="url"
               name="image"
               placeholder="Image URL (optional)"
-              className={`${themes.bg3} ${themes.text} border-0 border-bottom border-1 rounded-0`}
+              className="border-0 border-bottom border-1 rounded-0"
             />
           </Form.Group>
 
