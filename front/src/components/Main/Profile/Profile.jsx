@@ -5,9 +5,12 @@ import { UsersContext } from "../../../contexts/UsersContext";
 import { useContext, useEffect, useState } from "react";
 import templateApi from "../../../utils/templateApi";
 import formApi from "../../../utils/formApi";
+import { ThemeContext } from "../../../contexts/ThemeContext";
 
 function Profile() {
   const { user } = useContext(UsersContext);
+  const themes = useContext(ThemeContext);
+
   const [templates, setTemplates] = useState([]);
   const [forms, setForms] = useState([]);
   const [manageChange, setManageChange] = useState([]);
@@ -35,8 +38,8 @@ function Profile() {
 
   return (
     <>
-      <Container fluid className="bg-white px-2 py-4 d-flex flex-column">
-        <Row className="mx-auto justify-self-center">
+      <Container fluid className={`${themes.bg3} px-2 py-4 d-flex flex-column`}>
+        <Row className={`${themes.text} mx-auto justify-self-center`}>
           {user && <h2>Welcome back {user.first_name}!</h2>}
         </Row>
 
@@ -45,6 +48,7 @@ function Profile() {
             title="My created templates"
             array={templates}
             setManageChange={setManageChange}
+            themes={themes}
           />
         </Row>
 
@@ -55,6 +59,7 @@ function Profile() {
             title="My answered forms"
             array={forms}
             setManageChange={setManageChange}
+            themes={themes}
           />
         </Row>
       </Container>

@@ -11,11 +11,14 @@ import formApi from "../../../../utils/formApi";
 import answerApi from "../../../../utils/answerApi";
 import checkboxApi from "../../../../utils/checkboxApi";
 import defaultImage from "../../../../assets/form.jpg";
+import { ThemeContext } from "../../../../contexts/ThemeContext";
 
 function CreateForm() {
   const templateData = useLoaderData();
   const navigate = useNavigate();
+
   const { user } = useContext(UsersContext);
+  const themes = useContext(ThemeContext);
 
   const [formInfo, setFormInfo] = useState(templateData.response);
   const shownQuestions = formInfo.questions.filter((question) => question.show);
@@ -45,7 +48,9 @@ function CreateForm() {
 
   return (
     <>
-      <Container className="col-lg-10 col-12 flex-column mx-auto bg-white px-md-2 px-0 py-2 rounded">
+      <Container
+        className={`${themes.bg4} ${themes.text} col-lg-10 col-12 flex-column mx-auto px-md-2 px-0 py-2 rounded`}
+      >
         <Row className="m-0 p-md-2 p-0 text-center">
           <Col>
             <img
@@ -67,7 +72,7 @@ function CreateForm() {
           return (
             <Container
               key={ind + 1}
-              className="col-lg-10 col-12 flex-column mx-auto bg-white px-md-2 px-0 py-2 rounded mt-1"
+              className={`${themes.bg4} ${themes.text} col-lg-10 col-12 flex-column mx-auto px-md-2 px-0 py-2 rounded mt-1`}
             >
               <Row className="m-0 ps-3 py-1">
                 <p className="m-0">
@@ -87,8 +92,8 @@ function CreateForm() {
             className="p-0 d-flex align-items-center justify-content-center ms-auto mt-1 mx-auto col-md-2 col-sm-4 col-12"
             style={{
               height: 35,
-              backgroundColor: "#0CCA98",
-              border: "#0CCA98",
+              backgroundColor: themes.submit,
+              border: themes.submit,
             }}
             type="button"
             onClick={() => createNewForm()}
@@ -98,8 +103,14 @@ function CreateForm() {
           </Button>
         ))}
 
-      <Container className="col-lg-6 col-md-8 col-12 flex-column mx-auto bg-white px-md-2 px-0 py-2 rounded mt-2">
-        <Comments templateId={templateData.response.template_id} user={user} />
+      <Container
+        className={`${themes.bg4} ${themes.text} col-lg-6 col-md-8 col-12 flex-column mx-auto px-md-2 px-0 py-2 rounded mt-2`}
+      >
+        <Comments
+          templateId={templateData.response.template_id}
+          user={user}
+          themes={themes}
+        />
       </Container>
     </>
   );

@@ -4,13 +4,15 @@ import ToggleButton from "react-bootstrap/esm/ToggleButton";
 import Collapse from "react-bootstrap/esm/Collapse";
 import addTemplate from "../../../assets/add.jpg";
 import TemplateCard from "./TemplateCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import templateApi from "../../../utils/templateApi";
 import questionApi from "../../../utils/questionApi";
 import { toast } from "react-toastify";
+import { ThemeContext } from "../../../contexts/ThemeContext";
 
 function Templates({ templates, user }) {
+  const themes = useContext(ThemeContext);
   const [check, setCheck] = useState(false);
   const [popular, setPopular] = useState([]);
   const navigate = useNavigate();
@@ -43,16 +45,18 @@ function Templates({ templates, user }) {
     <>
       <Row
         className="col-11 mx-auto py-3 px-0 rounded-1"
-        style={{ backgroundColor: "#eaeaea" }}
+        style={{ backgroundColor: themes.bg2 }}
       >
         <Row className="justify-content-center align-items-center col-md-10 col-12 mx-auto py-2">
-          <Col className="col-10 fs-5 fw-medium">Latest templates</Col>
+          <Col className={`col-10 fs-5 fw-medium ${themes.text}`}>
+            Latest templates
+          </Col>
           <Col className="col-2">
             <ToggleButton
               className="btn btn-sm m-0 px-1 py-0 float-end"
               id="toggle-check"
               type="checkbox"
-              variant="outline-secondary"
+              variant={themes.button}
               checked={check}
               onChange={() => setCheck(!check)}
             >
@@ -75,7 +79,7 @@ function Templates({ templates, user }) {
                 />
                 <p
                   style={{ height: 30 }}
-                  className="badge text-dark fw-semibold fs-6 text-bg-light w-100 m-0 text-truncate rounded-0 rounded-bottom"
+                  className={`badge ${themes.bg} ${themes.text} fw-semibold fs-6 w-100 m-0 text-truncate rounded-0 rounded-bottom`}
                 >
                   New Template
                 </p>

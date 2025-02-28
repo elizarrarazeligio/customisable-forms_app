@@ -6,12 +6,15 @@ import Form from "react-bootstrap/esm/Form";
 import Question from "./Question";
 import AllowedUsers from "./AllowedUsers";
 import { useLoaderData, useNavigate, useOutletContext } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import templateApi from "../../../../../../utils/templateApi";
 import questionApi from "../../../../../../utils/questionApi";
+import { ThemeContext } from "../../../../../../contexts/ThemeContext";
 
 function Template() {
+  const themes = useContext(ThemeContext);
+
   const [template] = useOutletContext();
   const questionsData = useLoaderData();
   const navigate = useNavigate();
@@ -65,7 +68,10 @@ function Template() {
   return (
     <>
       <Form onSubmit={(e) => handleTemplateSubmit(e)}>
-        <Container fluid className="bg-white px-2 pt-2 pb-4  rounded mb-1">
+        <Container
+          fluid
+          className={`${themes.bg3} px-2 pt-2 pb-4 rounded mb-1`}
+        >
           <Form.Group className="my-2 mx-sm-4 mx-3" id="title">
             <Form.Control
               value={title}
@@ -73,7 +79,7 @@ function Template() {
               type="text"
               name="title"
               placeholder="Template Title"
-              className="fw-bold fs-3 border-0 border-bottom border-2 rounded-0"
+              className={`${themes.bg3} ${themes.text} fw-bold fs-3 border-0 border-bottom border-2 rounded-0`}
               required
             />
           </Form.Group>
@@ -85,7 +91,7 @@ function Template() {
               rows={1}
               name="description"
               placeholder="Template description"
-              className="fw-semibold border-0 border-bottom border-2 rounded-0"
+              className={`${themes.bg3} ${themes.text} fw-semibold border-0 border-bottom border-2 rounded-0`}
               required
             />
           </Form.Group>
@@ -96,7 +102,7 @@ function Template() {
               type="url"
               name="image"
               placeholder="Image URL (optional)"
-              className="border-0 border-bottom border-1 rounded-0"
+              className={`${themes.bg3} ${themes.text} border-0 border-bottom border-1 rounded-0`}
             />
           </Form.Group>
 
@@ -105,6 +111,7 @@ function Template() {
             setPriv={setPriv}
             allowedUsers={allowedUsers}
             setAllowedUsers={setAllowedUsers}
+            themes={themes}
           />
         </Container>
 
@@ -119,6 +126,7 @@ function Template() {
               submitted={submitted}
               setSubmitted={setSubmitted}
               setChange={setChange}
+              themes={themes}
             />
           );
         })}
@@ -139,8 +147,8 @@ function Template() {
               className="p-0 d-flex align-items-center justify-content-center mt-1 w-100"
               style={{
                 height: 35,
-                backgroundColor: "#CBC3E3",
-                border: "#CBC3E3",
+                backgroundColor: themes.submit2,
+                border: themes.submit2,
               }}
               type="button"
               onClick={() => navigate(`/${template.hash}/form`)}
@@ -154,8 +162,8 @@ function Template() {
               className="p-0 d-flex align-items-center justify-content-center mt-1 w-100"
               style={{
                 height: 35,
-                backgroundColor: "#0CCA98",
-                border: "#0CCA98",
+                backgroundColor: themes.submit,
+                border: themes.submit,
               }}
               type="submit"
             >

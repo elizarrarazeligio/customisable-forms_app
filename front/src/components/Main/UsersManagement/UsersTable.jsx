@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import userApi from "../../../utils/userApi.js";
 
-function UsersTable({ users, check, setCheck, checkAll, setCheckAll }) {
+function UsersTable({ users, check, setCheck, checkAll, setCheckAll, themes }) {
   const handleCheckUser = (e) => {
     userApi.checkUser(e.currentTarget.id).then(() => setCheck(!check));
   };
@@ -16,7 +16,7 @@ function UsersTable({ users, check, setCheck, checkAll, setCheckAll }) {
 
   return (
     <>
-      <Table striped className="table-sm">
+      <Table striped className="table-sm" variant={themes.table}>
         <thead>
           <tr>
             <th className="col-1">

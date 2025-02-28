@@ -11,7 +11,7 @@ import InputGroup from "react-bootstrap/esm/InputGroup";
 import commentApi from "../../../../utils/commentApi";
 import likeApi from "../../../../utils/likeApi";
 
-function Comments({ templateId, user }) {
+function Comments({ templateId, user, themes }) {
   const [comments, setComments] = useState([]);
   const [description, setDescription] = useState("");
   const [commentsChange, setCommentsChange] = useState(false);
@@ -62,12 +62,14 @@ function Comments({ templateId, user }) {
       <Row className="m-0 p-0 d-flex align-items-center text-center">
         <Col className="col-1 col-sm-3" />
         <Col className="d-flex align-items-center justify-content-sm-center gap-2 col-sm-6 col-8 ">
-          <span className="text-muted fw-semibold">Display comments</span>
+          <span className={`${themes.text2} fw-semibold`}>
+            Display comments
+          </span>
           <ToggleButton
             className="btn btn-sm m-0 px-1 py-0"
             id="toggle1"
             type="checkbox"
-            variant="outline-secondary"
+            variant={themes.button}
             checked={check}
             onChange={() => setCheck(!check)}
           >
@@ -100,10 +102,11 @@ function Comments({ templateId, user }) {
                   comment={comment}
                   user={user}
                   setCommentsChange={setCommentsChange}
+                  themes={themes}
                 />
               ))
             ) : (
-              <h5 className="text-center text-muted mb-3">
+              <h5 className={`${themes.text2} text-center mb-3`}>
                 No comments added yet
               </h5>
             )}
@@ -118,7 +121,7 @@ function Comments({ templateId, user }) {
                     onChange={(e) => setDescription(e.target.value)}
                   />
                   <Button
-                    variant="secondary"
+                    variant={themes.button2}
                     type="button"
                     onClick={() => handleCommentSubmit()}
                     disabled={description ? false : true}

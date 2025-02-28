@@ -4,9 +4,11 @@ import Templates from "./Templates";
 import { UsersContext } from "../../../contexts/UsersContext";
 import { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import { ThemeContext } from "../../../contexts/ThemeContext";
 
 function HomePage() {
   const { user } = useContext(UsersContext);
+  const themes = useContext(ThemeContext);
   const templatesData = useLoaderData();
   const [allTemplates, setAllTemplates] = useState(templatesData);
 
@@ -16,7 +18,7 @@ function HomePage() {
 
   return (
     <>
-      <Container fluid className="bg-white px-2 py-4">
+      <Container fluid className={`${themes.bg3} px-2 py-4`}>
         <Row className="m-0">
           <Templates templates={allTemplates} user={user} />
         </Row>

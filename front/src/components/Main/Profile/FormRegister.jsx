@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import formApi from "../../../utils/formApi";
 
-function FormRegister({ form, setManageChange }) {
+function FormRegister({ form, setManageChange, themes }) {
   const navigate = useNavigate();
 
   const handleDeleteTemplate = (e) => {
@@ -26,7 +26,7 @@ function FormRegister({ form, setManageChange }) {
           ${form.created_at.slice(11, 19)}`}
         </td>
         <td onClick={(e) => handleDeleteTemplate(e)}>
-          <CloseButton></CloseButton>
+          <CloseButton variant={themes.close} />
         </td>
       </tr>
     </>

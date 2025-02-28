@@ -12,7 +12,7 @@ function PositiveIntegers({ answers }) {
           className="bg-light m-0 rounded-2 col-12 d-flex align-items-center justify-content-center"
           style={{ height: 75 }}
         >
-          <p className="h1 fw-bold" style={{ fontSize: "3.5rem" }}>
+          <p className="h1 fw-bold text-dark" style={{ fontSize: "3.5rem" }}>
             {array.length > 0 ? (sum / array.length).toFixed(2) : ""}
           </p>
         </div>

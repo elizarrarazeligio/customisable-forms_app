@@ -4,7 +4,7 @@ import { Bar } from "react-chartjs-2";
 import { useState } from "react";
 Chart.register(CategoryScale);
 
-function Checkboxes({ answers }) {
+function Checkboxes({ answers, themes }) {
   const [chartData, setChartData] = useState({
     labels: answers.map((answer) => answer.option),
     datasets: [
@@ -42,6 +42,7 @@ function Checkboxes({ answers }) {
             x: {
               display: true,
               ticks: {
+                color: themes.labels,
                 font: {
                   size: "8px",
                 },
@@ -56,11 +57,19 @@ function Checkboxes({ answers }) {
                 },
               },
             },
+            y: {
+              ticks: {
+                color: themes.labels,
+                font: {
+                  size: "8px",
+                },
+              },
+            },
           },
         }}
       />
       <p
-        className="m-0 p-0 text-muted fw-semibold"
+        className={`${themes.text2} m-0 p-0 fw-semibold`}
         style={{ fontSize: "0.6rem" }}
       >
         Hover on bars from Bar Char to view the option's votes.

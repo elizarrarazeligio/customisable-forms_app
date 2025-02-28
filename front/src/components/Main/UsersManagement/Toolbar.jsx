@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
 import userApi from "../../../utils/userApi.js";
 
-function Toolbar({ setStatus }) {
+function Toolbar({ setStatus, themes }) {
   const handleClickStatus = (status) => {
     userApi
       .setUserStatus(status)
@@ -39,7 +39,8 @@ function Toolbar({ setStatus }) {
     <>
       <Navbar
         expand="lg"
-        className="bg-secondary border-secondary border border-3 px-1 py-1 d-flex justify-content-between rounded-2"
+        className="px-2 py-2 d-flex justify-content-between rounded-top-2"
+        style={{ backgroundColor: themes.bg2 }}
       >
         <div className="d-flex">
           <Button

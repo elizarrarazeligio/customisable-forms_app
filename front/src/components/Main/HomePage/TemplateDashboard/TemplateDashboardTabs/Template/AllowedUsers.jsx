@@ -7,7 +7,13 @@ import userApi from "../../../../../../utils/userApi";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-function AllowedUsers({ priv, setPriv, allowedUsers, setAllowedUsers }) {
+function AllowedUsers({
+  priv,
+  setPriv,
+  allowedUsers,
+  setAllowedUsers,
+  themes,
+}) {
   const [users, setUsers] = useState([]);
 
   const addAllowedUser = (e) => {
@@ -26,7 +32,6 @@ function AllowedUsers({ priv, setPriv, allowedUsers, setAllowedUsers }) {
   };
 
   const deleteAllowedUser = (ind) => {
-    // setEmails([...emails.filter((email, index) => index != ind)]);
     setAllowedUsers([...allowedUsers.filter((user, index) => index != ind)]);
   };
 
@@ -54,7 +59,7 @@ function AllowedUsers({ priv, setPriv, allowedUsers, setAllowedUsers }) {
                 ))}
             </datalist>
 
-            <DropdownButton variant="outline-secondary" title="allowed users">
+            <DropdownButton variant={themes.button} title="allowed users">
               {allowedUsers?.map((email, ind) => (
                 <Dropdown.Item
                   className="py-0 d-flex justify-content-between align-items-center"

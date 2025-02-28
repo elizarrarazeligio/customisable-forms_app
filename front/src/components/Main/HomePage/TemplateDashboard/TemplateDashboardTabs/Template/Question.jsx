@@ -17,6 +17,7 @@ function Question({
   submitted,
   setSubmitted,
   setChange,
+  themes,
 }) {
   const [questionTitle, setQuestionTitle] = useState(question.title);
   const [questionDescription, setQuestionDescription] = useState(
@@ -56,7 +57,7 @@ function Question({
 
   return (
     <>
-      <Container fluid className="bg-white p-2 mb-1 rounded">
+      <Container fluid className={`${themes.bg3} p-2 mb-1 rounded`}>
         <Row className="mx-sm-4 mx-1">
           <Col className="col-12 col-md-7">
             <Form.Group className="my-2">

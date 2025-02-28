@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import templateApi from "../../../utils/templateApi";
 
-function TemplateRegister({ template, setManageChange }) {
+function TemplateRegister({ template, setManageChange, themes }) {
   const navigate = useNavigate();
 
   const handleDeleteTemplate = (e) => {
@@ -26,7 +26,7 @@ function TemplateRegister({ template, setManageChange }) {
           ${template.created_at.slice(11, 19)}`}
         </td>
         <td onClick={(e) => handleDeleteTemplate(e)}>
-          <CloseButton></CloseButton>
+          <CloseButton variant={themes.close} />
         </td>
       </tr>
     </>

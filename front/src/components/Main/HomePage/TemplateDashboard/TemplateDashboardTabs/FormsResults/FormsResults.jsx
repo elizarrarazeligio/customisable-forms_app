@@ -3,14 +3,16 @@ import Row from "react-bootstrap/esm/Row";
 import Table from "react-bootstrap/esm/Table";
 import FormResultRegister from "./FormResultRegister";
 import { useLoaderData } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ThemeContext } from "../../../../../../contexts/ThemeContext";
 
 function FormsResults() {
   const answeredForms = useLoaderData();
   const [forms, setForms] = useState(answeredForms.response.forms);
+  const themes = useContext(ThemeContext);
 
   return (
-    <Container fluid className="bg-white px-2 pt-2 pb-4 rounded mb-1">
+    <Container fluid className={`${themes.bg3} px-2 pt-2 pb-4 rounded mb-1`}>
       <Row className="mx-auto pt-4 px-0 col-lg-10 col-11">
         <h2 className="text-center mb-3">Answered Forms</h2>
 
@@ -25,7 +27,7 @@ function FormsResults() {
       </Row>
 
       <Row className="overflow-auto mx-auto pt-2 px-0 col-lg-10 col-11 mb-2">
-        <Table hover striped>
+        <Table hover striped variant={themes.table}>
           <thead>
             <tr>
               <th className="col-1"></th>

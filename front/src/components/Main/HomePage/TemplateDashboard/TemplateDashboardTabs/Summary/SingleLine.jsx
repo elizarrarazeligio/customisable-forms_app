@@ -1,10 +1,10 @@
 import Row from "react-bootstrap/esm/Row";
 import Table from "react-bootstrap/esm/Table";
 
-function SingleLine({ answers }) {
+function SingleLine({ answers, themes }) {
   return (
     <Row className="mx-auto col-12 col-sm-9 col-md-6">
-      <Table bordered striped className="table-sm m-0">
+      <Table bordered striped className="table-sm m-0" variant={themes.table}>
         <thead>
           <tr>
             <th

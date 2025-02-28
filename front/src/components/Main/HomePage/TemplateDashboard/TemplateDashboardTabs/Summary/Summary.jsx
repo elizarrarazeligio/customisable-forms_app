@@ -5,16 +5,19 @@ import MultipleLine from "./MultipleLine";
 import PositiveIntegers from "./PositiveIntegers";
 import Checkboxes from "./Checkboxes";
 import { useLoaderData } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ThemeContext } from "../../../../../../contexts/ThemeContext";
 
 function Summary() {
   const templateQuestions = useLoaderData();
+  const themes = useContext(ThemeContext);
+
   const [questions, setQuestions] = useState(
     templateQuestions.response.questions
   );
 
   return (
-    <Container fluid className="bg-white px-2 pt-2 pb-4 rounded mb-1">
+    <Container fluid className={`${themes.bg3} px-2 pt-2 pb-4 rounded mb-1`}>
       <Row className="mx-auto pt-4 px-0 col-lg-10 col-11">
         <h2 className="text-center mb-3">Results Summary</h2>
 
@@ -34,13 +37,13 @@ function Summary() {
 
           <Row className="mx-auto p-0 mb-4 col-10 d-flex flex-column align-items-center text-center justify-content-center">
             {question.field == "Single-Line" ? (
-              <SingleLine answers={question.answers} />
+              <SingleLine answers={question.answers} themes={themes} />
             ) : question.field == "Multiple-Line" ? (
               <MultipleLine answers={question.answers} />
             ) : question.field == "Positive Integers" ? (
               <PositiveIntegers answers={question.answers} />
             ) : (
-              <Checkboxes answers={question.checkboxes} />
+              <Checkboxes answers={question.checkboxes} themes={themes} />
             )}
           </Row>
         </Container>

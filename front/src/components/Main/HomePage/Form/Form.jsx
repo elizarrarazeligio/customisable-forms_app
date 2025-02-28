@@ -11,9 +11,11 @@ import { toast } from "react-toastify";
 import formApi from "../../../../utils/formApi";
 import answerApi from "../../../../utils/answerApi";
 import topicApi from "../../../../utils/topicApi";
+import { ThemeContext } from "../../../../contexts/ThemeContext";
 
 function Form() {
   const { user } = useContext(UsersContext);
+  const themes = useContext(ThemeContext);
   const formData = useLoaderData();
 
   const [formInfo, setFormInfo] = useState(formData.response);
@@ -51,7 +53,9 @@ function Form() {
       className="col-lg-10 col-12 mx-auto d-flex flex-column align-items-center"
       onSubmit={(e) => handleFormSubmit(e)}
     >
-      <Container className="flex-column bg-white px-2 py-2 rounded">
+      <Container
+        className={`${themes.bg4} ${themes.text} flex-column px-2 py-2 rounded`}
+      >
         <Row className="m-0 p-md-2 p-0 text-center">
           <h2 className="m-0 pt-1 pb-3">
             {formInfo && formInfo.template.title}
@@ -136,8 +140,8 @@ function Form() {
             className="p-0 d-flex align-items-center justify-content-center ms-auto mt-1 col-md-3 col-sm-6 col-12 float-end"
             style={{
               height: 35,
-              backgroundColor: "#0CCA98",
-              border: "#0CCA98",
+              backgroundColor: themes.submit,
+              border: themes.submit,
             }}
             type="submit"
           >
