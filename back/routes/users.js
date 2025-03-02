@@ -1,5 +1,10 @@
 import { Router } from "express";
 import { literal } from "sequelize";
+import {
+  getAccountInfo,
+  createNewAccount,
+  salesforceLogout,
+} from "../salesforce.js";
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -38,6 +43,10 @@ users.post("/login", (req, res) => {
       if (!passwordValid) throw "Invalid password.";
       if (user.status === true) throw "Blocked account.";
 
+      // Getting user information from salesforce
+      const account = await getAccountInfo(email);
+      if (account.status == "error") throw account.message;
+
       const token = jwt.sign(
         {
           id: user.user_id,
@@ -45,6 +54,7 @@ users.post("/login", (req, res) => {
           first_name: user.first_name,
           status: user.status,
           admin: user.admin,
+          account: account.response[0],
         },
         process.env.JWT_SECRET,
         { expiresIn: "1h" }
@@ -100,7 +110,10 @@ users.post("/register", async (req, res) => {
     email: email,
     password: hashedPasword,
   })
-    .then((user) => {
+    .then(async (user) => {
+      // Create new account in salesforce
+      await createNewAccount(email);
+
       res.send({
         status: "success",
         message: "User registered successfully!",
@@ -222,6 +235,7 @@ users.delete("/", (req, res) => {
 
 // ============== POST User Logout ==============
 users.post("/logout", (req, res) => {
+  salesforceLogout();
   res
     .clearCookie("token")
     .send({ status: "succes", message: "Logout successful!" });

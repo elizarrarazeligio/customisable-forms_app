@@ -5,23 +5,65 @@ const conn = new jsforce.Connection({
   loginUrl: "https://login.salesforce.com",
 });
 
-conn
-  .login(
-    process.env.SF_USERNAME,
-    process.env.SF_PASSWORD + process.env.SF_SECURITY_TOKEN
-  )
-  .then((res) => {
-    console.log("Successfully logged in!");
+// ============ LOGIN to Salesforce =============
+const salesforceLogin = async () => {
+  await conn
+    .login(
+      process.env.SF_USERNAME,
+      process.env.SF_PASSWORD + process.env.SF_SECURITY_TOKEN
+    )
+    .then(() => {
+      console.log("Successfully logged in!");
+    })
+    .catch((err) => console.error("Failed to log in to Salesforce: ", err));
+};
 
-    conn
-      .query("SELECT Id, Name FROM Account LIMIT 20")
-      .then((res) => {
-        const { records } = res;
-        console.log(`Fetched ${records.length} records:`);
-        records.forEach((record) =>
-          console.log(`- ${record.Name} (${record.Id})`)
-        );
-      })
-      .catch((err) => console.error("Failed to run SOQL query: ", err));
-  })
-  .catch((err) => console.error("Failed to log in to Salesforce: ", err));
+// ============ LOGOUT to Salesforce ============
+const salesforceLogout = async () => {
+  await conn
+    .logout()
+    .then(() => {
+      console.log("Successfully logged out!");
+    })
+    .catch((err) => console.error("Failed to log out: ", err));
+};
+
+// ============== GET Account Info ==============
+const getAccountInfo = async (email) => {
+  await salesforceLogin();
+  return await conn
+    .sobject("Account")
+    .find({ Name: email }, [
+      "Id",
+      "Type",
+      "Name",
+      "BillingCountry",
+      "BillingState",
+      "BillingCity",
+      "BillingPostalCode",
+      "Phone",
+    ])
+    .then((res) => {
+      if (res.length == 0) throw "No user found at salesforce.";
+      return { status: "success", response: res };
+    })
+    .catch((err) => {
+      salesforceLogout();
+      return { status: "error", message: err };
+    });
+};
+
+// ============== POST New Account ==============
+const createNewAccount = async (email) => {
+  await salesforceLogin();
+  await conn
+    .sobject("Account")
+    .create({ Name: email, Type: "User" })
+    .then((res) => console.log({ status: "success", response: res }))
+    .catch((err) => {
+      return { status: "error", message: err };
+    })
+    .finally(async () => await salesforceLogout());
+};
+
+export { getAccountInfo, createNewAccount, salesforceLogout };
