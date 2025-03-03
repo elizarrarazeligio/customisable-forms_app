@@ -3,6 +3,7 @@ import { literal } from "sequelize";
 import {
   getAccountInfo,
   createNewAccount,
+  deleteAccount,
   salesforceLogout,
 } from "../salesforce.js";
 import User from "../models/User.js";
@@ -216,7 +217,12 @@ users.patch("/admin", (req, res) => {
 });
 
 // ============ DELETE Checked User =============
-users.delete("/", (req, res) => {
+users.delete("/", async (req, res) => {
+  const users = await User.findAll({
+    where: { checked: true },
+    attributes: ["email"],
+  });
+
   User.destroy({
     where: {
       checked: true,
@@ -224,6 +230,12 @@ users.delete("/", (req, res) => {
   })
     .then((rows) => {
       if (rows == 0) throw "Select at least one register.";
+
+      // Delete users in Salesforce
+      users.map(async (user) => {
+        await deleteAccount(user.email);
+      });
+
       res.send({
         status: "success",
         message: "User(s) successfully deleted.",
