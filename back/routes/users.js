@@ -3,6 +3,7 @@ import { literal } from "sequelize";
 import {
   getAccountInfo,
   createNewAccount,
+  updateAccount,
   deleteAccount,
   salesforceLogout,
 } from "../salesforce.js";
@@ -123,6 +124,40 @@ users.post("/register", async (req, res) => {
     })
     .catch((err) =>
       res.status(400).send({ status: "error", message: err.errors[0].message })
+    );
+});
+
+// ============ PATCH Update Account ============
+users.patch("/:id/account", async (req, res) => {
+  const { id } = req.params;
+  const { country, state, city, postal, phone } = req.body;
+
+  const email = await User.findOne({
+    where: { user_id: id },
+    attributes: ["email"],
+  });
+
+  // Update account information in Salesforce
+  await updateAccount(email.email, {
+    country,
+    state,
+    city,
+    postal,
+    phone,
+  })
+    .then((result) =>
+      res.send({
+        status: "success",
+        message: "Information updated successfully!",
+        response: result,
+      })
+    )
+    .catch((err) =>
+      res.status(400).send({
+        status: "error",
+        message: "Not possible to update, try again later.",
+        response: err,
+      })
     );
 });
 

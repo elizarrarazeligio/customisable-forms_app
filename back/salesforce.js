@@ -55,7 +55,7 @@ const getAccountInfo = async (email) => {
 
 // =============== GET Account Id ===============
 const getUserId = async (email) => {
-  return await conn.sobject("Account").find({ Name: email }, ["Id", "Name"]);
+  return await conn.sobject("Account").find({ Name: email }, ["Id"]);
 };
 
 // ============== POST New Account ==============
@@ -71,6 +71,19 @@ const createNewAccount = async (email) => {
     .finally(async () => await salesforceLogout());
 };
 
+// ============= PATCH Account Info =============
+const updateAccount = async (email, data) => {
+  const userId = await getUserId(email);
+  await conn.sobject("Account").update({
+    Id: userId[0].Id,
+    BillingCountry: data.country,
+    BillingState: data.state,
+    BillingCity: data.city,
+    BillingPostalCode: data.postal,
+    Phone: data.phone,
+  });
+};
+
 // =============== DELETE Account ===============
 const deleteAccount = async (email) => {
   const userId = await getUserId(email);
@@ -80,4 +93,10 @@ const deleteAccount = async (email) => {
     .then((res) => console.log({ status: "success", response: res }));
 };
 
-export { getAccountInfo, createNewAccount, deleteAccount, salesforceLogout };
+export {
+  getAccountInfo,
+  createNewAccount,
+  updateAccount,
+  deleteAccount,
+  salesforceLogout,
+};

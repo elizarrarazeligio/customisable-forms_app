@@ -1,7 +1,7 @@
 import Form from "react-bootstrap/esm/Form";
 import Col from "react-bootstrap/esm/Col";
 
-function Input({ type, label, option, value }) {
+function Input({ type, label, option, value, setter }) {
   return (
     <>
       {option == 1 ? (
@@ -17,6 +17,8 @@ function Input({ type, label, option, value }) {
               size="sm"
               disabled={type == "email" ? true : false}
               value={value}
+              onChange={(e) => setter(e.target.value)}
+              required
             />
           </Col>
         </Form.Group>
@@ -26,7 +28,13 @@ function Input({ type, label, option, value }) {
             <Form.Label className="m-0 p-0 pb-1" style={{ fontSize: "0.9rem" }}>
               {label}
             </Form.Label>
-            <Form.Control type={type} size="sm" value={value} />
+            <Form.Control
+              type={type}
+              size="sm"
+              value={value}
+              onChange={(e) => setter(e.target.value)}
+              required
+            />
           </Col>
         </Form.Group>
       )}

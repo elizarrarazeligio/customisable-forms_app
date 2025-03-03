@@ -63,13 +63,30 @@ class UserApi {
     });
   }
 
+  updateAccountInfo(id, data) {
+    return fetch(`${this._baseUrl}/users/${id}/account`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        country: data.country,
+        state: data.state,
+        city: data.city,
+        postal: data.postal,
+        phone: data.phone,
+      }),
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
   checkUser(id) {
     return fetch(`${this._baseUrl}/users/${id}/check`, {
       method: "PATCH",
       headers: this._headers,
     }).then((res) => {
       if (res.ok) return res.json();
-      return Promise.reject(`Error: ${res.status}`);
+      return Promise.reject(res.json());
     });
   }
 
