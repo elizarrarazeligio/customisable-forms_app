@@ -8,7 +8,7 @@ class ErrorApi {
     return fetch(`${this._baseUrl}/errors`, {
       method: "POST",
       headers: this._headers,
-      credentials: "include",
+      credentials: "same-origin",
       body: JSON.stringify({
         path: data.path,
         summary: data.summary,
