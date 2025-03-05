@@ -12,6 +12,7 @@ import topics from "./routes/topics.js";
 import checkboxes from "./routes/checkboxes.js";
 import contexts from "./routes/contexts.js";
 import likes from "./routes/likes.js";
+import errors from "./routes/errors.js";
 import "dotenv/config";
 
 const app = express();
@@ -34,6 +35,7 @@ app.use("/checkboxes", checkboxes);
 app.use("/topics", topics);
 app.use("/likes", likes);
 app.use("/contexts", contexts);
+app.use("/errors", errors);
 
 app.listen(process.env.API_PORT, () => {
   console.log("App listening at port:", process.env.API_PORT);
