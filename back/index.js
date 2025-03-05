@@ -22,7 +22,7 @@ const allowedOrigins = [
   "https://customisable-forms-app-front.vercel.app",
   "https://customisable-app.atlassian.net",
 ];
-app.use(cors());
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(bodyParser.json({ origin: allowedOrigins }));
 app.use(cookieParser());
 
