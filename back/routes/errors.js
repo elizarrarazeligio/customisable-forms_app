@@ -7,7 +7,7 @@ const errors = Router();
 
 // =========== POST New Error Ticket ============
 errors.post("/", async (req, res) => {
-  const { user, path, summary, severity } = req.body;
+  const { path, summary, severity } = req.body;
 
   let title = "";
   let hash = "";

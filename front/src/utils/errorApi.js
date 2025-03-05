@@ -9,7 +9,7 @@ class ErrorApi {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        user: data.user,
+        // user: data.user,
         path: data.path,
         summary: data.summary,
         severity: data.severity,
