@@ -15,7 +15,6 @@ function Support({ showModal, handleClose }) {
 
   const handleErrorSubmit = (e) => {
     e.preventDefault();
-    console.log(location.pathname);
     errorApi
       .postIssueTicket({ path: location.pathname, summary, severity })
       .then((res) => {

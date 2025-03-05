@@ -31,15 +31,16 @@ errors.post("/", async (req, res) => {
     title = `Error at ${path}`;
   }
 
-  postNewIssue(title, summary, severity)
-    .then((result) =>
-      res.send({
-        status: "success",
-        message: "Ticket sent succesfully!",
-        result,
-      })
-    )
-    .catch((err) => err.then((result) => res.status(400).send(result)));
+  res.send({ message: title });
+  // postNewIssue(title, summary, severity)
+  //   .then((result) =>
+  //     res.send({
+  //       status: "success",
+  //       message: "Ticket sent succesfully!",
+  //       result,
+  //     })
+  //   )
+  //   .catch((err) => err.then((result) => res.status(400).send(result)));
 });
 
 export default errors;
