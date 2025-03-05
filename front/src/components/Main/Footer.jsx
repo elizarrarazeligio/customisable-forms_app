@@ -1,12 +1,18 @@
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
+import Support from "./Support";
 import formLogo from "../../assets/form_logo.png";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
 function Footer() {
   const themes = useContext(ThemeContext);
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShow = () => setShowModal(true);
+  const handleClose = () => setShowModal(false);
 
   return (
     <>
@@ -28,36 +34,36 @@ function Footer() {
               &#169; 2025 Eligio Elizarraraz
             </p>
           </Col>
-          <Row className="m-0 p-0 d-flex align-items-center justify-content-sm-end justify-content-center gap-1 col-sm-4 col-12 mt-1">
-            <Col
-              className={`${themes.text2} mx-3 d-flex align-items-center gap-1 col-sm-3 col-12 justify-content-sm-end justify-content-center`}
+          <Col className="m-0 p-0 d-flex align-items-center justify-content-sm-end justify-content-center gap-1 col-sm-4 col-12 mt-1">
+            <div
+              className={`${themes.text2} me-3 d-flex align-items-center gap-1`}
+              style={{ cursor: "pointer" }}
+              onClick={handleShow}
             >
-              <i className="bi bi-question-circle-fill fs-6 opacity-75"></i>
               <span className="fw-semibold" style={{ fontSize: 12 }}>
-                Support
+                Help
               </span>
-            </Col>
+              <i className={`bi bi-question-circle-fill fs-6 opacity-75`}></i>
+            </div>
 
-            <Col className="col-12 col-sm-6 col-md-4 text-sm-end text-center mx-0 px-0">
-              <a href="https://www.instagram.com/elizarrarazeligio/">
-                <i
-                  className={`bi bi-instagram fs-4 ${themes.text2} opacity-75`}
-                ></i>
-              </a>
-              <a href="https://github.com/elizarrarazeligio">
-                <i
-                  className={`bi bi-github fs-4 ${themes.text2} opacity-75`}
-                ></i>
-              </a>
-              <a href="https://www.linkedin.com/in/elizarrarazeligio/">
-                <i
-                  className={`bi bi-linkedin fs-4 ${themes.text2} opacity-75`}
-                ></i>
-              </a>
-            </Col>
-          </Row>
+            <a href="https://www.instagram.com/elizarrarazeligio/">
+              <i
+                className={`bi bi-instagram fs-4 ${themes.text2} opacity-75`}
+              ></i>
+            </a>
+            <a href="https://github.com/elizarrarazeligio">
+              <i className={`bi bi-github fs-4 ${themes.text2} opacity-75`}></i>
+            </a>
+            <a href="https://www.linkedin.com/in/elizarrarazeligio/">
+              <i
+                className={`bi bi-linkedin fs-4 ${themes.text2} opacity-75`}
+              ></i>
+            </a>
+          </Col>
         </Row>
       </Container>
+
+      <Support showModal={showModal} handleClose={handleClose} />
     </>
   );
 }
