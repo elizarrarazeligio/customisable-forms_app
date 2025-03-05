@@ -28,21 +28,34 @@ function Footer() {
               &#169; 2025 Eligio Elizarraraz
             </p>
           </Col>
-          <Col className="m-0 p-0 d-flex align-items-center justify-content-sm-end justify-content-center gap-1 col-sm-4 col-12 mt-1">
-            <a href="https://www.instagram.com/elizarrarazeligio/">
-              <i
-                className={`bi bi-instagram fs-4 ${themes.text2} opacity-75`}
-              ></i>
-            </a>
-            <a href="https://github.com/elizarrarazeligio">
-              <i className={`bi bi-github fs-4 ${themes.text2} opacity-75`}></i>
-            </a>
-            <a href="https://www.linkedin.com/in/elizarrarazeligio/">
-              <i
-                className={`bi bi-linkedin fs-4 ${themes.text2} opacity-75`}
-              ></i>
-            </a>
-          </Col>
+          <Row className="m-0 p-0 d-flex align-items-center justify-content-sm-end justify-content-center gap-1 col-sm-4 col-12 mt-1">
+            <Col
+              className={`${themes.text2} mx-3 d-flex align-items-center gap-1 col-sm-3 col-12 justify-content-sm-end justify-content-center`}
+            >
+              <i className="bi bi-question-circle-fill fs-6 opacity-75"></i>
+              <span className="fw-semibold" style={{ fontSize: 12 }}>
+                Support
+              </span>
+            </Col>
+
+            <Col className="col-12 col-sm-6 col-md-4 text-sm-end text-center mx-0 px-0">
+              <a href="https://www.instagram.com/elizarrarazeligio/">
+                <i
+                  className={`bi bi-instagram fs-4 ${themes.text2} opacity-75`}
+                ></i>
+              </a>
+              <a href="https://github.com/elizarrarazeligio">
+                <i
+                  className={`bi bi-github fs-4 ${themes.text2} opacity-75`}
+                ></i>
+              </a>
+              <a href="https://www.linkedin.com/in/elizarrarazeligio/">
+                <i
+                  className={`bi bi-linkedin fs-4 ${themes.text2} opacity-75`}
+                ></i>
+              </a>
+            </Col>
+          </Row>
         </Row>
       </Container>
     </>
