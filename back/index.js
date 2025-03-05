@@ -20,7 +20,6 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:3000",
   "https://customisable-forms-app-front.vercel.app",
-  "https://customisable-app.atlassian.net/rest/api/3/*",
 ];
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(bodyParser.json({ origin: allowedOrigins }));
