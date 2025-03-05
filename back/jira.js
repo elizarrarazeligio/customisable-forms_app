@@ -2,7 +2,7 @@ import { Version3Client } from "jira.js";
 import "dotenv/config";
 
 const client = new Version3Client({
-  host: process.env.JIRA_URL,
+  host: "https://customisable-app.atlassian.net",
   authentication: {
     basic: {
       email: process.env.JIRA_USER,
