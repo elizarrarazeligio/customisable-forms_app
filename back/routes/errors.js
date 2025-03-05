@@ -36,7 +36,7 @@ errors.post("/", async (req, res) => {
       res.send({
         status: "success",
         message: "Ticket sent succesfully!",
-        result,
+        // result,
       })
     )
     .catch((err) => err.then((result) => res.status(400).send(result)));

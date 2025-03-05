@@ -46,7 +46,6 @@ const body = (title, summary, severity) => {
 };
 
 const postNewIssue = async (title, summary, severity) => {
-  // const bodyInfo = bodyData(title, summary, severity);
   const bodyInfo = body(title, summary, severity);
   return await client.issues.createIssue(bodyInfo);
 };
