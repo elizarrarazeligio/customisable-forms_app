@@ -35,10 +35,10 @@ const bodyData = (title, summary, severity) => `{
   "update": {}
 }`;
 
-const postNewIssue = (title, summary, severity) => {
+const postNewIssue = async (title, summary, severity) => {
   const bodyInfo = bodyData(title, summary, severity);
 
-  return fetch(`${process.env.JIRA_URL}/rest/api/3/issue`, {
+  return await fetch(`${process.env.JIRA_URL}/rest/api/3/issue`, {
     method: "POST",
     headers: {
       Authorization: `Basic ${Buffer.from(
