@@ -47,6 +47,7 @@ const postNewIssue = async (title, summary, severity) => {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
+    credentials: "include",
     body: bodyInfo,
   }).then((res) => {
     if (res.ok) return res.json();
