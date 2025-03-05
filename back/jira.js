@@ -9,6 +9,8 @@ const client = new Version3Client({
       apiToken: process.env.JIRA_TOKEN,
     },
   },
+  credentials: "include",
+  strictSSL: false,
 });
 
 const body = (title, summary, severity) => {
