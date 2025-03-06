@@ -11,7 +11,7 @@ import { UsersContext } from "../../contexts/UsersContext";
 import templateApi from "../../utils/templateApi";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
-function Header({ theme, setTheme }) {
+function Header({ theme, setTheme, removeCookie }) {
   const navigate = useNavigate();
   const { user } = useContext(UsersContext);
   const themes = useContext(ThemeContext);
@@ -49,6 +49,7 @@ function Header({ theme, setTheme }) {
                 handleHide={handleHide}
                 theme={theme}
                 setTheme={setTheme}
+                removeCookie={removeCookie}
               />
               <Navbar.Brand
                 href="/home"

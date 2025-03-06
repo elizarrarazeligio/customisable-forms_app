@@ -6,7 +6,7 @@ import formLogo from "../../assets/form_logo.png";
 import { useContext, useState } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
-function Footer() {
+function Footer({ cookies }) {
   const themes = useContext(ThemeContext);
 
   const [showModal, setShowModal] = useState(false);
@@ -63,7 +63,11 @@ function Footer() {
         </Row>
       </Container>
 
-      <Support showModal={showModal} handleClose={handleClose} />
+      <Support
+        showModal={showModal}
+        handleClose={handleClose}
+        permissions={cookies.permissions?.result}
+      />
     </>
   );
 }

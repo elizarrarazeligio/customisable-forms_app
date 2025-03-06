@@ -3,12 +3,14 @@ import Form from "react-bootstrap/esm/Form";
 import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/esm/Button";
 import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import errorApi from "../../utils/errorApi";
+import { UsersContext } from "../../contexts/UsersContext";
 
-function Support({ showModal, handleClose }) {
+function Support({ showModal, handleClose, permissions }) {
   const location = useLocation();
+  const { user } = useContext(UsersContext);
 
   const [summary, setSummary] = useState("");
   const [severity, setSeverity] = useState(5);
@@ -17,7 +19,12 @@ function Support({ showModal, handleClose }) {
     e.preventDefault();
 
     errorApi
-      .postIssueTicket({ path: location.pathname, summary, severity })
+      .postIssueTicket({
+        path: location.pathname,
+        summary,
+        severity,
+        permissions,
+      })
       .then((res) => {
         toast.success(res.message);
       })
@@ -73,7 +80,18 @@ function Support({ showModal, handleClose }) {
           </Row>
         </Modal.Body>
         <Modal.Footer className="d-flex flex-column justify-content-center">
-          <Button type="submit">Submit</Button>
+          {user && (
+            <a
+              style={{ fontSize: 10 }}
+              href={`https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=4nbPwG5jE9ZaHLHZkCBdxKCV1sBLyZge&scope=read%3Ajira-work%20write%3Ajira-work&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fhome&state=${user.id}&response_type=code&prompt=consent`}
+              className={permissions ? "d-none" : ""}
+            >
+              Access Jira first to enable ticket submitting
+            </a>
+          )}
+          <Button type="submit" disabled={permissions ? false : true}>
+            Submit
+          </Button>
         </Modal.Footer>
       </Form>
     </Modal>

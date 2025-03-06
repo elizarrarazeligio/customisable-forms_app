@@ -29,7 +29,8 @@ function Main() {
       errorApi
         .getPermissions(code[0])
         .then((res) => {
-          setCookie("permissions", res, { maxAge: 3600 });
+          res.status == "success" &&
+            setCookie("permissions", res, { maxAge: 3600 });
         })
         .catch((err) => console.log(err));
   }, []);
@@ -56,9 +57,13 @@ function Main() {
       <ThemeContext.Provider value={themes[theme]}>
         <CookiesProvider defaultSetOptions={{ path: "/" }}>
           <div style={{ minWidth: 375, maxWidth: 1500 }} className="mx-auto">
-            <Header theme={theme} setTheme={setTheme} />
+            <Header
+              theme={theme}
+              setTheme={setTheme}
+              removeCookie={removeCookie}
+            />
             <Outlet />
-            <Footer />
+            <Footer cookies={cookies} />
           </div>
         </CookiesProvider>
       </ThemeContext.Provider>

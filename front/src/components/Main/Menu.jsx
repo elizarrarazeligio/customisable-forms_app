@@ -19,6 +19,7 @@ function Menu(props) {
       .logoutUser()
       .then((res) => {
         navigate("/");
+        props.removeCookie("permissions");
         toast.success(res.message);
       })
       .catch((err) => console.log(err));
