@@ -83,7 +83,7 @@ function Support({ showModal, handleClose, permissions }) {
           {user && (
             <a
               style={{ fontSize: 10 }}
-              href={`https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=4nbPwG5jE9ZaHLHZkCBdxKCV1sBLyZge&scope=read%3Ajira-work%20write%3Ajira-work&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fhome&state=${user.id}&response_type=code&prompt=consent`}
+              href={`https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=4nbPwG5jE9ZaHLHZkCBdxKCV1sBLyZge&scope=read%3Ajira-work%20write%3Ajira-work&redirect_uri=https%3A%2F%2Fcustomisable-forms-app-front.vercel.app%2Fhome&state=${user.id}&response_type=code&prompt=consent`}
               className={permissions ? "d-none" : ""}
             >
               Access Jira first to enable ticket submitting

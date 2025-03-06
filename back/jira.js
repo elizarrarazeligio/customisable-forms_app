@@ -64,7 +64,7 @@ const getToken = async (code) => {
       "client_id": "${process.env.OATH_CLIENT}",
       "client_secret": "${process.env.OATH_SECRET}",
       "code": "${code}",
-      "redirect_uri": "http://localhost:3000/home"
+      "redirect_uri": "https://customisable-forms-app-front.vercel.app/home"
     }`,
   }).then((res) => {
     return res.json();
