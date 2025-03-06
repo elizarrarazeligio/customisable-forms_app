@@ -23,6 +23,7 @@
     "jsforce": "^3.6.6",
     "jsonwebtoken": "^9.0.2",
     "lunr": "^2.3.9",
+    "node-fetch": "^3.3.2",
     "odoo-await": "^3.4.1",
     "pg": "^8.13.1",
     "pg-hstore": "^2.3.4",

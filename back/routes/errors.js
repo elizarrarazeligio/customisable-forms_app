@@ -1,13 +1,27 @@
 import { Router } from "express";
-import { postNewIssue } from "../jira.js";
+import { getPermissions, postNewIssueOAuth } from "../jira.js";
 import Template from "../models/Templates.js";
 import Form from "../models/Forms.js";
 
 const errors = Router();
 
-// =========== POST New Error Ticket ============
+// ============ POST Get Permissions ============
 errors.post("/", async (req, res) => {
-  const { path, summary, severity } = req.body;
+  const { code } = req.body;
+
+  await getPermissions(code)
+    .then((result) =>
+      res.send({
+        status: "success",
+        result,
+      })
+    )
+    .catch((err) => res.send(err));
+});
+
+// =========== POST New Error Ticket ============
+errors.post("/ticket", async (req, res) => {
+  const { path, summary, severity, permissions } = req.body;
 
   let title = "";
   let hash = "";
@@ -31,7 +45,7 @@ errors.post("/", async (req, res) => {
     title = `Error at ${path}`;
   }
 
-  await postNewIssue(title, summary, severity)
+  await postNewIssueOAuth(title, summary, severity, permissions)
     .then((result) =>
       res.send({
         status: "success",
@@ -39,7 +53,7 @@ errors.post("/", async (req, res) => {
         result,
       })
     )
-    .catch((err) => err.then((result) => res.status(400).send(result)));
+    .catch((err) => res.status(400).send(err));
 });
 
 export default errors;

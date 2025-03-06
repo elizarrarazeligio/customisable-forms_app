@@ -4,15 +4,30 @@ class ErrorApi {
     this._headers = headers;
   }
 
-  postIssueTicket(data) {
+  getPermissions(code) {
     return fetch(`${this._baseUrl}/errors`, {
       method: "POST",
       headers: this._headers,
-      credentials: "same-origin",
+      credentials: "include",
+      body: JSON.stringify({
+        code,
+      }),
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return Promise.reject(res.json());
+    });
+  }
+
+  postIssueTicket(data) {
+    return fetch(`${this._baseUrl}/errors/ticket`, {
+      method: "POST",
+      headers: this._headers,
+      credentials: "include",
       body: JSON.stringify({
         path: data.path,
         summary: data.summary,
         severity: data.severity,
+        permissions: data.permissions,
       }),
     }).then((res) => {
       if (res.ok) return res.json();

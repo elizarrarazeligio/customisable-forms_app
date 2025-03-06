@@ -3,7 +3,7 @@ import Form from "react-bootstrap/esm/Form";
 import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/esm/Button";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import errorApi from "../../utils/errorApi";
 
@@ -15,6 +15,7 @@ function Support({ showModal, handleClose }) {
 
   const handleErrorSubmit = (e) => {
     e.preventDefault();
+
     errorApi
       .postIssueTicket({ path: location.pathname, summary, severity })
       .then((res) => {
