@@ -26,8 +26,8 @@ function CreateForm() {
   const createNewForm = () => {
     formApi
       .newForm(formInfo.template_id, user.id)
-      .then((res) => {
-        formInfo.questions
+      .then(async (res) => {
+        await formInfo.questions
           .filter((question) => question.show)
           .map(async (question) => {
             if (question.field !== "Checkboxes") {

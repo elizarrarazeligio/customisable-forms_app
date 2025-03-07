@@ -5,7 +5,6 @@ import {
   createNewAccount,
   updateAccount,
   deleteAccount,
-  salesforceLogout,
 } from "../salesforce.js";
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
@@ -282,7 +281,6 @@ users.delete("/", async (req, res) => {
 
 // ============== POST User Logout ==============
 users.post("/logout", (req, res) => {
-  salesforceLogout();
   res
     .clearCookie("token")
     .send({ status: "succes", message: "Logout successful!" });

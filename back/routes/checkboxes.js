@@ -1,4 +1,4 @@
-import { response, Router } from "express";
+import { Router } from "express";
 import Checkbox from "../models/Checkboxes.js";
 import CheckedAnswers from "../models/CheckedAnswers.js";
 

@@ -99,10 +99,4 @@ const deleteAccount = async (email) => {
     .finally(async () => await salesforceLogout());
 };
 
-export {
-  getAccountInfo,
-  createNewAccount,
-  updateAccount,
-  deleteAccount,
-  salesforceLogout,
-};
+export { getAccountInfo, createNewAccount, updateAccount, deleteAccount };
