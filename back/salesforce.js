@@ -48,9 +48,9 @@ const getAccountInfo = async (email) => {
       return { status: "success", response: res };
     })
     .catch((err) => {
-      salesforceLogout();
       return { status: "error", message: err };
-    });
+    })
+    .finally(async () => await salesforceLogout());
 };
 
 // =============== GET Account Id ===============
@@ -73,24 +73,30 @@ const createNewAccount = async (email) => {
 
 // ============= PATCH Account Info =============
 const updateAccount = async (email, data) => {
+  await salesforceLogin();
   const userId = await getUserId(email);
-  await conn.sobject("Account").update({
-    Id: userId[0].Id,
-    BillingCountry: data.country,
-    BillingState: data.state,
-    BillingCity: data.city,
-    BillingPostalCode: data.postal,
-    Phone: data.phone,
-  });
+  await conn
+    .sobject("Account")
+    .update({
+      Id: userId[0].Id,
+      BillingCountry: data.country,
+      BillingState: data.state,
+      BillingCity: data.city,
+      BillingPostalCode: data.postal,
+      Phone: data.phone,
+    })
+    .finally(async () => await salesforceLogout());
 };
 
 // =============== DELETE Account ===============
 const deleteAccount = async (email) => {
+  await salesforceLogin();
   const userId = await getUserId(email);
   await conn
     .sobject("Account")
     .destroy(userId[0].Id)
-    .then((res) => console.log({ status: "success", response: res }));
+    .then((res) => console.log({ status: "success", response: res }))
+    .finally(async () => await salesforceLogout());
 };
 
 export {
