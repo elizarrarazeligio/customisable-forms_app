@@ -29,17 +29,20 @@ function CreateForm() {
       .then((res) => {
         formInfo.questions
           .filter((question) => question.show)
-          .map((question) => {
+          .map(async (question) => {
             if (question.field !== "Checkboxes") {
-              answerApi
+              await answerApi
                 .addAnswerInput(res.form_id, question.question_id)
                 .catch((err) => err.then((res) => toast.error(res.message)));
             } else {
-              checkboxApi
+              await checkboxApi
                 .addFormCheckboxes(res.form_id, question.checkboxes)
                 .catch((err) => err.then((res) => toast.error(res.message)));
             }
           });
+        return res;
+      })
+      .then((res) => {
         toast.success(res.message);
         navigate(`/form/${res.hash}`);
       })
