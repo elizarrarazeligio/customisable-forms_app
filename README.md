@@ -1,12 +1,12 @@
 # Customisable Forms App
 
-## Nombre del proyecto
+### Nombre del proyecto
 Customisable Forms App
 
-## Autor
+### Autor
 Eligio Elizarraraz Molina
 
-## Descripción
+### Descripción
 Este es proyecto está basado en un sitio web que permite la creación de formularios! ✍🏽📄<br>
 Se trata de una plataforma que permite a los usuarios registrados crear sus propias plantillas de formularios, para que otros usuarios puedan contestarlas y poder generar un concentrado y resumen de las respuestas obtenidas 🧑🏽‍💻📊
 <br><br>
@@ -21,11 +21,11 @@ Entre las principales características se encuentran:<br>
 ✅Registro de usuarios dentro de Salesforce y seguimiento de errores a través de Jira.<br>
 <br><br>
 Por otro lado, las tecnologías utilizadas fueron;<br>
-◾𝗙𝗿𝗼𝗻𝘁𝗲𝗻𝗱: React, Vite, Bootstrap<br>
-◾𝗕𝗮𝗰𝗸𝗲𝗻𝗱: Node.js, Express, Sequelize, JWT<br>
-◾𝗗𝗕𝗠𝗦: PostgreSQL<br>
-◾𝗗𝗲𝘀𝗽𝗹𝗶𝗲𝗴𝘂𝗲: Vercel, Render<br>
-◾𝗜𝗻𝘁𝗲𝗴𝗿𝗮𝗰𝗶𝗼𝗻𝗲𝘀: Salesforce, Jira<br>
+◾**Frontend:** React, Vite, Bootstrap<br>
+◾**Backend:** Node.js, Express, Sequelize, JWT<br>
+◾**DBMS:** PostgreSQL<br>
+◾**Despliegue:** Vercel, Render<br>
+◾**Integraciones:** Salesforce, Jira<br>
 <br><br>
 Estoy atento a cualquier comentario y/o sugerencia que pueda impulsar a mejorar este y futuros proyectos! 🎯
 <br><br>
